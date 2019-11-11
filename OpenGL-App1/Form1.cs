@@ -13,14 +13,21 @@ namespace OpenGL_App1
 {
     public partial class Form1 : Form
     {
+        const int SHAPE_LINE = 0;
+        const int SHAPE_CIRCLE = 1;
         Color userColor;
-        short shape; // 0 - Line, 1 - Circle
+        short shape;
         Point pStart, pEnd;
+        bool isMouseDown;
+        string strMode;
+
         public Form1()
         {
             InitializeComponent();
             userColor = Color.White;
-            shape = 0;
+            shape = SHAPE_LINE;
+            isMouseDown = false;
+            strMode = labelMode.Text;
         }
 
         private void openGLControl_Load(object sender, EventArgs e)
@@ -63,18 +70,19 @@ namespace OpenGL_App1
             gl.Color(userColor.R / 255.0, userColor.G / 255.0, userColor.B / 255.0);
 
             // Vẽ vời chỗ này. Ví dụ:
-            if (shape == 0)
-            {
-                gl.Begin(OpenGL.GL_LINES);
-                gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pStart.Y);
-                gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
-                gl.End();
-                gl.Flush();
-            }
-            else
+            switch (shape)
             {
                 
-
+                case SHAPE_LINE:
+                    gl.Begin(OpenGL.GL_LINES);
+                    gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pStart.Y);
+                    gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
+                    gl.End();
+                    gl.Flush();
+                    break;
+                case SHAPE_CIRCLE:
+                    break;
+                default: break;
             }
 
 
@@ -90,12 +98,14 @@ namespace OpenGL_App1
 
         private void btnLine_Click(object sender, EventArgs e)
         {
-            shape = 0;
+            shape = SHAPE_LINE;
+            labelMode.Text = strMode + "Line";
         }
 
         private void btnCircle_Click(object sender, EventArgs e)
         {
-            shape = 1;
+            shape = SHAPE_CIRCLE;
+            labelMode.Text = strMode + "Circle"; ;
         }
 
         private void colorPalette_Click(object sender, EventArgs e)
@@ -108,13 +118,25 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseUp(object sender, MouseEventArgs e)
         {
+            isMouseDown = false;
             pEnd = e.Location;
         }
 
         private void openGLControl_MouseDown(object sender, MouseEventArgs e)
         {
+            isMouseDown = true;
             pStart = e.Location;
             pEnd = pStart;
         }
+
+
+        private void openGLControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown == true)
+            {
+                pEnd = e.Location;
+            }
+        }
+        
     }
 }

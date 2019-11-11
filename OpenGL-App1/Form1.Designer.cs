@@ -34,6 +34,7 @@
             this.btnCircle = new System.Windows.Forms.Button();
             this.colorPalette = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.labelMode = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +62,7 @@
             this.openGLControl.Resized += new System.EventHandler(this.openGLControl_Resized);
             this.openGLControl.Load += new System.EventHandler(this.openGLControl_Load);
             this.openGLControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseDown);
+            this.openGLControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseMove);
             this.openGLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseUp);
             // 
             // btnLine
@@ -93,20 +95,31 @@
             this.colorPalette.UseVisualStyleBackColor = true;
             this.colorPalette.Click += new System.EventHandler(this.colorPalette_Click);
             // 
+            // labelMode
+            // 
+            this.labelMode.AutoSize = true;
+            this.labelMode.Location = new System.Drawing.Point(537, 12);
+            this.labelMode.Name = "labelMode";
+            this.labelMode.Size = new System.Drawing.Size(55, 17);
+            this.labelMode.TabIndex = 6;
+            this.labelMode.Text = "Mode : ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 598);
+            this.Controls.Add(this.labelMode);
             this.Controls.Add(this.colorPalette);
             this.Controls.Add(this.btnCircle);
             this.Controls.Add(this.btnLine);
             this.Controls.Add(this.openGLControl);
             this.Controls.Add(this.vertexControl1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "SimpleDraw";
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -118,6 +131,7 @@
         private System.Windows.Forms.Button btnCircle;
         private System.Windows.Forms.Button colorPalette;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Label labelMode;
     }
 }
 
