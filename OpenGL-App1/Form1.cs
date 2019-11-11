@@ -73,7 +73,7 @@ namespace OpenGL_App1
             }
             else
             {
-                gl.Begin(OpenGL.GL_)
+                
 
             }
 
