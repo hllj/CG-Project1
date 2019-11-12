@@ -15,6 +15,7 @@ namespace OpenGL_App1
     {
         const int SHAPE_LINE = 0;
         const int SHAPE_CIRCLE = 1;
+        const int SHAPE_RECTANGLE = 2;
         Color userColor;
         short shape;
         Point pStart, pEnd;
@@ -82,18 +83,18 @@ namespace OpenGL_App1
                     break;
                 case SHAPE_CIRCLE:
                     break;
+                case SHAPE_RECTANGLE:
+                    /* xác định các đỉnh của đa giác */
+                    gl.Vertex(pStart.X,gl.RenderContextProvider.Height - pStart.Y); 
+                    gl.Vertex(pEnd.X, gl.RenderContextProvider.Height -pStart.Y);
+                    gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
+                    gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pEnd.Y);
+                    gl.End();
+                    gl.Flush();
+                    break;
                 default: break;
             }
 
-
-
-            ////gl.Color(1f, 0, 0, 0); // Chọn màu đỏ
-            //gl.Begin(OpenGL.GL_TRIANGLES); // Chọn chế độ vẽ tam giác
-            //gl.Vertex2sv(new short[] { 0, 0 }); // Đỉnh thứ 1 tọa độ 0,0
-            //gl.Vertex2sv(new short[] { 100, 100 }); // Đỉnh thứ 2 tọa độ 100, 100
-            //gl.Vertex2sv(new short[] { 200, 0 }); // Đỉnh thứ 3 tọa độ 200, 0
-            //gl.End();
-            //gl.Flush();// Thực hiện lệnh vẽ ngay lập tức thay vì đợi sau 1 khoảng thời gian
         }
 
         private void btnLine_Click(object sender, EventArgs e)
@@ -105,7 +106,7 @@ namespace OpenGL_App1
         private void btnCircle_Click(object sender, EventArgs e)
         {
             shape = SHAPE_CIRCLE;
-            labelMode.Text = strMode + "Circle"; ;
+            labelMode.Text = strMode + "Circle";
         }
 
         private void colorPalette_Click(object sender, EventArgs e)
@@ -129,6 +130,11 @@ namespace OpenGL_App1
             pEnd = pStart;
         }
 
+        private void btnRectangle_Click(object sender, EventArgs e)
+        {
+            shape = SHAPE_RECTANGLE;
+            labelMode.Text = strMode + "Rectangle";;
+        }
 
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)
         {
