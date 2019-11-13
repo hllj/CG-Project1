@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace OpenGL_App1
 {
     public partial class Form1 : Form
@@ -16,10 +15,13 @@ namespace OpenGL_App1
         const int SHAPE_LINE = 0;
         const int SHAPE_CIRCLE = 1;
         const int SHAPE_RECTANGLE = 2;
+        const int SHAPE_EQUAL_TRIANGLE = 3;
+        
         Color userColor;
         short shape;
         Point pStart, pEnd;
-        bool isMouseDown;
+        Point pTmp;
+       bool isMouseDown;
         string strMode;
 
         public Form1()
@@ -84,14 +86,30 @@ namespace OpenGL_App1
                 case SHAPE_CIRCLE:
                     break;
                 case SHAPE_RECTANGLE:
-                    /* xác định các đỉnh của đa giác */
-                    gl.Vertex(pStart.X,gl.RenderContextProvider.Height - pStart.Y); 
+                    gl.Begin(OpenGL.GL_POLYGON);
+                    /* xác định các đỉnh của hình chữ nhật */
+                    gl.Vertex(pStart.X,gl.RenderContextProvider.Height - pStart.Y);
                     gl.Vertex(pEnd.X, gl.RenderContextProvider.Height -pStart.Y);
                     gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
                     gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pEnd.Y);
                     gl.End();
                     gl.Flush();
                     break;
+                //case SHAPE_EQUAL_TRIANGLE: 
+                //    int XX = pEnd.X - pStart.X;//cạnh tam giác đều
+                //    double a1 = Math.Sqrt(7) / 2; //Hằng số trong hcn chứa tam giác đều
+                //    double b1 = Math.Cos(60 / 180* 3.14159265359);
+                //    pTmp.X = (pStart.X*2 + XX)/2;
+                //    pTmp.Y = (int)(pEnd.Y - XX * b1);
+                  
+                //    gl.Begin(OpenGL.GL_TRIANGLES);
+                //    gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pEnd.Y);
+                //    gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
+                //    gl.Vertex(pTmp.X, gl.RenderContextProvider.Height - pTmp.Y);
+                //    gl.End();
+                //    gl.Flush();
+                    
+                //    break;
                 default: break;
             }
 
@@ -133,7 +151,13 @@ namespace OpenGL_App1
         private void btnRectangle_Click(object sender, EventArgs e)
         {
             shape = SHAPE_RECTANGLE;
-            labelMode.Text = strMode + "Rectangle";;
+            labelMode.Text = strMode + "Rectangle";
+        }
+
+        private void btn_Triangles_click(object sender, EventArgs e)
+        {
+            shape = SHAPE_EQUAL_TRIANGLE;
+            labelMode.Text = strMode + "Triangle";
         }
 
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)

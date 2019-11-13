@@ -36,13 +36,14 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.labelMode = new System.Windows.Forms.Label();
             this.btn_rectangle = new System.Windows.Forms.Button();
+            this.btn_Triangles = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
             // vertexControl1
             // 
             this.vertexControl1.Location = new System.Drawing.Point(405, 0);
-            this.vertexControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.vertexControl1.Margin = new System.Windows.Forms.Padding(2);
             this.vertexControl1.Name = "vertexControl1";
             this.vertexControl1.Size = new System.Drawing.Size(6, 6);
             this.vertexControl1.TabIndex = 0;
@@ -69,7 +70,7 @@
             // btnLine
             // 
             this.btnLine.Location = new System.Drawing.Point(10, 10);
-            this.btnLine.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLine.Margin = new System.Windows.Forms.Padding(2);
             this.btnLine.Name = "btnLine";
             this.btnLine.Size = new System.Drawing.Size(68, 44);
             this.btnLine.TabIndex = 2;
@@ -80,7 +81,7 @@
             // btnCircle
             // 
             this.btnCircle.Location = new System.Drawing.Point(88, 10);
-            this.btnCircle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCircle.Margin = new System.Windows.Forms.Padding(2);
             this.btnCircle.Name = "btnCircle";
             this.btnCircle.Size = new System.Drawing.Size(68, 44);
             this.btnCircle.TabIndex = 3;
@@ -91,7 +92,7 @@
             // colorPalette
             // 
             this.colorPalette.Location = new System.Drawing.Point(496, 10);
-            this.colorPalette.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.colorPalette.Margin = new System.Windows.Forms.Padding(2);
             this.colorPalette.Name = "colorPalette";
             this.colorPalette.Size = new System.Drawing.Size(68, 44);
             this.colorPalette.TabIndex = 4;
@@ -120,6 +121,17 @@
             this.btn_rectangle.UseVisualStyleBackColor = true;
             this.btn_rectangle.Click += new System.EventHandler(this.btnRectangle_Click);
             // 
+            // btn_Triangles
+            // 
+            this.btn_Triangles.Location = new System.Drawing.Point(244, 10);
+            this.btn_Triangles.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Triangles.Name = "btn_Triangles";
+            this.btn_Triangles.Size = new System.Drawing.Size(80, 44);
+            this.btn_Triangles.TabIndex = 3;
+            this.btn_Triangles.Text = "TRIANGLES";
+            this.btn_Triangles.UseVisualStyleBackColor = true;
+            this.btn_Triangles.Click += new System.EventHandler(this.btn_Triangles_click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,12 +139,13 @@
             this.ClientSize = new System.Drawing.Size(573, 486);
             this.Controls.Add(this.labelMode);
             this.Controls.Add(this.colorPalette);
+            this.Controls.Add(this.btn_Triangles);
             this.Controls.Add(this.btn_rectangle);
             this.Controls.Add(this.btnCircle);
             this.Controls.Add(this.btnLine);
             this.Controls.Add(this.openGLControl);
             this.Controls.Add(this.vertexControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "SimpleDraw";
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).EndInit();
@@ -151,6 +164,7 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Label labelMode;
         private System.Windows.Forms.Button btn_rectangle;
+        private System.Windows.Forms.Button btn_Triangles;
     }
 }
 
