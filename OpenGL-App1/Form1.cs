@@ -12,25 +12,42 @@ namespace OpenGL_App1
 {
     public partial class Form1 : Form
     {
+        // States of OpenGL screen
+        const int OPENGL_IDLE = 0;
+        const int OPENGL_DRAWING = 1;
+        const int OPENGL_DRAWN = 2;
+
         const int SHAPE_LINE = 0;
         const int SHAPE_CIRCLE = 1;
         const int SHAPE_RECTANGLE = 2;
-        const int SHAPE_EQUAL_TRIANGLE = 3;
+        const int SHAPE_ELLIPSE = 3;
+        const int SHAPE_EQUI_TRIANGLE = 4;
+        const int SHAPE_EQUI_PENTAGON = 5;
+        const int SHAPE_EQUI_HEXAGON = 6;
+
+        // Vẽ ellipse cần bao nhiêu điểm điều khiển?
         
+
+        List<ShapeType> listShapes;
+
         Color userColor;
         short shape;
         Point pStart, pEnd;
+        
         Point pTmp;
-       bool isMouseDown;
+        
         string strMode;
 
         public Form1()
         {
             InitializeComponent();
+            listShapes = new List<ShapeType>();
+            List<Point> pointsOfShape = new List<Point>();
             userColor = Color.White;
             shape = SHAPE_LINE;
-            isMouseDown = false;
+            openGLControl.Tag = OPENGL_IDLE;
             strMode = labelMode.Text;
+            labelMode.Text = strMode + "Line";
         }
 
         private void openGLControl_Load(object sender, EventArgs e)
@@ -65,55 +82,108 @@ namespace OpenGL_App1
 
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs e)
         {
+            if ((int)openGLControl.Tag == OPENGL_IDLE)
+                return;
             // Get the OpenGL object.
             OpenGL gl = openGLControl.OpenGL;
             // Clear the color and depth buffer.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
+
+
+            for (int i = 0; i < listShapes.Count; i++)
+            {
+                listShapes[i].Draw(gl);
+            }
+
             gl.Color(userColor.R / 255.0, userColor.G / 255.0, userColor.B / 255.0);
+
+
+            ShapeType newShape;
 
             // Vẽ vời chỗ này. Ví dụ:
             switch (shape)
             {
-                
                 case SHAPE_LINE:
-                    gl.Begin(OpenGL.GL_LINES);
-                    gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pStart.Y);
-                    gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
-                    gl.End();
-                    gl.Flush();
+                    newShape = new Line()
+                    {
+                        id = SHAPE_LINE
+                    };
                     break;
                 case SHAPE_CIRCLE:
+                    newShape = new Circle()
+                    {
+                        id = SHAPE_CIRCLE
+                    };
                     break;
                 case SHAPE_RECTANGLE:
-                    gl.Begin(OpenGL.GL_POLYGON);
-                    /* xác định các đỉnh của hình chữ nhật */
-                    gl.Vertex(pStart.X,gl.RenderContextProvider.Height - pStart.Y);
-                    gl.Vertex(pEnd.X, gl.RenderContextProvider.Height -pStart.Y);
-                    gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
-                    gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pEnd.Y);
-                    gl.End();
-                    gl.Flush();
+                    newShape = new Rectangle()
+                    {
+                        id = SHAPE_RECTANGLE
+                    };
+                    //gl.Begin(OpenGL.GL_POLYGON);
+                    ///* xác định các đỉnh của hình chữ nhật */
+                    //gl.Vertex(pStart.X,gl.RenderContextProvider.Height - pStart.Y);
+                    //gl.Vertex(pEnd.X, gl.RenderContextProvider.Height -pStart.Y);
+                    //gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
+                    //gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pEnd.Y);
+                    //gl.End();
+                    //gl.Flush();
                     break;
-                //case SHAPE_EQUAL_TRIANGLE: 
-                //    int XX = pEnd.X - pStart.X;//cạnh tam giác đều
-                //    double a1 = Math.Sqrt(7) / 2; //Hằng số trong hcn chứa tam giác đều
-                //    double b1 = Math.Cos(60 / 180* 3.14159265359);
-                //    pTmp.X = (pStart.X*2 + XX)/2;
-                //    pTmp.Y = (int)(pEnd.Y - XX * b1);
-                  
-                //    gl.Begin(OpenGL.GL_TRIANGLES);
-                //    gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pEnd.Y);
-                //    gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
-                //    gl.Vertex(pTmp.X, gl.RenderContextProvider.Height - pTmp.Y);
-                //    gl.End();
-                //    gl.Flush();
-                    
-                //    break;
-                default: break;
+                case SHAPE_ELLIPSE:
+                    newShape = new Ellipse()
+                    {
+                        id = SHAPE_ELLIPSE
+                    };
+                    break;
+
+                case SHAPE_EQUI_TRIANGLE:
+                    newShape = new EquiTriangle()
+                    {
+                        id = SHAPE_EQUI_TRIANGLE
+                    };
+
+                    //    int XX = pEnd.X - pStart.X;//cạnh tam giác đều
+                    //    double a1 = Math.Sqrt(7) / 2; //Hằng số trong hcn chứa tam giác đều
+                    //    double b1 = Math.Cos(60 / 180* 3.14159265359);
+                    //    pTmp.X = (pStart.X*2 + XX)/2;
+                    //    pTmp.Y = (int)(pEnd.Y - XX * b1);
+
+                    //    gl.Begin(OpenGL.GL_TRIANGLES);
+                    //    gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pEnd.Y);
+                    //    gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
+                    //    gl.Vertex(pTmp.X, gl.RenderContextProvider.Height - pTmp.Y);
+                    //    gl.End();
+                    //    gl.Flush();
+                    break;
+                case SHAPE_EQUI_PENTAGON:
+                    newShape = new EquiPentagon()
+                    {
+                        id = SHAPE_EQUI_PENTAGON
+                    };
+                    break;
+                default:
+                    newShape = new EquiHexagon()
+                    {
+                        id = SHAPE_EQUI_HEXAGON
+                    };
+                    break;
             }
 
+            newShape.color = userColor;
+            newShape.p1 = new Point(pStart.X, pStart.Y);
+            newShape.p2 = new Point(pEnd.X, pEnd.Y);
+            newShape.Draw(gl);
+            if ((int)openGLControl.Tag == OPENGL_DRAWN)
+            {
+                listShapes.Add(newShape);
+                openGLControl.Tag = OPENGL_IDLE;
+            }
+            
         }
+
+
+        // Event handlers
 
         private void btnLine_Click(object sender, EventArgs e)
         {
@@ -135,17 +205,17 @@ namespace OpenGL_App1
             }
         }
 
-        private void openGLControl_MouseUp(object sender, MouseEventArgs e)
-        {
-            isMouseDown = false;
-            pEnd = e.Location;
-        }
-
         private void openGLControl_MouseDown(object sender, MouseEventArgs e)
         {
-            isMouseDown = true;
+            openGLControl.Tag = OPENGL_DRAWING;
             pStart = e.Location;
             pEnd = pStart;
+        }
+
+        private void openGLControl_MouseUp(object sender, MouseEventArgs e)
+        {
+            openGLControl.Tag = OPENGL_DRAWN;
+            pEnd = e.Location;
         }
 
         private void btnRectangle_Click(object sender, EventArgs e)
@@ -156,13 +226,13 @@ namespace OpenGL_App1
 
         private void btn_Triangles_click(object sender, EventArgs e)
         {
-            shape = SHAPE_EQUAL_TRIANGLE;
+            shape = SHAPE_EQUI_TRIANGLE;
             labelMode.Text = strMode + "Triangle";
         }
 
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMouseDown == true)
+            if ((int)openGLControl.Tag == OPENGL_DRAWING)
             {
                 pEnd = e.Location;
             }
