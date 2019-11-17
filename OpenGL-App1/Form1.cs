@@ -143,18 +143,7 @@ namespace OpenGL_App1
                         id = SHAPE_EQUI_TRIANGLE
                     };
 
-                    //    int XX = pEnd.X - pStart.X;//cạnh tam giác đều
-                    //    double a1 = Math.Sqrt(7) / 2; //Hằng số trong hcn chứa tam giác đều
-                    //    double b1 = Math.Cos(60 / 180* 3.14159265359);
-                    //    pTmp.X = (pStart.X*2 + XX)/2;
-                    //    pTmp.Y = (int)(pEnd.Y - XX * b1);
 
-                    //    gl.Begin(OpenGL.GL_TRIANGLES);
-                    //    gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pEnd.Y);
-                    //    gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
-                    //    gl.Vertex(pTmp.X, gl.RenderContextProvider.Height - pTmp.Y);
-                    //    gl.End();
-                    //    gl.Flush();
                     break;
                 case SHAPE_EQUI_PENTAGON:
                     newShape = new EquiPentagon()

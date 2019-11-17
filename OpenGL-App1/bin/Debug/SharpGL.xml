@@ -2949,182 +2949,7 @@
             <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
             <param name="pixels">The actual pixel data.</param>
         </member>
-        <member name="M:SharpGL.OpenGL.TexImage1D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.SByte[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage1D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.UInt16[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage1D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.Int16[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage1D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.UInt32[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage1D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.Int32[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage1D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.Single[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage1D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.IntPtr)">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
         <member name="M:SharpGL.OpenGL.TexImage2D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.Byte[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="height">The height of the texture image (must be a power of 2, e.g 32).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage2D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.SByte[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="height">The height of the texture image (must be a power of 2, e.g 32).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage2D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.UInt16[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="height">The height of the texture image (must be a power of 2, e.g 32).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage2D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.Int16[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="height">The height of the texture image (must be a power of 2, e.g 32).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage2D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.UInt32[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="height">The height of the texture image (must be a power of 2, e.g 32).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage2D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.Int32[])">
-            <summary>
-            This function sets the image for the currently binded texture.
-            </summary>
-            <param name="target">The type of texture, TEXTURE_2D or PROXY_TEXTURE_2D.</param>
-            <param name="level">For mip-map textures, ordinary textures should be '0'.</param>
-            <param name="internalformat">The format of the data you are want OpenGL to create, e.g  RGB16.</param>
-            <param name="width">The width of the texture image (must be a power of 2, e.g 64).</param>
-            <param name="height">The height of the texture image (must be a power of 2, e.g 32).</param>
-            <param name="border">The width of the border (0 or 1).</param>
-            <param name="format">The format of the data you are passing, e.g. RGBA.</param>
-            <param name="type">The type of data you are passing, e.g GL_BYTE.</param>
-            <param name="pixels">The actual pixel data.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexImage2D(System.UInt32,System.Int32,System.UInt32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.Single[])">
             <summary>
             This function sets the image for the currently binded texture.
             </summary>
@@ -3756,36 +3581,6 @@
             The FontOutlines object is used to allow rendering of text.
             </summary>
         </member>
-        <member name="P:SharpGL.OpenGL.RenderContextProvider">
-            <summary>
-            Gets the render context provider.
-            </summary>
-            <value>The render context provider.</value>
-        </member>
-        <member name="P:SharpGL.OpenGL.Vendor">
-            <summary>
-            Gets the vendor.
-            </summary>
-            <value>The vendor.</value>
-        </member>
-        <member name="P:SharpGL.OpenGL.Renderer">
-            <summary>
-            Gets the renderer.
-            </summary>
-            <value>The renderer.</value>
-        </member>
-        <member name="P:SharpGL.OpenGL.Version">
-            <summary>
-            Gets the version.
-            </summary>
-            <value>The version.</value>
-        </member>
-        <member name="P:SharpGL.OpenGL.Extensions">
-            <summary>
-            Gets the extensions.
-            </summary>
-            <value>The extensions.</value>
-        </member>
         <member name="M:SharpGL.OpenGL.IsExtensionFunctionSupported(System.String)">
             <summary>
             Determines whether a named extension function is supported.
@@ -3795,12 +3590,13 @@
             	<c>true</c> if the extension function is supported; otherwise, <c>false</c>.
             </returns>
         </member>
-        <member name="M:SharpGL.OpenGL.GetDelegateFor``1">
+        <member name="M:SharpGL.OpenGL.InvokeExtensionFunction``1(System.Object[])">
             <summary>
-            Returns a delegate for an extension function. This delegate  can be called to execute the extension function.
+            Invokes an extension function.
             </summary>
             <typeparam name="T">The extension delegate type.</typeparam>
-            <returns>The delegate that points to the extension function.</returns>
+            <param name="args">The arguments to the pass to the function.</param>
+            <returns>The return value of the extension function.</returns>
         </member>
         <member name="F:SharpGL.OpenGL.extensionFunctions">
             <summary>
@@ -3819,32 +3615,6 @@
             </summary>
             <param name="type">Specifies the type of shader to be created. Must be either GL_VERTEX_SHADER or GL_FRAGMENT_SHADER.</param>
             <returns>This function returns 0 if an error occurs creating the shader object. Otherwise the shader id is returned.</returns>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetActiveAttrib(System.UInt32,System.UInt32,System.Int32,System.Int32@,System.Int32@,System.UInt32@,System.String@)">
-            <summary>
-            Return information about an active attribute variable
-            </summary>
-            <param name="program">Specifies the program object to be queried.</param>
-            <param name="index">Specifies the index of the attribute variable to be queried.</param>
-            <param name="bufSize">Specifies the maximum number of characters OpenGL is allowed to write in the character buffer indicated by <paramref name="name"/>.</param>
-            <param name="length">Returns the number of characters actually written by OpenGL in the string indicated by name (excluding the null terminator) if a value other than NULL is passed.</param>
-            <param name="size">Returns the size of the attribute variable.</param>
-            <param name="type">Returns the data type of the attribute variable.</param>
-            <param name="name">Returns a null terminated string containing the name of the attribute variable.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetActiveUniform(System.UInt32,System.UInt32,System.Int32,System.Int32@,System.Int32@,System.UInt32@,System.String@)">
-            <summary>
-            Return information about an active uniform variable
-            </summary>
-            <param name="program">Specifies the program object to be queried.</param>
-            <param name="index">Specifies the index of the uniform variable to be queried.</param>
-            <param name="bufSize">Specifies the maximum number of characters OpenGL is allowed 
-            to write in the character buffer indicated by <paramref name="name"/>.</param>
-            <param name="length">Returns the number of characters actually written by OpenGL in the string indicated by name 
-            (excluding the null terminator) if a value other than NULL is passed.</param>
-            <param name="size">Returns the size of the uniform variable.</param>
-            <param name="type">Returns the data type of the uniform variable.</param>
-            <param name="name">Returns a null terminated string containing the name of the uniform variable.</param>
         </member>
         <member name="M:SharpGL.OpenGL.GetUniformLocation(System.UInt32,System.String)">
             <summary>
@@ -3909,437 +3679,35 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "M:SharpGL.OpenGL.CreateContextAttribsARB(System.IntPtr,System.Int32[])" -->
-        <member name="F:SharpGL.OpenGL.GL_MAX_UNIFORM_LOCATIONS">
+        <member name="P:SharpGL.OpenGL.RenderContextProvider">
             <summary>
-            The number of available pre-assigned uniform locations to that can default be 
-            allocated in the default uniform block.
+            Gets the render context provider.
             </summary>
+            <value>The render context provider.</value>
         </member>
-        <member name="M:SharpGL.OpenGL.ClearBufferData(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.IntPtr)">
+        <member name="P:SharpGL.OpenGL.Vendor">
             <summary>
-            Fill a buffer object's data store with a fixed value
+            Gets the vendor.
             </summary>
-            <param name="target">Specifies the target buffer object. The symbolic constant must be GL_ARRAY_BUFFER​, GL_ATOMIC_COUNTER_BUFFER​, GL_COPY_READ_BUFFER​, GL_COPY_WRITE_BUFFER​, GL_DRAW_INDIRECT_BUFFER​, GL_DISPATCH_INDIRECT_BUFFER​, GL_ELEMENT_ARRAY_BUFFER​, GL_PIXEL_PACK_BUFFER​, GL_PIXEL_UNPACK_BUFFER​, GL_QUERY_BUFFER​, GL_SHADER_STORAGE_BUFFER​, GL_TEXTURE_BUFFER​, GL_TRANSFORM_FEEDBACK_BUFFER​, or GL_UNIFORM_BUFFER​.</param>
-            <param name="internalformat">The sized internal format with which the data will be stored in the buffer object.</param>
-            <param name="format">Specifies the format of the pixel data. For transfers of depth, stencil, or depth/stencil data, you must use GL_DEPTH_COMPONENT​, GL_STENCIL_INDEX​, or GL_DEPTH_STENCIL​, where appropriate. For transfers of normalized integer or floating-point color image data, you must use one of the following: GL_RED​, GL_GREEN​, GL_BLUE​, GL_RG​, GL_RGB​, GL_BGR​, GL_RGBA​, and GL_BGRA​. For transfers of non-normalized integer data, you must use one of the following: GL_RED_INTEGER​, GL_GREEN_INTEGER​, GL_BLUE_INTEGER​, GL_RG_INTEGER​, GL_RGB_INTEGER​, GL_BGR_INTEGER​, GL_RGBA_INTEGER​, and GL_BGRA_INTEGER​.</param>
-            <param name="type">Specifies the data type of the pixel data. The following symbolic values are accepted: GL_UNSIGNED_BYTE​, GL_BYTE​, GL_UNSIGNED_SHORT​, GL_SHORT​, GL_UNSIGNED_INT​, GL_INT​, GL_FLOAT​, GL_UNSIGNED_BYTE_3_3_2​, GL_UNSIGNED_BYTE_2_3_3_REV​, GL_UNSIGNED_SHORT_5_6_5​, GL_UNSIGNED_SHORT_5_6_5_REV​, GL_UNSIGNED_SHORT_4_4_4_4​, GL_UNSIGNED_SHORT_4_4_4_4_REV​, GL_UNSIGNED_SHORT_5_5_5_1​, GL_UNSIGNED_SHORT_1_5_5_5_REV​, GL_UNSIGNED_INT_8_8_8_8​, GL_UNSIGNED_INT_8_8_8_8_REV​, GL_UNSIGNED_INT_10_10_10_2​, and GL_UNSIGNED_INT_2_10_10_10_REV​.</param>
-            <param name="data">Specifies a pointer to a single pixel of data to upload. This parameter may not be NULL.</param>
+            <value>The vendor.</value>
         </member>
-        <member name="M:SharpGL.OpenGL.ClearBufferSubData(System.UInt32,System.UInt32,System.IntPtr,System.UInt32,System.UInt32,System.UInt32,System.IntPtr)">
+        <member name="P:SharpGL.OpenGL.Renderer">
             <summary>
-            Fill all or part of buffer object's data store with a fixed value
+            Gets the renderer.
             </summary>
-            <param name="target">Specifies the target buffer object. The symbolic constant must be GL_ARRAY_BUFFER​, GL_ATOMIC_COUNTER_BUFFER​, GL_COPY_READ_BUFFER​, GL_COPY_WRITE_BUFFER​, GL_DRAW_INDIRECT_BUFFER​, GL_DISPATCH_INDIRECT_BUFFER​, GL_ELEMENT_ARRAY_BUFFER​, GL_PIXEL_PACK_BUFFER​, GL_PIXEL_UNPACK_BUFFER​, GL_QUERY_BUFFER​, GL_SHADER_STORAGE_BUFFER​, GL_TEXTURE_BUFFER​, GL_TRANSFORM_FEEDBACK_BUFFER​, or GL_UNIFORM_BUFFER​.</param>
-            <param name="internalformat">The sized internal format with which the data will be stored in the buffer object.</param>
-            <param name="offset">The offset, in basic machine units into the buffer object's data store at which to start filling.</param>
-            <param name="size">The size, in basic machine units of the range of the data store to fill.</param>
-            <param name="format">Specifies the format of the pixel data. For transfers of depth, stencil, or depth/stencil data, you must use GL_DEPTH_COMPONENT​, GL_STENCIL_INDEX​, or GL_DEPTH_STENCIL​, where appropriate. For transfers of normalized integer or floating-point color image data, you must use one of the following: GL_RED​, GL_GREEN​, GL_BLUE​, GL_RG​, GL_RGB​, GL_BGR​, GL_RGBA​, and GL_BGRA​. For transfers of non-normalized integer data, you must use one of the following: GL_RED_INTEGER​, GL_GREEN_INTEGER​, GL_BLUE_INTEGER​, GL_RG_INTEGER​, GL_RGB_INTEGER​, GL_BGR_INTEGER​, GL_RGBA_INTEGER​, and GL_BGRA_INTEGER​.</param>
-            <param name="type">Specifies the data type of the pixel data. The following symbolic values are accepted: GL_UNSIGNED_BYTE​, GL_BYTE​, GL_UNSIGNED_SHORT​, GL_SHORT​, GL_UNSIGNED_INT​, GL_INT​, GL_FLOAT​, GL_UNSIGNED_BYTE_3_3_2​, GL_UNSIGNED_BYTE_2_3_3_REV​, GL_UNSIGNED_SHORT_5_6_5​, GL_UNSIGNED_SHORT_5_6_5_REV​, GL_UNSIGNED_SHORT_4_4_4_4​, GL_UNSIGNED_SHORT_4_4_4_4_REV​, GL_UNSIGNED_SHORT_5_5_5_1​, GL_UNSIGNED_SHORT_1_5_5_5_REV​, GL_UNSIGNED_INT_8_8_8_8​, GL_UNSIGNED_INT_8_8_8_8_REV​, GL_UNSIGNED_INT_10_10_10_2​, and GL_UNSIGNED_INT_2_10_10_10_REV​.</param>
-            <param name="data">Specifies a pointer to a single pixel of data to upload. This parameter may not be NULL.</param>
+            <value>The renderer.</value>
         </member>
-        <member name="M:SharpGL.OpenGL.DispatchCompute(System.UInt32,System.UInt32,System.UInt32)">
+        <member name="P:SharpGL.OpenGL.Version">
             <summary>
-            Launch one or more compute work groups
+            Gets the version.
             </summary>
-            <param name="num_groups_x">The number of work groups to be launched in the X dimension.</param>
-            <param name="num_groups_y">The number of work groups to be launched in the Y dimension.</param>
-            <param name="num_groups_z">The number of work groups to be launched in the Z dimension.</param>
+            <value>The version.</value>
         </member>
-        <member name="M:SharpGL.OpenGL.DispatchComputeIndirect(System.IntPtr)">
+        <member name="P:SharpGL.OpenGL.Extensions">
             <summary>
-            Launch one or more compute work groups using parameters stored in a buffer
+            Gets the extensions.
             </summary>
-            <param name="indirect">The offset into the buffer object currently bound to the GL_DISPATCH_INDIRECT_BUFFER​ buffer target at which the dispatch parameters are stored.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.CopyImageSubData(System.UInt32,System.UInt32,System.Int32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.Int32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.UInt32)">
-            <summary>
-            Perform a raw data copy between two images
-            </summary>
-            <param name="srcName">The name of a texture or renderbuffer object from which to copy.</param>
-            <param name="srcTarget">The target representing the namespace of the source name srcName​.</param>
-            <param name="srcLevel">The mipmap level to read from the source.</param>
-            <param name="srcX">The X coordinate of the left edge of the souce region to copy.</param>
-            <param name="srcY">The Y coordinate of the top edge of the souce region to copy.</param>
-            <param name="srcZ">The Z coordinate of the near edge of the souce region to copy.</param>
-            <param name="dstName">The name of a texture or renderbuffer object to which to copy.</param>
-            <param name="dstTarget">The target representing the namespace of the destination name dstName​.</param>
-            <param name="dstLevel">The desination mipmap level.</param>
-            <param name="dstX">The X coordinate of the left edge of the destination region.</param>
-            <param name="dstY">The Y coordinate of the top edge of the destination region.</param>
-            <param name="dstZ">The Z coordinate of the near edge of the destination region.</param>
-            <param name="srcWidth">The width of the region to be copied.</param>
-            <param name="srcHeight">The height of the region to be copied.</param>
-            <param name="srcDepth">The depth of the region to be copied.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.FramebufferParameter(System.UInt32,System.UInt32,System.Int32)">
-            <summary>
-            Set a named parameter of a framebuffer.
-            </summary>
-            <param name="target">The target of the operation, which must be GL_READ_FRAMEBUFFER​, GL_DRAW_FRAMEBUFFER​ or GL_FRAMEBUFFER​.</param>
-            <param name="pname">A token indicating the parameter to be modified.</param>
-            <param name="param">The new value for the parameter named pname​.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetFramebufferParameter(System.UInt32,System.UInt32,System.Int32[])">
-            <summary>
-            Retrieve a named parameter from a framebuffer
-            </summary>
-            <param name="target">The target of the operation, which must be GL_READ_FRAMEBUFFER​, GL_DRAW_FRAMEBUFFER​ or GL_FRAMEBUFFER​.</param>
-            <param name="pname">A token indicating the parameter to be retrieved.</param>
-            <param name="parameters">The address of a variable to receive the value of the parameter named pname​.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetInternalformat(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.Int32[])">
-            <summary>
-            Retrieve information about implementation-dependent support for internal formats
-            </summary>
-            <param name="target">Indicates the usage of the internal format. target​ must be GL_TEXTURE_1D​, GL_TEXTURE_1D_ARRAY​, GL_TEXTURE_2D​, GL_TEXTURE_2D_ARRAY​, GL_TEXTURE_3D​, GL_TEXTURE_CUBE_MAP​, GL_TEXTURE_CUBE_MAP_ARRAY​, GL_TEXTURE_RECTANGLE​, GL_TEXTURE_BUFFER​, GL_RENDERBUFFER​, GL_TEXTURE_2D_MULTISAMPLE​ or GL_TEXTURE_2D_MULTISAMPLE_ARRAY​.</param>
-            <param name="internalformat">Specifies the internal format about which to retrieve information.</param>
-            <param name="pname">Specifies the type of information to query.</param>
-            <param name="bufSize">Specifies the maximum number of basic machine units that may be written to params​ by the function.</param>
-            <param name="parameters">Specifies the address of a variable into which to write the retrieved information.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetInternalformat(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.Int64[])">
-            <summary>
-            Retrieve information about implementation-dependent support for internal formats
-            </summary>
-            <param name="target">Indicates the usage of the internal format. target​ must be GL_TEXTURE_1D​, GL_TEXTURE_1D_ARRAY​, GL_TEXTURE_2D​, GL_TEXTURE_2D_ARRAY​, GL_TEXTURE_3D​, GL_TEXTURE_CUBE_MAP​, GL_TEXTURE_CUBE_MAP_ARRAY​, GL_TEXTURE_RECTANGLE​, GL_TEXTURE_BUFFER​, GL_RENDERBUFFER​, GL_TEXTURE_2D_MULTISAMPLE​ or GL_TEXTURE_2D_MULTISAMPLE_ARRAY​.</param>
-            <param name="internalformat">Specifies the internal format about which to retrieve information.</param>
-            <param name="pname">Specifies the type of information to query.</param>
-            <param name="bufSize">Specifies the maximum number of basic machine units that may be written to params​ by the function.</param>
-            <param name="parameters">Specifies the address of a variable into which to write the retrieved information.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.InvalidateTexSubImage(System.UInt32,System.Int32,System.Int32,System.Int32,System.Int32,System.UInt32,System.UInt32,System.UInt32)">
-            <summary>
-            Invalidate a region of a texture image
-            </summary>
-            <param name="texture">The name of a texture object a subregion of which to invalidate.</param>
-            <param name="level">The level of detail of the texture object within which the region resides.</param>
-            <param name="xoffset">The X offset of the region to be invalidated.</param>
-            <param name="yoffset">The Y offset of the region to be invalidated.</param>
-            <param name="zoffset">The Z offset of the region to be invalidated.</param>
-            <param name="width">The width of the region to be invalidated.</param>
-            <param name="height">The height of the region to be invalidated.</param>
-            <param name="depth">The depth of the region to be invalidated.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.InvalidateTexImage(System.UInt32,System.Int32)">
-            <summary>
-            Invalidate the entirety a texture image
-            </summary>
-            <param name="texture">The name of a texture object to invalidate.</param>
-            <param name="level">The level of detail of the texture object to invalidate.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.InvalidateBufferSubData(System.UInt32,System.IntPtr,System.IntPtr)">
-            <summary>
-            Invalidate a region of a buffer object's data store
-            </summary>
-            <param name="buffer">The name of a buffer object, a subrange of whose data store to invalidate.</param>
-            <param name="offset">The offset within the buffer's data store of the start of the range to be invalidated.</param>
-            <param name="length">The length of the range within the buffer's data store to be invalidated.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.InvalidateBufferData(System.UInt32)">
-            <summary>
-            Invalidate the content of a buffer object's data store
-            </summary>
-            <param name="buffer">The name of a buffer object whose data store to invalidate.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.InvalidateFramebuffer(System.UInt32,System.UInt32,System.UInt32[])">
-            <summary>
-            Invalidate the content some or all of a framebuffer object's attachments
-            </summary>
-            <param name="target">The target to which the framebuffer is attached. target​ must be GL_FRAMEBUFFER​, GL_DRAW_FRAMEBUFFER​, or GL_READ_FRAMEBUFFER​.</param>
-            <param name="numAttachments">The number of entries in the attachments​ array.</param>
-            <param name="attachments">The address of an array identifying the attachments to be invalidated.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.InvalidateSubFramebuffer(System.UInt32,System.UInt32,System.UInt32[],System.Int32,System.Int32,System.UInt32,System.UInt32)">
-            <summary>
-            Invalidate the content of a region of some or all of a framebuffer object's attachments
-            </summary>
-            <param name="target">The target to which the framebuffer is attached. target​ must be GL_FRAMEBUFFER​, GL_DRAW_FRAMEBUFFER​, or GL_READ_FRAMEBUFFER​.</param>
-            <param name="numAttachments">The number of entries in the attachments​ array.</param>
-            <param name="attachments">The address of an array identifying the attachments to be invalidated.</param>
-            <param name="x">The X offset of the region to be invalidated.</param>
-            <param name="y">The Y offset of the region to be invalidated.</param>
-            <param name="width">The width of the region to be invalidated.</param>
-            <param name="height">The height of the region to be invalidated.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.MultiDrawArraysIndirect(System.UInt32,System.IntPtr,System.UInt32,System.UInt32)">
-            <summary>
-            Render multiple sets of primitives from array data, taking parameters from memory
-            </summary>
-            <param name="mode">Specifies what kind of primitives to render. Symbolic constants GL_POINTS​, GL_LINE_STRIP​, GL_LINE_LOOP​, GL_LINES​, GL_LINE_STRIP_ADJACENCY​, GL_LINES_ADJACENCY​, GL_TRIANGLE_STRIP​, GL_TRIANGLE_FAN​, GL_TRIANGLES​, GL_TRIANGLE_STRIP_ADJACENCY​, GL_TRIANGLES_ADJACENCY​, and GL_PATCHES​ are accepted.</param>
-            <param name="indirect">Specifies the address of an array of structures containing the draw parameters.</param>
-            <param name="primcount">Specifies the the number of elements in the array of draw parameter structures.</param>
-            <param name="stride">Specifies the distance in basic machine units between elements of the draw parameter array.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.MultiDrawElementsIndirect(System.UInt32,System.UInt32,System.IntPtr,System.UInt32,System.UInt32)">
-            <summary>
-            Render indexed primitives from array data, taking parameters from memory
-            </summary>
-            <param name="mode">Specifies what kind of primitives to render. Symbolic constants GL_POINTS​, GL_LINE_STRIP​, GL_LINE_LOOP​, GL_LINES​, GL_LINE_STRIP_ADJACENCY​, GL_LINES_ADJACENCY​, GL_TRIANGLE_STRIP​, GL_TRIANGLE_FAN​, GL_TRIANGLES​, GL_TRIANGLE_STRIP_ADJACENCY​, GL_TRIANGLES_ADJACENCY​, and GL_PATCHES​ are accepted.</param>
-            <param name="type">Specifies the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER​ binding.</param>
-            <param name="indirect">Specifies a byte offset (cast to a pointer type) into the buffer bound to GL_DRAW_INDIRECT_BUFFER​, which designates the starting point of the structure containing the draw parameters.</param>
-            <param name="primcount">Specifies the number of elements in the array addressed by indirect​.</param>
-            <param name="stride">Specifies the distance in basic machine units between elements of the draw parameter array.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetProgramInterface(System.UInt32,System.UInt32,System.UInt32,System.Int32[])">
-            <summary>
-            Query a property of an interface in a program
-            </summary>
-            <param name="program">The name of a program object whose interface to query.</param>
-            <param name="programInterface">A token identifying the interface within program​ to query.</param>
-            <param name="pname">The name of the parameter within programInterface​ to query.</param>
-            <param name="parameters">The address of a variable to retrieve the value of pname​ for the program interface..</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetProgramResourceIndex(System.UInt32,System.UInt32,System.String)">
-            <summary>
-            Query the index of a named resource within a program
-            </summary>
-            <param name="program">The name of a program object whose resources to query.</param>
-            <param name="programInterface">A token identifying the interface within program​ containing the resource named name​.</param>
-            <param name="name">The name of the resource to query the index of.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetProgramResourceName(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32@,System.String@)">
-            <summary>
-            Query the name of an indexed resource within a program
-            </summary>
-            <param name="program">The name of a program object whose resources to query.</param>
-            <param name="programInterface">A token identifying the interface within program​ containing the indexed resource.</param>
-            <param name="index">The index of the resource within programInterface​ of program​.</param>
-            <param name="bufSize">The size of the character array whose address is given by name​.</param>
-            <param name="length">The address of a variable which will receive the length of the resource name.</param>
-            <param name="name">The address of a character array into which will be written the name of the resource.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetProgramResource(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32[],System.UInt32,System.UInt32@,System.Int32[]@)">
-            <summary>
-            Retrieve values for multiple properties of a single active resource within a program object
-            </summary>
-            <param name="program">The name of a program object whose resources to query.</param>
-            <param name="programInterface">A token identifying the interface within program​ containing the resource named name​.</param>
-            <param name="index">The index within the programInterface​ to query information about.</param>
-            <param name="propCount">The number of properties being queried.</param>
-            <param name="props">An array of properties of length propCount​ to query.</param>
-            <param name="bufSize">The number of GLint values in the params​ array.</param>
-            <param name="length">If not NULL, then this value will be filled in with the number of actual parameters written to params​.</param>
-            <param name="parameters">The output array of parameters to write.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetProgramResourceLocation(System.UInt32,System.UInt32,System.String)">
-            <summary>
-            Query the location of a named resource within a program.
-            </summary>
-            <param name="program">The name of a program object whose resources to query.</param>
-            <param name="programInterface">A token identifying the interface within program​ containing the resource named name​.</param>
-            <param name="name">The name of the resource to query the location of.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.GetProgramResourceLocationIndex(System.UInt32,System.UInt32,System.String)">
-            <summary>
-            Query the fragment color index of a named variable within a program.
-            </summary>
-            <param name="program">The name of a program object whose resources to query.</param>
-            <param name="programInterface">A token identifying the interface within program​ containing the resource named name​.</param>
-            <param name="name">The name of the resource to query the location of.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.ShaderStorageBlockBinding(System.UInt32,System.UInt32,System.UInt32)">
-            <summary>
-            Change an active shader storage block binding.
-            </summary>
-            <param name="program">The name of the program containing the block whose binding to change.</param>
-            <param name="storageBlockIndex">The index storage block within the program.</param>
-            <param name="storageBlockBinding">The index storage block binding to associate with the specified storage block.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexBufferRange(System.UInt32,System.UInt32,System.UInt32,System.IntPtr,System.IntPtr)">
-            <summary>
-            Bind a range of a buffer's data store to a buffer texture
-            </summary>
-            <param name="target">Specifies the target of the operation and must be GL_TEXTURE_BUFFER​.</param>
-            <param name="internalformat">Specifies the internal format of the data in the store belonging to buffer​.</param>
-            <param name="buffer">Specifies the name of the buffer object whose storage to attach to the active buffer texture.</param>
-            <param name="offset">Specifies the offset of the start of the range of the buffer's data store to attach.</param>
-            <param name="size">Specifies the size of the range of the buffer's data store to attach.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TextureBufferRangeEXT(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.IntPtr,System.IntPtr)">
-            <summary>
-            Bind a range of a buffer's data store to a buffer texture
-            </summary>
-            <param name="texture">The texture.</param>
-            <param name="target">Specifies the target of the operation and must be GL_TEXTURE_BUFFER​.</param>
-            <param name="internalformat">Specifies the internal format of the data in the store belonging to buffer​.</param>
-            <param name="buffer">Specifies the name of the buffer object whose storage to attach to the active buffer texture.</param>
-            <param name="offset">Specifies the offset of the start of the range of the buffer's data store to attach.</param>
-            <param name="size">Specifies the size of the range of the buffer's data store to attach.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexStorage2DMultisample(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.Boolean)">
-            <summary>
-            Specify storage for a two-dimensional multisample texture.
-            </summary>
-            <param name="target">Specify the target of the operation. target​ must be GL_TEXTURE_2D_MULTISAMPLE​ or GL_PROXY_TEXTURE_2D_MULTISAMPLE​.</param>
-            <param name="samples">Specify the number of samples in the texture.</param>
-            <param name="internalformat">Specifies the sized internal format to be used to store texture image data.</param>
-            <param name="width">Specifies the width of the texture, in texels.</param>
-            <param name="height">Specifies the height of the texture, in texels.</param>
-            <param name="fixedsamplelocations">Specifies whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not depend on the internal format or size of the image.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexStorage3DMultisample(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.Boolean)">
-            <summary>
-            Specify storage for a three-dimensional multisample array texture
-            </summary>
-            <param name="target">Specify the target of the operation. target​ must be GL_TEXTURE_3D_MULTISAMPLE_ARRAY​ or GL_PROXY_TEXTURE_3D_MULTISAMPLE_ARRAY​.</param>
-            <param name="samples">Specify the number of samples in the texture.</param>
-            <param name="internalformat">Specifies the sized internal format to be used to store texture image data.</param>
-            <param name="width">Specifies the width of the texture, in texels.</param>
-            <param name="height">Specifies the height of the texture, in texels.</param>
-            <param name="depth">Specifies the depth of the texture, in layers.</param>
-            <param name="fixedsamplelocations">Specifies the depth of the texture, in layers.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexStorage2DMultisampleEXT(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.Boolean)">
-            <summary>
-            Specify storage for a two-dimensional multisample texture.
-            </summary>
-            <param name="texture">The texture.</param>
-            <param name="target">Specify the target of the operation. target​ must be GL_TEXTURE_2D_MULTISAMPLE​ or GL_PROXY_TEXTURE_2D_MULTISAMPLE​.</param>
-            <param name="samples">Specify the number of samples in the texture.</param>
-            <param name="internalformat">Specifies the sized internal format to be used to store texture image data.</param>
-            <param name="width">Specifies the width of the texture, in texels.</param>
-            <param name="height">Specifies the height of the texture, in texels.</param>
-            <param name="fixedsamplelocations">Specifies whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not depend on the internal format or size of the image.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TexStorage3DMultisampleEXT(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.Boolean)">
-            <summary>
-            Specify storage for a three-dimensional multisample array texture
-            </summary>
-            <param name="texture">The texture.</param>
-            <param name="target">Specify the target of the operation. target​ must be GL_TEXTURE_3D_MULTISAMPLE_ARRAY​ or GL_PROXY_TEXTURE_3D_MULTISAMPLE_ARRAY​.</param>
-            <param name="samples">Specify the number of samples in the texture.</param>
-            <param name="internalformat">Specifies the sized internal format to be used to store texture image data.</param>
-            <param name="width">Specifies the width of the texture, in texels.</param>
-            <param name="height">Specifies the height of the texture, in texels.</param>
-            <param name="depth">Specifies the depth of the texture, in layers.</param>
-            <param name="fixedsamplelocations">Specifies the depth of the texture, in layers.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.TextureView(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
-            <summary>
-            Initialize a texture as a data alias of another texture's data store.
-            </summary>
-            <param name="texture">Specifies the texture object to be initialized as a view.</param>
-            <param name="target">Specifies the target to be used for the newly initialized texture.</param>
-            <param name="origtexture">Specifies the name of a texture object of which to make a view.</param>
-            <param name="internalformat">Specifies the internal format for the newly created view.</param>
-            <param name="minlevel">Specifies lowest level of detail of the view.</param>
-            <param name="numlevels">Specifies the number of levels of detail to include in the view.</param>
-            <param name="minlayer">Specifies the index of the first layer to include in the view.</param>
-            <param name="numlayers">Specifies the number of layers to include in the view.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.BindVertexBuffer(System.UInt32,System.UInt32,System.IntPtr,System.UInt32)">
-            <summary>
-            Bind a buffer to a vertex buffer bind point.
-            </summary>
-            <param name="bindingindex">The index of the vertex buffer binding point to which to bind the buffer.</param>
-            <param name="buffer">The name of an existing buffer to bind to the vertex buffer binding point.</param>
-            <param name="offset">The offset of the first element of the buffer.</param>
-            <param name="stride">The distance between elements within the buffer.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexAttribFormat(System.UInt32,System.Int32,System.UInt32,System.Boolean,System.UInt32)">
-            <summary>
-            Specify the organization of vertex arrays.
-            </summary>
-            <param name="attribindex">The generic vertex attribute array being described.</param>
-            <param name="size">The number of values per vertex that are stored in the array.</param>
-            <param name="type">The type of the data stored in the array.</param>
-            <param name="normalized">GL_TRUE​ if the parameter represents a normalized integer (type​ must be an integer type). GL_FALSE​ otherwise.</param>
-            <param name="relativeoffset">The offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexAttribIFormat(System.UInt32,System.Int32,System.UInt32,System.UInt32)">
-            <summary>
-            Specify the organization of vertex arrays.
-            </summary>
-            <param name="attribindex">The generic vertex attribute array being described.</param>
-            <param name="size">The number of values per vertex that are stored in the array.</param>
-            <param name="type">The type of the data stored in the array.</param>
-            <param name="relativeoffset">The offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexAttribLFormat(System.UInt32,System.Int32,System.UInt32,System.UInt32)">
-            <summary>
-            Specify the organization of vertex arrays.
-            </summary>
-            <param name="attribindex">The generic vertex attribute array being described.</param>
-            <param name="size">The number of values per vertex that are stored in the array.</param>
-            <param name="type">The type of the data stored in the array.</param>
-            <param name="relativeoffset">The offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexAttribBinding(System.UInt32,System.UInt32)">
-            <summary>
-            Associate a vertex attribute and a vertex buffer binding.
-            </summary>
-            <param name="attribindex">The index of the attribute to associate with a vertex buffer binding.</param>
-            <param name="bindingindex">The index of the vertex buffer binding with which to associate the generic vertex attribute.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexBindingDivisor(System.UInt32,System.UInt32)">
-            <summary>
-            Modify the rate at which generic vertex attributes advance.
-            </summary>
-            <param name="bindingindex">The index of the binding whose divisor to modify.</param>
-            <param name="divisor">The new value for the instance step rate to apply.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexArrayBindVertexBufferEXT(System.UInt32,System.UInt32,System.UInt32,System.IntPtr,System.UInt32)">
-            <summary>
-            Bind a buffer to a vertex buffer bind point.
-            Available only when When EXT_direct_state_access is present.
-            </summary>
-            <param name="vaobj">The vertex array object.</param>
-            <param name="bindingindex">The index of the vertex buffer binding point to which to bind the buffer.</param>
-            <param name="buffer">The name of an existing buffer to bind to the vertex buffer binding point.</param>
-            <param name="offset">The offset of the first element of the buffer.</param>
-            <param name="stride">The distance between elements within the buffer.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexArrayVertexAttribFormatEXT(System.UInt32,System.UInt32,System.Int32,System.UInt32,System.Boolean,System.UInt32)">
-            <summary>
-            Specify the organization of vertex arrays.
-            Available only when When EXT_direct_state_access is present.
-            </summary>
-            <param name="vaobj">The vertex array object.</param>
-            <param name="attribindex">The generic vertex attribute array being described.</param>
-            <param name="size">The number of values per vertex that are stored in the array.</param>
-            <param name="type">The type of the data stored in the array.</param>
-            <param name="normalized">GL_TRUE​ if the parameter represents a normalized integer (type​ must be an integer type). GL_FALSE​ otherwise.</param>
-            <param name="relativeoffset">The offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexArrayVertexAttribIFormatEXT(System.UInt32,System.UInt32,System.Int32,System.UInt32,System.UInt32)">
-            <summary>
-            Specify the organization of vertex arrays.
-            Available only when When EXT_direct_state_access is present.
-            </summary>
-            <param name="vaobj">The vertex array object.</param>
-            <param name="attribindex">The generic vertex attribute array being described.</param>
-            <param name="size">The number of values per vertex that are stored in the array.</param>
-            <param name="type">The type of the data stored in the array.</param>
-            <param name="relativeoffset">The offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexArrayVertexAttribLFormatEXT(System.UInt32,System.UInt32,System.Int32,System.UInt32,System.UInt32)">
-            <summary>
-            Specify the organization of vertex arrays.
-            Available only when When EXT_direct_state_access is present.
-            </summary>
-            <param name="vaobj">The vertex array object.</param>
-            <param name="attribindex">The generic vertex attribute array being described.</param>
-            <param name="size">The number of values per vertex that are stored in the array.</param>
-            <param name="type">The type of the data stored in the array.</param>
-            <param name="relativeoffset">The offset, measured in basic machine units of the first element relative to the start of the vertex buffer binding this attribute fetches from.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexArrayVertexAttribBindingEXT(System.UInt32,System.UInt32,System.UInt32)">
-            <summary>
-            Associate a vertex attribute and a vertex buffer binding.
-            Available only when When EXT_direct_state_access is present.
-            </summary>
-            <param name="vaobj">The vertex array object.</param>
-            <param name="attribindex">The index of the attribute to associate with a vertex buffer binding.</param>
-            <param name="bindingindex">The index of the vertex buffer binding with which to associate the generic vertex attribute.</param>
-        </member>
-        <member name="M:SharpGL.OpenGL.VertexArrayVertexBindingDivisorEXT(System.UInt32,System.UInt32,System.UInt32)">
-            <summary>
-            Modify the rate at which generic vertex attributes advance.
-            Available only when When EXT_direct_state_access is present.
-            </summary>
-            <param name="vaobj">The vertex array object.</param>
-            <param name="bindingindex">The index of the binding whose divisor to modify.</param>
-            <param name="divisor">The new value for the instance step rate to apply.</param>
+            <value>The extensions.</value>
         </member>
         <member name="T:SharpGL.Enumerations.AccumOperation">
             <summary>
@@ -4541,155 +3909,6 @@
             Texture target.
             </summary>
         </member>
-        <member name="M:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider"/> class.
-            </summary>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider.Create(SharpGL.Version.OpenGLVersion,SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Object)">
-            <summary>
-            Creates the render context provider. Must also create the OpenGL extensions.
-            </summary>
-            <param name="openGLVersion">The desired OpenGL version.</param>
-            <param name="gl">The OpenGL context.</param>
-            <param name="width">The width.</param>
-            <param name="height">The height.</param>
-            <param name="bitDepth">The bit depth.</param>
-            <param name="parameter">The extra parameter.</param>
-            <returns></returns>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider.Destroy">
-            <summary>
-            Destroys the render context provider instance.
-            </summary>
-        </member>
-        <member name="F:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider.dibSection">
-            <summary>
-            The DIB Section object.
-            </summary>
-        </member>
-        <member name="P:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider.DIBSection">
-            <summary>
-            Gets the DIB section.
-            </summary>
-            <value>The DIB section.</value>
-        </member>
-        <member name="T:SharpGL.RenderContextProviders.ExternalRenderContextProvider">
-            <summary>
-            Render context provider for working with an external render context
-            </summary>
-        </member>
-        <member name="F:SharpGL.RenderContextProviders.ExternalRenderContextProvider.windowHandle">
-            <summary>
-            The window handle.
-            </summary>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.ExternalRenderContextProvider.#ctor(System.IntPtr,System.IntPtr,System.IntPtr)">
-            <summary>
-            Initializes a new instance of the <see cref="T:SharpGL.RenderContextProviders.ExternalRenderContextProvider"/> class.
-            </summary>
-            <param name="windowHandle">The existing window handle.</param>
-            <param name="renderContextHandle">The handle to the existing render context.</param>
-            <param name="deviceContextHandle">The handle to the existing device context.</param>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.ExternalRenderContextProvider.Destroy">
-            <summary>
-            Destroys the render context provider instance.
-            </summary>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.ExternalRenderContextProvider.Blit(System.IntPtr)">
-            <summary>
-            Blit the rendered data to the supplied device context.
-            </summary>
-            <param name="hdc">The HDC.</param>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.ExternalRenderContextProvider.MakeCurrent">
-            <summary>
-            Makes the render context current.
-            </summary>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.FBORenderContextProvider.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:SharpGL.RenderContextProviders.FBORenderContextProvider"/> class.
-            </summary>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.FBORenderContextProvider.Create(SharpGL.Version.OpenGLVersion,SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Object)">
-            <summary>
-            Creates the render context provider. Must also create the OpenGL extensions.
-            </summary>
-            <param name="openGLVersion">The desired OpenGL version.</param>
-            <param name="gl">The OpenGL context.</param>
-            <param name="width">The width.</param>
-            <param name="height">The height.</param>
-            <param name="bitDepth">The bit depth.</param>
-            <param name="parameter">The parameter</param>
-            <returns></returns>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.FBORenderContextProvider.CreateWithShareLists(SharpGL.Version.OpenGLVersion,SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Object,System.IntPtr)">
-            <summary>
-            Creates the render context provider with sharing lists of another render context. 
-            Must also create the OpenGL extensions.
-            </summary>
-            <param name="openGLVersion">The desired OpenGL version.</param>
-            <param name="gl">The OpenGL context.</param>
-            <param name="width">The width.</param>
-            <param name="height">The height.</param>
-            <param name="bitDepth">The bit depth.</param>
-            <param name="parameter">The parameter</param>
-            <param name="hrc">Render context handle to share lists with</param>
-            <returns></returns>
-        </member>
-        <member name="P:SharpGL.RenderContextProviders.FBORenderContextProvider.InternalDIBSection">
-            <summary>
-            Gets the internal DIB section.
-            </summary>
-            <value>The internal DIB section.</value>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider"/> class.
-            </summary>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.Create(SharpGL.Version.OpenGLVersion,SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Object)">
-            <summary>
-            Creates the render context provider. Must also create the OpenGL extensions.
-            </summary>
-            <param name="openGLVersion">The desired OpenGL version.</param>
-            <param name="gl">The OpenGL context.</param>
-            <param name="width">The width.</param>
-            <param name="height">The height.</param>
-            <param name="bitDepth">The bit depth.</param>
-            <param name="parameter">The parameter</param>
-            <returns></returns>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.Destroy">
-            <summary>
-            Destroys the render context provider instance.
-            </summary>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.SetDimensions(System.Int32,System.Int32)">
-            <summary>
-            Sets the dimensions of the render context provider.
-            </summary>
-            <param name="width">Width.</param>
-            <param name="height">Height.</param>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.Blit(System.IntPtr)">
-            <summary>
-            Blit the rendered data to the supplied device context.
-            </summary>
-            <param name="hdc">The HDC.</param>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.MakeCurrent">
-            <summary>
-            Makes the render context current.
-            </summary>
-        </member>
-        <member name="F:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.windowHandle">
-            <summary>
-            The window handle.
-            </summary>
-        </member>
         <member name="T:SharpGL.RenderContextProviders.IRenderContextProvider">
             <summary>
             Defines the contract for a type that can provide an OpenGL render context.
@@ -4764,52 +3983,6 @@
             </summary>
             <value><c>true</c> if GDI drawing is enabled; otherwise, <c>false</c>.</value>
         </member>
-        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider"/> class.
-            </summary>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.Create(SharpGL.Version.OpenGLVersion,SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Object)">
-            <summary>
-            Creates the render context provider. Must also create the OpenGL extensions.
-            </summary>
-            <param name="openGLVersion">The desired OpenGL version.</param>
-            <param name="gl">The OpenGL context.</param>
-            <param name="width">The width.</param>
-            <param name="height">The height.</param>
-            <param name="bitDepth">The bit depth.</param>
-            <param name="parameter">The parameter.</param>
-            <returns></returns>
-            <exception cref="T:System.Exception">A valid Window Handle must be provided for the NativeWindowRenderContextProvider</exception>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.Destroy">
-            <summary>
-            Destroys the render context provider instance.
-            </summary>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.SetDimensions(System.Int32,System.Int32)">
-            <summary>
-            Sets the dimensions of the render context provider.
-            </summary>
-            <param name="width">Width.</param>
-            <param name="height">Height.</param>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.Blit(System.IntPtr)">
-            <summary>
-            Blit the rendered data to the supplied device context.
-            </summary>
-            <param name="hdc">The HDC.</param>
-        </member>
-        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.MakeCurrent">
-            <summary>
-            Makes the render context current.
-            </summary>
-        </member>
-        <member name="F:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.windowHandle">
-            <summary>
-            The window handle.
-            </summary>
-        </member>
         <member name="M:SharpGL.RenderContextProviders.RenderContextProvider.Create(SharpGL.Version.OpenGLVersion,SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Object)">
             <summary>
             Creates the render context provider. Must also create the OpenGL extensions.
@@ -4858,6 +4031,46 @@
             </summary>
             <param name="gl">The OpenGL instance.</param>
         </member>
+        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.renderContextHandle">
+            <summary>
+            The render context handle.
+            </summary>
+        </member>
+        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.deviceContextHandle">
+            <summary>
+            The device context handle.
+            </summary>
+        </member>
+        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.width">
+            <summary>
+            The width.
+            </summary>
+        </member>
+        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.height">
+            <summary>
+            The height.
+            </summary>
+        </member>
+        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.bitDepth">
+            <summary>
+            The bit depth.
+            </summary>
+        </member>
+        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.gdiDrawingEnabled">
+            <summary>
+            Is gdi drawing enabled?
+            </summary>
+        </member>
+        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.requestedOpenGLVersion">
+            <summary>
+            The version of OpenGL that was requested when creating the render context.
+            </summary>
+        </member>
+        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.createdOpenGLVersion">
+            <summary>
+            The actual version of OpenGL that is supported by the render context.
+            </summary>
+        </member>
         <member name="P:SharpGL.RenderContextProviders.RenderContextProvider.RenderContextHandle">
             <summary>
             Gets the render context handle.
@@ -4902,44 +4115,185 @@
             Gets the OpenGL version that is supported by the render context, compare to <see cref="P:SharpGL.RenderContextProviders.RenderContextProvider.RequestedOpenGLVersion"/>.
             </summary>
         </member>
-        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.renderContextHandle">
+        <member name="M:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider.#ctor">
             <summary>
-            The render context handle.
+            Initializes a new instance of the <see cref="T:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider"/> class.
             </summary>
         </member>
-        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.deviceContextHandle">
+        <member name="M:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider.Create(SharpGL.Version.OpenGLVersion,SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Object)">
             <summary>
-            The device context handle.
+            Creates the render context provider. Must also create the OpenGL extensions.
+            </summary>
+            <param name="openGLVersion">The desired OpenGL version.</param>
+            <param name="gl">The OpenGL context.</param>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+            <param name="bitDepth">The bit depth.</param>
+            <param name="parameter">The extra parameter.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider.Destroy">
+            <summary>
+            Destroys the render context provider instance.
             </summary>
         </member>
-        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.width">
+        <member name="F:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider.dibSection">
             <summary>
-            The width.
+            The DIB Section object.
             </summary>
         </member>
-        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.height">
+        <member name="P:SharpGL.RenderContextProviders.DIBSectionRenderContextProvider.DIBSection">
             <summary>
-            The height.
+            Gets the DIB section.
+            </summary>
+            <value>The DIB section.</value>
+        </member>
+        <member name="T:SharpGL.RenderContextProviders.ExternalRenderContextProvider">
+            <summary>
+            Render context provider for working with an external render context
             </summary>
         </member>
-        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.bitDepth">
+        <member name="F:SharpGL.RenderContextProviders.ExternalRenderContextProvider.windowHandle">
             <summary>
-            The bit depth.
+            The window handle.
             </summary>
         </member>
-        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.gdiDrawingEnabled">
+        <member name="M:SharpGL.RenderContextProviders.ExternalRenderContextProvider.#ctor(System.IntPtr,System.IntPtr,System.IntPtr)">
             <summary>
-            Is gdi drawing enabled?
+            Initializes a new instance of the <see cref="T:SharpGL.RenderContextProviders.ExternalRenderContextProvider"/> class.
+            </summary>
+            <param name="windowHandle">The existing window handle.</param>
+            <param name="renderContextHandle">The handle to the existing render context.</param>
+            <param name="deviceContextHandle">The handle to the existing device context.</param>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.ExternalRenderContextProvider.Destroy">
+            <summary>
+            Destroys the render context provider instance.
             </summary>
         </member>
-        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.requestedOpenGLVersion">
+        <member name="M:SharpGL.RenderContextProviders.ExternalRenderContextProvider.Blit(System.IntPtr)">
             <summary>
-            The version of OpenGL that was requested when creating the render context.
+            Blit the rendered data to the supplied device context.
+            </summary>
+            <param name="hdc">The HDC.</param>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.ExternalRenderContextProvider.MakeCurrent">
+            <summary>
+            Makes the render context current.
             </summary>
         </member>
-        <member name="F:SharpGL.RenderContextProviders.RenderContextProvider.createdOpenGLVersion">
+        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.#ctor">
             <summary>
-            The actual version of OpenGL that is supported by the render context.
+            Initializes a new instance of the <see cref="T:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.Create(SharpGL.Version.OpenGLVersion,SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Object)">
+            <summary>
+            Creates the render context provider. Must also create the OpenGL extensions.
+            </summary>
+            <param name="openGLVersion">The desired OpenGL version.</param>
+            <param name="gl">The OpenGL context.</param>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+            <param name="bitDepth">The bit depth.</param>
+            <param name="parameter">The parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.Destroy">
+            <summary>
+            Destroys the render context provider instance.
+            </summary>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.SetDimensions(System.Int32,System.Int32)">
+            <summary>
+            Sets the dimensions of the render context provider.
+            </summary>
+            <param name="width">Width.</param>
+            <param name="height">Height.</param>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.Blit(System.IntPtr)">
+            <summary>
+            Blit the rendered data to the supplied device context.
+            </summary>
+            <param name="hdc">The HDC.</param>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.MakeCurrent">
+            <summary>
+            Makes the render context current.
+            </summary>
+        </member>
+        <member name="F:SharpGL.RenderContextProviders.HiddenWindowRenderContextProvider.windowHandle">
+            <summary>
+            The window handle.
+            </summary>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.FBORenderContextProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpGL.RenderContextProviders.FBORenderContextProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.FBORenderContextProvider.Create(SharpGL.Version.OpenGLVersion,SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Object)">
+            <summary>
+            Creates the render context provider. Must also create the OpenGL extensions.
+            </summary>
+            <param name="openGLVersion">The desired OpenGL version.</param>
+            <param name="gl">The OpenGL context.</param>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+            <param name="bitDepth">The bit depth.</param>
+            <param name="parameter">The parameter</param>
+            <returns></returns>
+        </member>
+        <member name="P:SharpGL.RenderContextProviders.FBORenderContextProvider.InternalDIBSection">
+            <summary>
+            Gets the internal DIB section.
+            </summary>
+            <value>The internal DIB section.</value>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.Create(SharpGL.Version.OpenGLVersion,SharpGL.OpenGL,System.Int32,System.Int32,System.Int32,System.Object)">
+            <summary>
+            Creates the render context provider. Must also create the OpenGL extensions.
+            </summary>
+            <param name="openGLVersion">The desired OpenGL version.</param>
+            <param name="gl">The OpenGL context.</param>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+            <param name="bitDepth">The bit depth.</param>
+            <param name="parameter">The parameter.</param>
+            <returns></returns>
+            <exception cref="T:System.Exception">A valid Window Handle must be provided for the NativeWindowRenderContextProvider</exception>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.Destroy">
+            <summary>
+            Destroys the render context provider instance.
+            </summary>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.SetDimensions(System.Int32,System.Int32)">
+            <summary>
+            Sets the dimensions of the render context provider.
+            </summary>
+            <param name="width">Width.</param>
+            <param name="height">Height.</param>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.Blit(System.IntPtr)">
+            <summary>
+            Blit the rendered data to the supplied device context.
+            </summary>
+            <param name="hdc">The HDC.</param>
+        </member>
+        <member name="M:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.MakeCurrent">
+            <summary>
+            Makes the render context current.
+            </summary>
+        </member>
+        <member name="F:SharpGL.RenderContextProviders.NativeWindowRenderContextProvider.windowHandle">
+            <summary>
+            The window handle.
             </summary>
         </member>
         <member name="T:SharpGL.RenderContextType">
@@ -4997,6 +4351,12 @@
             uint attribute locations to their names.</param>
             <exception cref="T:SharpGL.Shaders.ShaderCompilationException"></exception>
         </member>
+        <member name="F:SharpGL.Shaders.ShaderProgram.uniformNamesToLocations">
+            <summary>
+            A mapping of uniform names to locations. This allows us to very easily specify 
+            uniform data by name, quickly looking up the location first if needed.
+            </summary>
+        </member>
         <member name="P:SharpGL.Shaders.ShaderProgram.ShaderProgramObject">
             <summary>
             Gets the shader program object.
@@ -5004,12 +4364,6 @@
             <value>
             The shader program object.
             </value>
-        </member>
-        <member name="F:SharpGL.Shaders.ShaderProgram.uniformNamesToLocations">
-            <summary>
-            A mapping of uniform names to locations. This allows us to very easily specify 
-            uniform data by name, quickly looking up the location first if needed.
-            </summary>
         </member>
         <member name="T:SharpGL.Version.OpenGLVersion">
             <summary>

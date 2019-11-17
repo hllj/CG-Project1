@@ -45,27 +45,6 @@
             <param name="sizeX">Size of the thumbnail.</param>
             <param name="sizeY">Size of the thumbnail.</param>
         </member>
-        <member name="T:SharpGL.Controls.VertexControl">
-            <summary>
-            Summary description for VertexControl.
-            </summary>
-        </member>
-        <member name="F:SharpGL.Controls.VertexControl.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:SharpGL.Controls.VertexControl.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-        </member>
-        <member name="M:SharpGL.Controls.VertexControl.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="T:SharpGL.OpenGLControl">
             <summary>
             This is the basic OpenGL control object, it gives all of the basic OpenGL functionality.
@@ -141,26 +120,6 @@
             Signals the object that initialization is complete.
             </summary>
         </member>
-        <member name="E:SharpGL.OpenGLControl.OpenGLInitialized">
-            <summary>
-            Occurs when OpenGL has been initialized.
-            </summary>
-        </member>
-        <member name="E:SharpGL.OpenGLControl.OpenGLDraw">
-            <summary>
-            Occurs when OpenGL drawing should be performed.
-            </summary>
-        </member>
-        <member name="E:SharpGL.OpenGLControl.GDIDraw">
-            <summary>
-            Occurs when GDI drawing should be performed.
-            </summary>
-        </member>
-        <member name="E:SharpGL.OpenGLControl.Resized">
-            <summary>
-            Occurs when the control is resized. Can be used to perform custom viewport projections.
-            </summary>
-        </member>
         <member name="F:SharpGL.OpenGLControl.timerDrawing">
             <summary>
             The timer used for drawing the control.
@@ -186,6 +145,53 @@
             The last frame time in milliseconds.
             </summary>
         </member>
+        <member name="F:SharpGL.OpenGLControl.frameRate">
+            <summary>
+            The framerate, in hertz.
+            </summary>
+        </member>
+        <member name="F:SharpGL.OpenGLControl.openGLVersion">
+            <summary>
+            The default desired OpenGL version.
+            </summary>
+        </member>
+        <member name="F:SharpGL.OpenGLControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SharpGL.OpenGLControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SharpGL.OpenGLControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="E:SharpGL.OpenGLControl.OpenGLInitialized">
+            <summary>
+            Occurs when OpenGL has been initialized.
+            </summary>
+        </member>
+        <member name="E:SharpGL.OpenGLControl.OpenGLDraw">
+            <summary>
+            Occurs when OpenGL drawing should be performed.
+            </summary>
+        </member>
+        <member name="E:SharpGL.OpenGLControl.GDIDraw">
+            <summary>
+            Occurs when GDI drawing should be performed.
+            </summary>
+        </member>
+        <member name="E:SharpGL.OpenGLControl.Resized">
+            <summary>
+            Occurs when the control is resized. Can be used to perform custom viewport projections.
+            </summary>
+        </member>
         <member name="P:SharpGL.OpenGLControl.OpenGL">
             <summary>
             Gets the OpenGL object.
@@ -199,11 +205,6 @@
             <value>
               <c>true</c> if FPS info should be drawn; otherwise, <c>false</c>.
             </value>
-        </member>
-        <member name="F:SharpGL.OpenGLControl.frameRate">
-            <summary>
-            The framerate, in hertz.
-            </summary>
         </member>
         <member name="P:SharpGL.OpenGLControl.FrameRate">
             <summary>
@@ -229,11 +230,6 @@
             The desired OpenGL version.
             </value>
         </member>
-        <member name="F:SharpGL.OpenGLControl.openGLVersion">
-            <summary>
-            The default desired OpenGL version.
-            </summary>
-        </member>
         <member name="P:SharpGL.OpenGLControl.RenderTrigger">
             <summary>
             Gets or sets the render trigger.
@@ -241,23 +237,6 @@
             <value>
             The render trigger.
             </value>
-        </member>
-        <member name="F:SharpGL.OpenGLControl.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:SharpGL.OpenGLControl.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:SharpGL.OpenGLControl.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
         </member>
         <member name="T:SharpGL.RenderEventHandler">
             <summary>
@@ -330,6 +309,27 @@
         <member name="F:SharpGL.SceneControl.scene">
             <summary>
             This is the scene itself.
+            </summary>
+        </member>
+        <member name="T:SharpGL.Controls.VertexControl">
+            <summary>
+            Summary description for VertexControl.
+            </summary>
+        </member>
+        <member name="F:SharpGL.Controls.VertexControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SharpGL.Controls.VertexControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:SharpGL.Controls.VertexControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
             </summary>
         </member>
     </members>
