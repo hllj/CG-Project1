@@ -37,6 +37,9 @@
             this.labelMode = new System.Windows.Forms.Label();
             this.btn_rectangle = new System.Windows.Forms.Button();
             this.btn_Triangles = new System.Windows.Forms.Button();
+            this.btn_equipentagon = new System.Windows.Forms.Button();
+            this.btn_EquiHexagon = new System.Windows.Forms.Button();
+            this.btn_Polygon = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +60,7 @@
             this.openGLControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
             this.openGLControl.RenderContextType = SharpGL.RenderContextType.DIBSection;
             this.openGLControl.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
-            this.openGLControl.Size = new System.Drawing.Size(554, 396);
+            this.openGLControl.Size = new System.Drawing.Size(645, 396);
             this.openGLControl.TabIndex = 1;
             this.openGLControl.OpenGLInitialized += new System.EventHandler(this.openGLControl_OpenGLInitialized);
             this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl_OpenGLDraw);
@@ -91,7 +94,7 @@
             // 
             // colorPalette
             // 
-            this.colorPalette.Location = new System.Drawing.Point(496, 10);
+            this.colorPalette.Location = new System.Drawing.Point(711, 12);
             this.colorPalette.Margin = new System.Windows.Forms.Padding(2);
             this.colorPalette.Name = "colorPalette";
             this.colorPalette.Size = new System.Drawing.Size(68, 44);
@@ -103,7 +106,7 @@
             // labelMode
             // 
             this.labelMode.AutoSize = true;
-            this.labelMode.Location = new System.Drawing.Point(403, 10);
+            this.labelMode.Location = new System.Drawing.Point(612, 12);
             this.labelMode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMode.Name = "labelMode";
             this.labelMode.Size = new System.Drawing.Size(43, 13);
@@ -132,10 +135,43 @@
             this.btn_Triangles.UseVisualStyleBackColor = true;
             this.btn_Triangles.Click += new System.EventHandler(this.btn_Triangles_click);
             // 
+            // btn_equipentagon
+            // 
+            this.btn_equipentagon.Location = new System.Drawing.Point(329, 10);
+            this.btn_equipentagon.Name = "btn_equipentagon";
+            this.btn_equipentagon.Size = new System.Drawing.Size(82, 44);
+            this.btn_equipentagon.TabIndex = 7;
+            this.btn_equipentagon.Text = "EquiPentagon";
+            this.btn_equipentagon.UseVisualStyleBackColor = true;
+            this.btn_equipentagon.Click += new System.EventHandler(this.btn_equipentagon_Click);
+            // 
+            // btn_EquiHexagon
+            // 
+            this.btn_EquiHexagon.Location = new System.Drawing.Point(417, 10);
+            this.btn_EquiHexagon.Name = "btn_EquiHexagon";
+            this.btn_EquiHexagon.Size = new System.Drawing.Size(93, 44);
+            this.btn_EquiHexagon.TabIndex = 8;
+            this.btn_EquiHexagon.Text = "EquiHexagon";
+            this.btn_EquiHexagon.UseVisualStyleBackColor = true;
+            this.btn_EquiHexagon.Click += new System.EventHandler(this.btn_EquiHexagon_Click);
+            // 
+            // btn_Polygon
+            // 
+            this.btn_Polygon.Location = new System.Drawing.Point(329, 10);
+            this.btn_Polygon.Name = "btn_Polygon";
+            this.btn_Polygon.Size = new System.Drawing.Size(75, 44);
+            this.btn_Polygon.TabIndex = 7;
+            this.btn_Polygon.Text = "POLYGON";
+            this.btn_Polygon.UseVisualStyleBackColor = true;
+            this.btn_Polygon.Click += new System.EventHandler(this.btn_Polygon_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(790, 486);
+            this.Controls.Add(this.btn_EquiHexagon);
+            this.Controls.Add(this.btn_equipentagon);
             this.ClientSize = new System.Drawing.Size(573, 486);
             this.Controls.Add(this.labelMode);
             this.Controls.Add(this.colorPalette);
@@ -165,6 +201,9 @@
         private System.Windows.Forms.Label labelMode;
         private System.Windows.Forms.Button btn_rectangle;
         private System.Windows.Forms.Button btn_Triangles;
+        private System.Windows.Forms.Button btn_equipentagon;
+        private System.Windows.Forms.Button btn_EquiHexagon;
+        private System.Windows.Forms.Button btn_Polygon;
     }
 }
 

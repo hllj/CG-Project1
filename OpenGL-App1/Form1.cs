@@ -219,6 +219,81 @@ namespace OpenGL_App1
             labelMode.Text = strMode + "Triangle";
         }
 
+        private void btn_equipentagon_Click(object sender, EventArgs e)
+        {
+            shape = SHAPE_EQUI_PENTAGON;
+            labelMode.Text = strMode + "EquiPentagon";
+        }
+
+        private void btn_EquiHexagon_Click(object sender, EventArgs e)
+        {
+            shape = SHAPE_EQUI_HEXAGON;
+            labelMode.Text = strMode + "EquiHexagon";
+        }
+
+        private void openGLControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (labelMode.Text == strMode + "Polygon")
+            {
+                // xử lý event mouse click trong chế độ polygon 
+
+                if (e.Button == MouseButtons.Right)
+                {
+
+                    // chuột phải thì kết thúc quá trình vẽ 
+                    if ((int)openGLControl.Tag == OPENGL_DRAWING)
+                    {
+                        pEnd = e.Location;
+                        ShapeType tmp = new Polygon();
+                        tmp = listShapes.Last();
+                        tmp.Done = true;
+                        tmp.p1 = tmp.Control_points.Last();
+                        tmp.p2 = tmp.Control_points[0];
+                    }
+                    openGLControl.Tag = OPENGL_DRAWN;
+                }
+                if (e.Button == MouseButtons.Left)
+                {
+                    // xử lý click chuột trái
+                    pStart = e.Location;
+
+                    openGLControl.Tag = OPENGL_DRAWING;
+                    ShapeType tmp;
+                    if (listShapes.Count == 0 || listShapes.Last().id != SHAPE_POLYGON || listShapes.Last().Done)
+                    {
+                        // nếu trong danh sách các hình đã vẽ, nếu hình cuối vẽ chưa xong, hoạc chưa có hình nào
+                        //* hoặc ko phải là 1 polygon thì tạo 1 polygon mới thêm vào listshape
+                        tmp = new Polygon()
+                        {
+                            id = SHAPE_POLYGON,
+                            Done = false,
+                            p1 = new Point(pStart.X, pStart.Y),
+                            p2 = new Point(pStart.X, pStart.Y)
+
+                        };
+                        listShapes.Add(tmp);
+                    }
+
+                    Point t = new Point(pStart.X, pStart.Y);
+                    t = pStart;
+                    listShapes.Last().Control_points.Add(t);
+                    listShapes.Last().p1 = pStart;
+                    listShapes.Last().p2 = pEnd;
+                    /* if (listShapes.Last().id == SHAPE_POLYGON && listShapes.Last().Done == false)
+                     {
+
+                         listShapes.Last().p1 = new Point(pStart.X, pStart.Y);
+                         listShapes.Last().p2 = new Point(pEnd.X, pEnd.Y);
+                     }*/
+
+                    pEnd = pStart;
+                }
+            }
+
+            return;
+
+        }
+
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)
         {
             if ((int)openGLControl.Tag == OPENGL_DRAWING)
