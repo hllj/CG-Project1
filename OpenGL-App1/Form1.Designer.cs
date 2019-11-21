@@ -37,7 +37,6 @@
             this.labelMode = new System.Windows.Forms.Label();
             this.btn_rectangle = new System.Windows.Forms.Button();
             this.btn_Triangles = new System.Windows.Forms.Button();
-            this.btn_Polygon = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +63,6 @@
             this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl_OpenGLDraw);
             this.openGLControl.Resized += new System.EventHandler(this.openGLControl_Resized);
             this.openGLControl.Load += new System.EventHandler(this.openGLControl_Load);
-            this.openGLControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseClick);
             this.openGLControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseDown);
             this.openGLControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseMove);
             this.openGLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseUp);
@@ -134,22 +132,11 @@
             this.btn_Triangles.UseVisualStyleBackColor = true;
             this.btn_Triangles.Click += new System.EventHandler(this.btn_Triangles_click);
             // 
-            // btn_Polygon
-            // 
-            this.btn_Polygon.Location = new System.Drawing.Point(329, 10);
-            this.btn_Polygon.Name = "btn_Polygon";
-            this.btn_Polygon.Size = new System.Drawing.Size(75, 44);
-            this.btn_Polygon.TabIndex = 7;
-            this.btn_Polygon.Text = "POLYGON";
-            this.btn_Polygon.UseVisualStyleBackColor = true;
-            this.btn_Polygon.Click += new System.EventHandler(this.btn_Polygon_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 486);
-            this.Controls.Add(this.btn_Polygon);
             this.Controls.Add(this.labelMode);
             this.Controls.Add(this.colorPalette);
             this.Controls.Add(this.btn_Triangles);
@@ -178,7 +165,6 @@
         private System.Windows.Forms.Label labelMode;
         private System.Windows.Forms.Button btn_rectangle;
         private System.Windows.Forms.Button btn_Triangles;
-        private System.Windows.Forms.Button btn_Polygon;
     }
 }
 
