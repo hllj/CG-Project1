@@ -37,6 +37,7 @@
             this.labelMode = new System.Windows.Forms.Label();
             this.btn_rectangle = new System.Windows.Forms.Button();
             this.btn_Triangles = new System.Windows.Forms.Button();
+            this.btn_equipentagon = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,7 +104,7 @@
             // labelMode
             // 
             this.labelMode.AutoSize = true;
-            this.labelMode.Location = new System.Drawing.Point(403, 10);
+            this.labelMode.Location = new System.Drawing.Point(427, 10);
             this.labelMode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMode.Name = "labelMode";
             this.labelMode.Size = new System.Drawing.Size(43, 13);
@@ -132,11 +133,22 @@
             this.btn_Triangles.UseVisualStyleBackColor = true;
             this.btn_Triangles.Click += new System.EventHandler(this.btn_Triangles_click);
             // 
+            // btn_equipentagon
+            // 
+            this.btn_equipentagon.Location = new System.Drawing.Point(329, 12);
+            this.btn_equipentagon.Name = "btn_equipentagon";
+            this.btn_equipentagon.Size = new System.Drawing.Size(82, 42);
+            this.btn_equipentagon.TabIndex = 7;
+            this.btn_equipentagon.Text = "EquiPentagon";
+            this.btn_equipentagon.UseVisualStyleBackColor = true;
+            this.btn_equipentagon.Click += new System.EventHandler(this.btn_equipentagon_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 486);
+            this.Controls.Add(this.btn_equipentagon);
             this.Controls.Add(this.labelMode);
             this.Controls.Add(this.colorPalette);
             this.Controls.Add(this.btn_Triangles);
@@ -165,6 +177,7 @@
         private System.Windows.Forms.Label labelMode;
         private System.Windows.Forms.Button btn_rectangle;
         private System.Windows.Forms.Button btn_Triangles;
+        private System.Windows.Forms.Button btn_equipentagon;
     }
 }
 
