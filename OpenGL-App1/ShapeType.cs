@@ -148,7 +148,31 @@ namespace OpenGL_App1
     {
         public override void Draw(OpenGL gl)
         {
+            double[,] pt = new double[6, 2];
+            double const_cos = 1 + Math.Cos(60 * Math.PI / 180);
+            double const_sin = Math.Sin(60 * Math.PI / 180);
+            //get 2 points for 2 first vertices
+            pt[0, 0] = p1.X;
+            pt[0, 1] = p1.Y;
 
+            pt[1, 0] = p2.X;
+            pt[1, 1] = p2.Y;
+
+            for (int i = 2; i < 6; i++)
+            {
+                double xA = pt[i - 2, 0], yA = pt[i - 2, 1];
+                double xB = pt[i - 1, 0], yB = pt[i - 1, 1];
+                pt[i, 0] = xA + const_cos * (xB - xA) + const_sin * (yA - yB);
+                pt[i, 1] = yA + const_cos * (yB - yA) + const_sin * (xB - xA);
+            }
+
+            gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+
+            gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
+            for (int i = 0; i < 6; i++)
+                gl.Vertex(pt[i, 0], gl.RenderContextProvider.Height - pt[i, 1]);
+            gl.End();
+            gl.Flush();
         }
     }
   
