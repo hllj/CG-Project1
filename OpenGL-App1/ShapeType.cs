@@ -11,6 +11,8 @@ namespace OpenGL_App1
     abstract public class ShapeType
     {
         public int id { get; set; }
+        public bool Done;
+        public List<Point> Control_points;  // list control point
         public Point p1 { get; set; } // starting point
         public Point p2 { get; set; } // ending point
        // public List<Point> lPoint;
@@ -18,6 +20,8 @@ namespace OpenGL_App1
         abstract public void Draw(OpenGL gl);
         public ShapeType()
         {
+            Done = false;
+            Control_points = new List<Point>();
         }
     }
 
@@ -175,5 +179,31 @@ namespace OpenGL_App1
             gl.Flush();
         }
     }
-  
+    public class Polygon : ShapeType
+    {
+
+        public override void Draw(OpenGL gl)
+        {
+
+            for (int i = 0; i < Control_points.Count - 1; i++)
+            {
+                // Vẽ những cạnh trước đó 
+                gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+                gl.Begin(OpenGL.GL_LINES);
+                gl.Vertex(Control_points[i].X, gl.RenderContextProvider.Height - Control_points[i].Y);
+                gl.Vertex(Control_points[i + 1].X, gl.RenderContextProvider.Height - Control_points[i + 1].Y);
+                gl.End();
+                gl.Flush();
+            }
+            // Mouse Move
+            gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            gl.Begin(OpenGL.GL_LINES);
+            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
+            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
+            gl.End();
+            gl.Flush();
+        }
+
+    }
+
 }

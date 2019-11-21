@@ -24,12 +24,12 @@ namespace OpenGL_App1
         const int SHAPE_EQUI_TRIANGLE = 4;
         const int SHAPE_EQUI_PENTAGON = 5;
         const int SHAPE_EQUI_HEXAGON = 6;
-
+        const int SHAPE_POLYGON = 7;
         // Vẽ ellipse cần bao nhiêu điểm điều khiển?
-        
+
 
         List<ShapeType> listShapes;
-
+        private bool startup; // biến kiểm tra chương trình được khởi động lần đầu
         Color userColor;
         short shape;
         Point pStart, pEnd;
@@ -43,11 +43,12 @@ namespace OpenGL_App1
             InitializeComponent();
             listShapes = new List<ShapeType>();
             List<Point> pointsOfShape = new List<Point>();
-            userColor = Color.White;
+            userColor = Color.Black;
             shape = SHAPE_LINE;
             openGLControl.Tag = OPENGL_IDLE;
             strMode = labelMode.Text;
             labelMode.Text = strMode + "Line";
+            startup = true;  // 
         }
 
         private void openGLControl_Load(object sender, EventArgs e)
@@ -60,7 +61,7 @@ namespace OpenGL_App1
             // Get the OpenGL object.
             OpenGL gl = openGLControl.OpenGL;
             // Set the clear color.
-            gl.ClearColor(0, 0, 0, 0);
+            gl.ClearColor(1, 1, 1, 1); // set clearcolor to white
             // Set the projection matrix.
             gl.MatrixMode(OpenGL.GL_PROJECTION);
             // Load the identity.
@@ -82,12 +83,31 @@ namespace OpenGL_App1
 
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs e)
         {
-            if ((int)openGLControl.Tag == OPENGL_IDLE)
-                return;
             // Get the OpenGL object.
             OpenGL gl = openGLControl.OpenGL;
+
+            /* **************************************/
+            if (startup) // đoạn code này để đổi backGround thành màu trắng
+            {
+                gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+                gl.ClearColor(1, 1, 1, 1);
+                Line tmp = new Line { p1 = new Point(0, 0), p2 = new Point(0, 0) };
+                tmp.Draw(gl);
+                startup = false;
+                return;
+            }
+            /* **************************************/
+
+            if ((int)openGLControl.Tag == OPENGL_IDLE)
+            {
+                return;
+            }
+
+
             // Clear the color and depth buffer.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+            gl.ClearColor(1, 1, 1, 1);
+
 
 
 
@@ -151,6 +171,15 @@ namespace OpenGL_App1
                         id = SHAPE_EQUI_PENTAGON
                     };
                     break;
+                case SHAPE_POLYGON:
+                    newShape = new Polygon();
+                    newShape = listShapes.Last();
+                    if (newShape.id != SHAPE_POLYGON || newShape.Done == true)
+                    {
+                        return;
+                    }
+                    newShape.color = userColor;
+                    return;
                 default:
                     newShape = new EquiHexagon()
                     {
@@ -196,6 +225,8 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseDown(object sender, MouseEventArgs e)
         {
+            if (labelMode.Text == strMode + "Polygon") // không xử lý event này trong mode polygon
+                return;
             openGLControl.Tag = OPENGL_DRAWING;
             pStart = e.Location;
             pEnd = pStart;
@@ -203,6 +234,8 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseUp(object sender, MouseEventArgs e)
         {
+            if (labelMode.Text == strMode + "Polygon") // không xử lý event này trong mode polygon
+                return;
             openGLControl.Tag = OPENGL_DRAWN;
             pEnd = e.Location;
         }
@@ -294,13 +327,25 @@ namespace OpenGL_App1
 
         }
 
+        private void btn_Polygon_Click(object sender, EventArgs e)
+        {
+            // button Polygon
+            shape = SHAPE_POLYGON;
+            labelMode.Text = strMode + "Polygon";
+        }
+
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)
         {
             if ((int)openGLControl.Tag == OPENGL_DRAWING)
             {
                 pEnd = e.Location;
+
+                if (labelMode.Text == strMode + "Polygon")
+                    listShapes.Last().p2 = pEnd;
             }
+
         }
-        
     }
+
+       
 }

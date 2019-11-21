@@ -55,7 +55,7 @@
             // 
             this.openGLControl.DrawFPS = false;
             this.openGLControl.ForeColor = System.Drawing.SystemColors.Window;
-            this.openGLControl.Location = new System.Drawing.Point(10, 72);
+            this.openGLControl.Location = new System.Drawing.Point(88, 61);
             this.openGLControl.Name = "openGLControl";
             this.openGLControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
             this.openGLControl.RenderContextType = SharpGL.RenderContextType.DIBSection;
@@ -66,6 +66,7 @@
             this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl_OpenGLDraw);
             this.openGLControl.Resized += new System.EventHandler(this.openGLControl_Resized);
             this.openGLControl.Load += new System.EventHandler(this.openGLControl_Load);
+            this.openGLControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseClick);
             this.openGLControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseDown);
             this.openGLControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseMove);
             this.openGLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseUp);
@@ -157,10 +158,10 @@
             // 
             // btn_Polygon
             // 
-            this.btn_Polygon.Location = new System.Drawing.Point(329, 10);
+            this.btn_Polygon.Location = new System.Drawing.Point(516, 12);
             this.btn_Polygon.Name = "btn_Polygon";
-            this.btn_Polygon.Size = new System.Drawing.Size(75, 44);
-            this.btn_Polygon.TabIndex = 7;
+            this.btn_Polygon.Size = new System.Drawing.Size(75, 42);
+            this.btn_Polygon.TabIndex = 9;
             this.btn_Polygon.Text = "POLYGON";
             this.btn_Polygon.UseVisualStyleBackColor = true;
             this.btn_Polygon.Click += new System.EventHandler(this.btn_Polygon_Click);
@@ -169,10 +170,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 486);
+            this.ClientSize = new System.Drawing.Size(879, 486);
+            this.Controls.Add(this.btn_Polygon);
             this.Controls.Add(this.btn_EquiHexagon);
             this.Controls.Add(this.btn_equipentagon);
-            this.ClientSize = new System.Drawing.Size(573, 486);
             this.Controls.Add(this.labelMode);
             this.Controls.Add(this.colorPalette);
             this.Controls.Add(this.btn_Triangles);
