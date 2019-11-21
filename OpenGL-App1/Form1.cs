@@ -261,6 +261,18 @@ namespace OpenGL_App1
             labelMode.Text = strMode + "Triangle";
         }
 
+        private void btn_equipentagon_Click(object sender, EventArgs e)
+        {
+            shape = SHAPE_EQUI_PENTAGON;
+            labelMode.Text = strMode + "EquiPentagon";
+        }
+
+        private void btn_EquiHexagon_Click(object sender, EventArgs e)
+        {
+            shape = SHAPE_EQUI_HEXAGON;
+            labelMode.Text = strMode + "EquiHexagon";
+        }
+
         private void openGLControl_MouseClick(object sender, MouseEventArgs e)
         {
             if (labelMode.Text == strMode + "Polygon")
