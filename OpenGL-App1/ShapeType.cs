@@ -133,6 +133,8 @@ namespace OpenGL_App1
                 pt[i, 1] = yA + const_cos * (yB - yA) + const_sin * (xB - xA);
             }
 
+            gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+
             gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
             for (int i = 0; i < 5; i++)
                 gl.Vertex(pt[i, 0], gl.RenderContextProvider.Height - pt[i, 1]);
