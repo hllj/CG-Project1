@@ -33,7 +33,6 @@
             this.btnLine = new System.Windows.Forms.Button();
             this.btnCircle = new System.Windows.Forms.Button();
             this.colorPalette = new System.Windows.Forms.Button();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.labelMode = new System.Windows.Forms.Label();
             this.btn_rectangle = new System.Windows.Forms.Button();
             this.btn_Triangles = new System.Windows.Forms.Button();
@@ -42,6 +41,8 @@
             this.btn_Polygon = new System.Windows.Forms.Button();
             this.btn_Select = new System.Windows.Forms.Button();
             this.btn_Translate = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.btn_Ellipse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             // 
             this.openGLControl.DrawFPS = false;
             this.openGLControl.ForeColor = System.Drawing.SystemColors.Window;
-            this.openGLControl.Location = new System.Drawing.Point(88, 61);
+            this.openGLControl.Location = new System.Drawing.Point(82, 60);
             this.openGLControl.Name = "openGLControl";
             this.openGLControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
             this.openGLControl.RenderContextType = SharpGL.RenderContextType.DIBSection;
@@ -97,7 +98,7 @@
             // 
             // colorPalette
             // 
-            this.colorPalette.Location = new System.Drawing.Point(711, 12);
+            this.colorPalette.Location = new System.Drawing.Point(6, 60);
             this.colorPalette.Margin = new System.Windows.Forms.Padding(2);
             this.colorPalette.Name = "colorPalette";
             this.colorPalette.Size = new System.Drawing.Size(68, 44);
@@ -109,7 +110,7 @@
             // labelMode
             // 
             this.labelMode.AutoSize = true;
-            this.labelMode.Location = new System.Drawing.Point(612, 12);
+            this.labelMode.Location = new System.Drawing.Point(697, 10);
             this.labelMode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMode.Name = "labelMode";
             this.labelMode.Size = new System.Drawing.Size(43, 13);
@@ -160,7 +161,7 @@
             // 
             // btn_Polygon
             // 
-            this.btn_Polygon.Location = new System.Drawing.Point(516, 12);
+            this.btn_Polygon.Location = new System.Drawing.Point(602, 8);
             this.btn_Polygon.Name = "btn_Polygon";
             this.btn_Polygon.Size = new System.Drawing.Size(75, 42);
             this.btn_Polygon.TabIndex = 9;
@@ -170,7 +171,7 @@
             // 
             // btn_Select
             // 
-            this.btn_Select.Location = new System.Drawing.Point(10, 59);
+            this.btn_Select.Location = new System.Drawing.Point(6, 109);
             this.btn_Select.Name = "btn_Select";
             this.btn_Select.Size = new System.Drawing.Size(66, 42);
             this.btn_Select.TabIndex = 10;
@@ -180,7 +181,7 @@
             // 
             // btn_Translate
             // 
-            this.btn_Translate.Location = new System.Drawing.Point(739, 69);
+            this.btn_Translate.Location = new System.Drawing.Point(3, 157);
             this.btn_Translate.Name = "btn_Translate";
             this.btn_Translate.Size = new System.Drawing.Size(75, 23);
             this.btn_Translate.TabIndex = 11;
@@ -188,16 +189,27 @@
             this.btn_Translate.UseVisualStyleBackColor = true;
             this.btn_Translate.Click += new System.EventHandler(this.btn_Translate_Click);
             // 
+            // btn_Ellipse
+            // 
+            this.btn_Ellipse.Location = new System.Drawing.Point(516, 8);
+            this.btn_Ellipse.Name = "btn_Ellipse";
+            this.btn_Ellipse.Size = new System.Drawing.Size(80, 44);
+            this.btn_Ellipse.TabIndex = 8;
+            this.btn_Ellipse.Text = "Ellipse";
+            this.btn_Ellipse.UseVisualStyleBackColor = true;
+            this.btn_Ellipse.Click += new System.EventHandler(this.btn_Ellipse_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 486);
+            this.ClientSize = new System.Drawing.Size(843, 486);
             this.Controls.Add(this.btn_Translate);
             this.Controls.Add(this.btn_Select);
             this.Controls.Add(this.btn_Polygon);
             this.Controls.Add(this.btn_EquiHexagon);
             this.Controls.Add(this.btn_equipentagon);
+            this.Controls.Add(this.btn_Ellipse);
             this.Controls.Add(this.labelMode);
             this.Controls.Add(this.colorPalette);
             this.Controls.Add(this.btn_Triangles);
@@ -222,7 +234,6 @@
         private System.Windows.Forms.Button btnLine;
         private System.Windows.Forms.Button btnCircle;
         private System.Windows.Forms.Button colorPalette;
-        private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Label labelMode;
         private System.Windows.Forms.Button btn_rectangle;
         private System.Windows.Forms.Button btn_Triangles;
@@ -231,6 +242,10 @@
         private System.Windows.Forms.Button btn_Polygon;
         private System.Windows.Forms.Button btn_Select;
         private System.Windows.Forms.Button btn_Translate;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button btn_Ellipse;
+
+
     }
 }
 
