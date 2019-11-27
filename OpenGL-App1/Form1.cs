@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
+
 namespace OpenGL_App1
 {
     public partial class Form1 : Form
@@ -33,9 +35,10 @@ namespace OpenGL_App1
         Color userColor;
         short shape;
         Point pStart, pEnd;
-        
+        ShapeType Selected_shape;
+        Point Selected_point;
         Point pTmp;
-        
+        Affine affine;
         string strMode;
 
         public Form1()
@@ -48,7 +51,10 @@ namespace OpenGL_App1
             openGLControl.Tag = OPENGL_IDLE;
             strMode = labelMode.Text;
             labelMode.Text = strMode + "Line";
-            startup = true;  // 
+            startup = true;  //
+            Selected_point = new Point();
+            affine = new Affine();
+
         }
 
         private void openGLControl_Load(object sender, EventArgs e)
@@ -85,14 +91,18 @@ namespace OpenGL_App1
         {
             // Get the OpenGL object.
             OpenGL gl = openGLControl.OpenGL;
-
+            ShapeType newShape;
             /* **************************************/
             if (startup) // đoạn code này để đổi backGround thành màu trắng
             {
                 gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
                 gl.ClearColor(1, 1, 1, 1);
-                Line tmp = new Line { p1 = new Point(0, 0), p2 = new Point(0, 0) };
+                Line tmp = new Line {
+                    p1 = new Point(0, 0), p2 = new Point(0, 0)
+                };
+                
                 tmp.Draw(gl);
+                listShapes.Add(tmp);
                 startup = false;
                 return;
             }
@@ -109,17 +119,33 @@ namespace OpenGL_App1
             gl.ClearColor(1, 1, 1, 1);
 
 
+           
+            
+           
+            if (labelMode.Text == strMode + "Translate")
+            {
+                /*for (int i = 0; i < listShapes.Count - 1; i++)
+                {
+                    listShapes[i].Draw(gl);
+                }*/
 
-
+                
+                newShape = listShapes.Last().Clone();
+                newShape.Transform(affine);
+                newShape.Draw(gl);
+                //listShapes.RemoveAt(listShapes.Count - 1);
+                //listShapes.Add(newShape);
+                //Thread.Sleep(200);
+                return;
+            }
             for (int i = 0; i < listShapes.Count; i++)
             {
                 listShapes[i].Draw(gl);
             }
-
             gl.Color(userColor.R / 255.0, userColor.G / 255.0, userColor.B / 255.0);
 
-
-            ShapeType newShape;
+            
+           
 
             // Vẽ vời chỗ này. Ví dụ:
             switch (shape)
@@ -191,6 +217,8 @@ namespace OpenGL_App1
             newShape.color = userColor;
             newShape.p1 = new Point(pStart.X, pStart.Y);
             newShape.p2 = new Point(pEnd.X, pEnd.Y);
+            newShape.Control_points.Add(newShape.p1);
+            newShape.Control_points.Add(newShape.p2);
             newShape.Draw(gl);
             if ((int)openGLControl.Tag == OPENGL_DRAWN)
             {
@@ -227,15 +255,42 @@ namespace OpenGL_App1
         {
             if (labelMode.Text == strMode + "Polygon") // không xử lý event này trong mode polygon
                 return;
+            if (labelMode.Text ==  strMode + "Translate")
+            {
+                /*Selected_shape =  listShapes.Last().Clone();
+                double d = 0;
+                for(int i=0;i<Selected_shape.Control_points.Count;i++)
+                {
+                    Point j = new Point();
+                    j = Selected_shape.Control_points[i];
+                    double t = Math.Sqrt((double)(e.Location.X - j.X) * (e.Location.X - j.X) + (double)(e.Location.Y - j.Y) * (e.Location.Y - j.Y));
+                    if (d<t)
+                    {
+                        d = t;
+                        Selected_point = Selected_shape.Control_points[i];
+                    }
+                }*/
+                
+                Selected_point = listShapes.Last().Control_points[0];
+                openGLControl.Tag = OPENGL_DRAWING;
+                return;
+            }
             openGLControl.Tag = OPENGL_DRAWING;
             pStart = e.Location;
-            pEnd = pStart;
+            pEnd = pStart;  
         }
 
         private void openGLControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (labelMode.Text == strMode + "Polygon") // không xử lý event này trong mode polygon
                 return;
+           if (labelMode.Text == strMode + "Translate")
+            {
+                
+                openGLControl.Tag = OPENGL_IDLE;
+                affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                return;
+            }
             openGLControl.Tag = OPENGL_DRAWN;
             pEnd = e.Location;
         }
@@ -322,8 +377,11 @@ namespace OpenGL_App1
                     pEnd = pStart;
                 }
             }
-
-            return;
+            if (labelMode.Text == strMode + "Translate")
+            {
+                
+                return;
+            }
 
         }
 
@@ -334,6 +392,17 @@ namespace OpenGL_App1
             labelMode.Text = strMode + "Polygon";
         }
 
+        private void btn_Select_Click(object sender, EventArgs e)
+        {
+            labelMode.Text = strMode + "Select";
+        }
+
+        private void btn_Translate_Click(object sender, EventArgs e)
+        {
+            
+            labelMode.Text = strMode + "Translate";
+        }
+
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)
         {
             if ((int)openGLControl.Tag == OPENGL_DRAWING)
@@ -342,6 +411,10 @@ namespace OpenGL_App1
 
                 if (labelMode.Text == strMode + "Polygon")
                     listShapes.Last().p2 = pEnd;
+                if (labelMode.Text == strMode + "Translate")
+                {
+                    affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                }
             }
 
         }

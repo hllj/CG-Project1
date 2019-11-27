@@ -40,6 +40,8 @@
             this.btn_equipentagon = new System.Windows.Forms.Button();
             this.btn_EquiHexagon = new System.Windows.Forms.Button();
             this.btn_Polygon = new System.Windows.Forms.Button();
+            this.btn_Select = new System.Windows.Forms.Button();
+            this.btn_Translate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -166,11 +168,33 @@
             this.btn_Polygon.UseVisualStyleBackColor = true;
             this.btn_Polygon.Click += new System.EventHandler(this.btn_Polygon_Click);
             // 
+            // btn_Select
+            // 
+            this.btn_Select.Location = new System.Drawing.Point(10, 59);
+            this.btn_Select.Name = "btn_Select";
+            this.btn_Select.Size = new System.Drawing.Size(66, 42);
+            this.btn_Select.TabIndex = 10;
+            this.btn_Select.Text = "Select";
+            this.btn_Select.UseVisualStyleBackColor = true;
+            this.btn_Select.Click += new System.EventHandler(this.btn_Select_Click);
+            // 
+            // btn_Translate
+            // 
+            this.btn_Translate.Location = new System.Drawing.Point(739, 69);
+            this.btn_Translate.Name = "btn_Translate";
+            this.btn_Translate.Size = new System.Drawing.Size(75, 23);
+            this.btn_Translate.TabIndex = 11;
+            this.btn_Translate.Text = "Translate";
+            this.btn_Translate.UseVisualStyleBackColor = true;
+            this.btn_Translate.Click += new System.EventHandler(this.btn_Translate_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(879, 486);
+            this.Controls.Add(this.btn_Translate);
+            this.Controls.Add(this.btn_Select);
             this.Controls.Add(this.btn_Polygon);
             this.Controls.Add(this.btn_EquiHexagon);
             this.Controls.Add(this.btn_equipentagon);
@@ -205,6 +229,8 @@
         private System.Windows.Forms.Button btn_equipentagon;
         private System.Windows.Forms.Button btn_EquiHexagon;
         private System.Windows.Forms.Button btn_Polygon;
+        private System.Windows.Forms.Button btn_Select;
+        private System.Windows.Forms.Button btn_Translate;
     }
 }
 

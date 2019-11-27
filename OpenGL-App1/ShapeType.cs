@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpGL;
 
+
 namespace OpenGL_App1
 {
     abstract public class ShapeType
@@ -18,6 +19,8 @@ namespace OpenGL_App1
        // public List<Point> lPoint;
         public Color color { get; set; }
         abstract public void Draw(OpenGL gl);
+        abstract public ShapeType Clone();
+        abstract public void Transform(Affine at);
         public ShapeType()
         {
             Done = false;
@@ -29,12 +32,33 @@ namespace OpenGL_App1
     {
         public override void Draw(OpenGL gl)
         {
+            if (Control_points.Count<2)
+            {
+                Control_points.Add(p1);
+                Control_points.Add(p2);
+            }
+            Control_points[0] = new Point(p1.X, p1.Y);
+            Control_points[1] = new Point(p2.X, p2.Y);
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
             gl.Begin(OpenGL.GL_LINES);
             gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
             gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
             gl.End();
             gl.Flush();
+        }
+        public override ShapeType Clone()
+        {
+            ShapeType t = new Line();
+            t.Control_points = new List<Point>(Control_points);
+            t.color = color;
+            t.p1 = new Point(p1.X, p1.Y);
+            t.p2 = new Point(p2.X,p2.Y);
+            return t;
+        }
+        public override void Transform(Affine at)
+        {
+            p1 = at.Transform(p1);
+            p2 = at.Transform(p2);
         }
     }
 
@@ -43,6 +67,14 @@ namespace OpenGL_App1
         public override void Draw(OpenGL gl)
         {
 
+        }
+        public override ShapeType Clone()
+        {
+            throw new NotImplementedException();
+        }
+        public override void Transform(Affine at)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -72,6 +104,14 @@ namespace OpenGL_App1
             gl.End();
             gl.Flush();
         }
+        public override ShapeType Clone()
+        {
+            throw new NotImplementedException();
+        }
+        public override void Transform(Affine at)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Ellipse : ShapeType
@@ -79,6 +119,14 @@ namespace OpenGL_App1
         public override void Draw(OpenGL gl)
         {
                 
+        }
+        public override ShapeType Clone()
+        {
+            throw new NotImplementedException();
+        }
+        public override void Transform(Affine at)
+        {
+            throw new NotImplementedException();
         }
     }
     
@@ -113,6 +161,14 @@ namespace OpenGL_App1
             gl.End();
             gl.Flush();
         }
+        public override ShapeType Clone()
+        {
+            throw new NotImplementedException();
+        }
+        public override void Transform(Affine at)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class EquiPentagon : ShapeType
@@ -146,6 +202,14 @@ namespace OpenGL_App1
             gl.Flush();
 
         }
+        public override ShapeType Clone()
+        {
+            throw new NotImplementedException();
+        }
+        public override void Transform(Affine at)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class EquiHexagon : ShapeType
@@ -178,6 +242,14 @@ namespace OpenGL_App1
             gl.End();
             gl.Flush();
         }
+        public override ShapeType Clone()
+        {
+            throw new NotImplementedException();
+        }
+        public override void Transform(Affine at)
+        {
+            throw new NotImplementedException();
+        }
     }
     public class Polygon : ShapeType
     {
@@ -202,6 +274,14 @@ namespace OpenGL_App1
             gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
             gl.End();
             gl.Flush();
+        }
+        public override ShapeType Clone()
+        {
+            throw new NotImplementedException();
+        }
+        public override void Transform(Affine at)
+        {
+            throw new NotImplementedException();
         }
 
     }
