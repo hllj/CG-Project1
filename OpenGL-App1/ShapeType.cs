@@ -6,6 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpGL;
 
+/*Thêm:
+ * Biến controlPoints: Lưu trữ các control của Shape
+ * Hàm Create: Thêm các điểm control point vào
+ * Hàm DrawControlPoints: Vẽ các điểm control point khi nhất Select
+ * Cách vẽ hình Ellipse
+ */
 namespace OpenGL_App1
 {
     abstract public class ShapeType
@@ -13,11 +19,14 @@ namespace OpenGL_App1
         public int id { get; set; }
         public Point p1 { get; set; } // starting point
         public Point p2 { get; set; } // ending point
-       // public List<Point> lPoint;
+        public List<Point> controlPoints;
         public Color color { get; set; }
         abstract public void Draw(OpenGL gl);
+        abstract public void Create(OpenGL gl);
+        abstract public void DrawControlPoints(OpenGL gl);
         public ShapeType()
         {
+            controlPoints = new List<Point>();
         }
     }
 
@@ -32,6 +41,25 @@ namespace OpenGL_App1
             gl.End();
             gl.Flush();
         }
+        public override void Create(OpenGL gl)
+        {
+            controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
+            controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
+        }
+        public override void DrawControlPoints(OpenGL gl)
+        {
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                gl.Color(color.R / 255.0, 0, 0);
+                gl.PointSize(5);
+                gl.Begin(OpenGL.GL_POINTS);
+                Point a = controlPoints[i];
+                gl.Vertex(a.X, a.Y);
+                gl.End();
+                gl.Flush();
+            }
+            gl.PointSize(1);
+        }
     }
 
     public class Circle : ShapeType
@@ -39,6 +67,24 @@ namespace OpenGL_App1
         public override void Draw(OpenGL gl)
         {
 
+        }
+        public override void Create(OpenGL gl)
+        {
+
+        }
+        public override void DrawControlPoints(OpenGL gl)
+        {
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                gl.Color(color.R / 255.0, 0, 0);
+                gl.PointSize(5);
+                gl.Begin(OpenGL.GL_POINTS);
+                Point a = controlPoints[i];
+                gl.Vertex(a.X, a.Y);
+                gl.End();
+                gl.Flush();
+            }
+            gl.PointSize(1);
         }
     }
 
@@ -68,13 +114,129 @@ namespace OpenGL_App1
             gl.End();
             gl.Flush();
         }
+        public override void Create(OpenGL gl)
+        {
+            controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
+            controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p1.Y));
+            controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
+            controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p2.Y));
+            controlPoints.Add(new Point(p1.X, (gl.RenderContextProvider.Height - p1.Y + gl.RenderContextProvider.Height - p2.Y) / 2));
+            controlPoints.Add(new Point(p2.X, (gl.RenderContextProvider.Height - p1.Y + gl.RenderContextProvider.Height - p2.Y) / 2));
+            controlPoints.Add(new Point((p1.X + p2.X) / 2, gl.RenderContextProvider.Height - p1.Y));
+            controlPoints.Add(new Point((p1.X + p2.X) / 2, gl.RenderContextProvider.Height - p2.Y));
+        }
+        public override void DrawControlPoints(OpenGL gl)
+        {
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                gl.Color(color.R / 255.0, 0, 0);
+                gl.PointSize(5);
+                gl.Begin(OpenGL.GL_POINTS);
+                Point a = controlPoints[i];
+                gl.Vertex(a.X, a.Y);
+                gl.End();
+                gl.Flush();
+            }
+            gl.PointSize(1);
+        }
     }
 
     public class Ellipse : ShapeType
     {
         public override void Draw(OpenGL gl)
         {
-                
+            gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            gl.Begin(OpenGL.GL_POINTS);
+            /* Xác định các đại lượng cơ bản của hình ellipse */
+            /* Bán kính rx, ry*/
+            long rx = Math.Abs(p1.X - p2.X) / 2;
+            long ry = Math.Abs(p1.Y - p2.Y) / 2;
+            long rx2 = rx * rx;
+            long ry2 = ry * ry;
+            long twoRx2 = 2 * rx2, twoRy2 = 2 * ry2;
+            /* Tâm hình ellipse*/
+            long xc = (p1.X + p2.X) / 2;
+            long yc = (p1.Y + p2.Y) / 2;
+            long x = 0, y = ry;
+            long px = 0, py = twoRx2 * y;
+            /* Vẽ đối xứng qua tâm*/
+            gl.Vertex(xc + x, gl.RenderContextProvider.Height - (yc + y));
+            gl.Vertex(xc - x, gl.RenderContextProvider.Height - (yc + y));
+            gl.Vertex(xc + x, gl.RenderContextProvider.Height - (yc - y));
+            gl.Vertex(xc - x, gl.RenderContextProvider.Height - (yc - y));
+            /* Vùng 1: dx/dy <= 1*/
+            long p = (long)(Math.Round(ry2 - rx2 * ry + 0.25 * rx2));
+            while (px < py)
+            {
+                x++;
+                px += twoRy2;
+                if (p < 0)
+                {
+                    p += ry2 + px;
+                }
+                else
+                {
+                    y--;
+                    py -= twoRx2;
+                    p += ry2 + px - py;
+                }
+                /* Vẽ đối xứng qua tâm*/
+                gl.Vertex(xc + x, gl.RenderContextProvider.Height - (yc + y));
+                gl.Vertex(xc - x, gl.RenderContextProvider.Height - (yc + y));
+                gl.Vertex(xc + x, gl.RenderContextProvider.Height - (yc - y));
+                gl.Vertex(xc - x, gl.RenderContextProvider.Height - (yc - y));
+            }
+
+            /* Vùng 2*/
+            p = (long)(Math.Round(ry2 * (x + 0.5) * (x + 0.5) + rx2 * (y - 1) * (y - 1) - rx2 * ry2));
+            while (y > 0)
+            {
+                y--;
+                py -= twoRx2;
+                if (p > 0)
+                {
+                    p += rx2 - py;
+                }
+                else
+                {
+                    x++;
+                    px += twoRy2;
+                    p += rx2 - py + px;
+                }
+                /* Vẽ đối xứng qua tâm*/
+                gl.Vertex(xc + x, gl.RenderContextProvider.Height - (yc + y));
+                gl.Vertex(xc - x, gl.RenderContextProvider.Height - (yc + y));
+                gl.Vertex(xc + x, gl.RenderContextProvider.Height - (yc - y));
+                gl.Vertex(xc - x, gl.RenderContextProvider.Height - (yc - y));
+            }
+
+            gl.End();
+            gl.Flush();
+        }
+        public override void Create(OpenGL gl)
+        {
+            controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
+            controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p1.Y));
+            controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
+            controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p2.Y));
+            controlPoints.Add(new Point(p1.X, (gl.RenderContextProvider.Height - p1.Y + gl.RenderContextProvider.Height - p2.Y) / 2));
+            controlPoints.Add(new Point(p2.X, (gl.RenderContextProvider.Height - p1.Y + gl.RenderContextProvider.Height - p2.Y) / 2));
+            controlPoints.Add(new Point((p1.X + p2.X) / 2, gl.RenderContextProvider.Height - p1.Y));
+            controlPoints.Add(new Point((p1.X + p2.X) / 2, gl.RenderContextProvider.Height - p2.Y));
+        }
+        public override void DrawControlPoints(OpenGL gl)
+        {
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                gl.Color(color.R / 255.0, 0, 0);
+                gl.PointSize(5);
+                gl.Begin(OpenGL.GL_POINTS);
+                Point a = controlPoints[i];
+                gl.Vertex(a.X, a.Y);
+                gl.End();
+                gl.Flush();
+            }
+            gl.PointSize(1);
         }
     }
     
@@ -109,6 +271,24 @@ namespace OpenGL_App1
             gl.End();
             gl.Flush();
         }
+        public override void Create(OpenGL gl)
+        {
+
+        }
+        public override void DrawControlPoints(OpenGL gl)
+        {
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                gl.Color(color.R / 255.0, 0, 0);
+                gl.PointSize(5);
+                gl.Begin(OpenGL.GL_POINTS);
+                Point a = controlPoints[i];
+                gl.Vertex(a.X, a.Y);
+                gl.End();
+                gl.Flush();
+            }
+            gl.PointSize(1);
+        }
     }
 
     public class EquiPentagon : ShapeType
@@ -142,6 +322,24 @@ namespace OpenGL_App1
             gl.Flush();
 
         }
+        public override void Create(OpenGL gl)
+        {
+
+        }
+        public override void DrawControlPoints(OpenGL gl)
+        {
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                gl.Color(color.R / 255.0, 0, 0);
+                gl.PointSize(5);
+                gl.Begin(OpenGL.GL_POINTS);
+                Point a = controlPoints[i];
+                gl.Vertex(a.X, a.Y);
+                gl.End();
+                gl.Flush();
+            }
+            gl.PointSize(1);
+        }
     }
 
     public class EquiHexagon : ShapeType
@@ -173,6 +371,24 @@ namespace OpenGL_App1
                 gl.Vertex(pt[i, 0], gl.RenderContextProvider.Height - pt[i, 1]);
             gl.End();
             gl.Flush();
+        }
+        public override void Create(OpenGL gl)
+        {
+
+        }
+        public override void DrawControlPoints(OpenGL gl)
+        {
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                gl.Color(color.R / 255.0, 0, 0);
+                gl.PointSize(5);
+                gl.Begin(OpenGL.GL_POINTS);
+                Point a = controlPoints[i];
+                gl.Vertex(a.X, a.Y);
+                gl.End();
+                gl.Flush();
+            }
+            gl.PointSize(1);
         }
     }
   

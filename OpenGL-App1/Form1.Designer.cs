@@ -39,6 +39,8 @@
             this.btn_Triangles = new System.Windows.Forms.Button();
             this.btn_equipentagon = new System.Windows.Forms.Button();
             this.btn_EquiHexagon = new System.Windows.Forms.Button();
+            this.btn_Ellipse = new System.Windows.Forms.Button();
+            this.btn_Select = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,17 +56,18 @@
             // 
             this.openGLControl.DrawFPS = false;
             this.openGLControl.ForeColor = System.Drawing.SystemColors.Window;
-            this.openGLControl.Location = new System.Drawing.Point(10, 72);
+            this.openGLControl.Location = new System.Drawing.Point(10, 114);
             this.openGLControl.Name = "openGLControl";
             this.openGLControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
             this.openGLControl.RenderContextType = SharpGL.RenderContextType.DIBSection;
             this.openGLControl.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
-            this.openGLControl.Size = new System.Drawing.Size(645, 396);
+            this.openGLControl.Size = new System.Drawing.Size(645, 354);
             this.openGLControl.TabIndex = 1;
             this.openGLControl.OpenGLInitialized += new System.EventHandler(this.openGLControl_OpenGLInitialized);
             this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl_OpenGLDraw);
             this.openGLControl.Resized += new System.EventHandler(this.openGLControl_Resized);
             this.openGLControl.Load += new System.EventHandler(this.openGLControl_Load);
+            this.openGLControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseClick);
             this.openGLControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseDown);
             this.openGLControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseMove);
             this.openGLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseUp);
@@ -154,11 +157,33 @@
             this.btn_EquiHexagon.UseVisualStyleBackColor = true;
             this.btn_EquiHexagon.Click += new System.EventHandler(this.btn_EquiHexagon_Click);
             // 
+            // btn_Ellipse
+            // 
+            this.btn_Ellipse.Location = new System.Drawing.Point(517, 11);
+            this.btn_Ellipse.Name = "btn_Ellipse";
+            this.btn_Ellipse.Size = new System.Drawing.Size(90, 43);
+            this.btn_Ellipse.TabIndex = 9;
+            this.btn_Ellipse.Text = "Ellipse";
+            this.btn_Ellipse.UseVisualStyleBackColor = true;
+            this.btn_Ellipse.Click += new System.EventHandler(this.btn_Ellipse_Click);
+            // 
+            // btn_Select
+            // 
+            this.btn_Select.Location = new System.Drawing.Point(10, 60);
+            this.btn_Select.Name = "btn_Select";
+            this.btn_Select.Size = new System.Drawing.Size(68, 48);
+            this.btn_Select.TabIndex = 10;
+            this.btn_Select.Text = "Select";
+            this.btn_Select.UseVisualStyleBackColor = true;
+            this.btn_Select.Click += new System.EventHandler(this.btn_Select_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 486);
+            this.Controls.Add(this.btn_Select);
+            this.Controls.Add(this.btn_Ellipse);
             this.Controls.Add(this.btn_EquiHexagon);
             this.Controls.Add(this.btn_equipentagon);
             this.Controls.Add(this.labelMode);
@@ -191,6 +216,8 @@
         private System.Windows.Forms.Button btn_Triangles;
         private System.Windows.Forms.Button btn_equipentagon;
         private System.Windows.Forms.Button btn_EquiHexagon;
+        private System.Windows.Forms.Button btn_Ellipse;
+        private System.Windows.Forms.Button btn_Select;
     }
 }
 

@@ -8,6 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+/*Huan
+ * Thêm: 
+ * 2 button: Ellipse, Select
+ * Hàm changeToSelect: Chuyển GL_RENDER thành GL_SELECT, Mặc định là Select, nhấn vào button vẽ mới vẽ được
+ * Hàm ReDraw: Vẽ lại các shape
+ * Biến Boolean renderMode: Kiểm tra xem đang ở SELECT hay RENDER
+ * Action: MouseClick: Khi nhấn vào thì hiện lên control point
+ */
+
 namespace OpenGL_App1
 {
     public partial class Form1 : Form
@@ -35,8 +44,31 @@ namespace OpenGL_App1
         Point pStart, pEnd;
         
         Point pTmp;
-        
+        Boolean renderMode = false;
+
         string strMode;
+
+        private void changeToSelectMode()
+        {
+            System.UInt32[] selectO;
+            selectO = new System.UInt32[512];
+
+            OpenGL gl = openGLControl.OpenGL;
+            gl.SelectBuffer(512, selectO);
+            gl.RenderMode(OpenGL.GL_SELECT);
+            renderMode = false;
+        }
+
+        private void ReDraw()
+        {
+            OpenGL gl = openGLControl.OpenGL;
+            gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+
+            for (int i = 0; i < listShapes.Count; i++)
+            {
+                listShapes[i].Draw(gl);
+            }
+        }
 
         public Form1()
         {
@@ -47,7 +79,8 @@ namespace OpenGL_App1
             shape = SHAPE_LINE;
             openGLControl.Tag = OPENGL_IDLE;
             strMode = labelMode.Text;
-            labelMode.Text = strMode + "Line";
+            labelMode.Text = strMode + "Select";
+            renderMode = false;
         }
 
         private void openGLControl_Load(object sender, EventArgs e)
@@ -82,19 +115,14 @@ namespace OpenGL_App1
 
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs e)
         {
-            if ((int)openGLControl.Tag == OPENGL_IDLE)
+            if ((int)openGLControl.Tag == OPENGL_IDLE || renderMode == false)
                 return;
             // Get the OpenGL object.
             OpenGL gl = openGLControl.OpenGL;
             // Clear the color and depth buffer.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
-
-
-            for (int i = 0; i < listShapes.Count; i++)
-            {
-                listShapes[i].Draw(gl);
-            }
+            ReDraw();
 
             gl.Color(userColor.R / 255.0, userColor.G / 255.0, userColor.B / 255.0);
 
@@ -121,14 +149,6 @@ namespace OpenGL_App1
                     {
                         id = SHAPE_RECTANGLE
                     };
-                    //gl.Begin(OpenGL.GL_POLYGON);
-                    ///* xác định các đỉnh của hình chữ nhật */
-                    //gl.Vertex(pStart.X,gl.RenderContextProvider.Height - pStart.Y);
-                    //gl.Vertex(pEnd.X, gl.RenderContextProvider.Height -pStart.Y);
-                    //gl.Vertex(pEnd.X, gl.RenderContextProvider.Height - pEnd.Y);
-                    //gl.Vertex(pStart.X, gl.RenderContextProvider.Height - pEnd.Y);
-                    //gl.End();
-                    //gl.Flush();
                     break;
                 case SHAPE_ELLIPSE:
                     newShape = new Ellipse()
@@ -142,8 +162,6 @@ namespace OpenGL_App1
                     {
                         id = SHAPE_EQUI_TRIANGLE
                     };
-
-
                     break;
                 case SHAPE_EQUI_PENTAGON:
                     newShape = new EquiPentagon()
@@ -162,6 +180,7 @@ namespace OpenGL_App1
             newShape.color = userColor;
             newShape.p1 = new Point(pStart.X, pStart.Y);
             newShape.p2 = new Point(pEnd.X, pEnd.Y);
+            newShape.Create(gl);
             newShape.Draw(gl);
             if ((int)openGLControl.Tag == OPENGL_DRAWN)
             {
@@ -171,19 +190,25 @@ namespace OpenGL_App1
             
         }
 
-
+  
         // Event handlers
 
         private void btnLine_Click(object sender, EventArgs e)
         {
             shape = SHAPE_LINE;
             labelMode.Text = strMode + "Line";
+            OpenGL gl = openGLControl.OpenGL;
+            gl.RenderMode(OpenGL.GL_RENDER);
+            renderMode = true;
         }
 
         private void btnCircle_Click(object sender, EventArgs e)
         {
             shape = SHAPE_CIRCLE;
             labelMode.Text = strMode + "Circle";
+            OpenGL gl = openGLControl.OpenGL;
+            gl.RenderMode(OpenGL.GL_RENDER);
+            renderMode = true;
         }
 
         private void colorPalette_Click(object sender, EventArgs e)
@@ -211,24 +236,88 @@ namespace OpenGL_App1
         {
             shape = SHAPE_RECTANGLE;
             labelMode.Text = strMode + "Rectangle";
+            OpenGL gl = openGLControl.OpenGL;
+            gl.RenderMode(OpenGL.GL_RENDER);
+            renderMode = true;
         }
 
         private void btn_Triangles_click(object sender, EventArgs e)
         {
             shape = SHAPE_EQUI_TRIANGLE;
             labelMode.Text = strMode + "Triangle";
+            OpenGL gl = openGLControl.OpenGL;
+            gl.RenderMode(OpenGL.GL_RENDER);
+            renderMode = true;
         }
 
         private void btn_equipentagon_Click(object sender, EventArgs e)
         {
             shape = SHAPE_EQUI_PENTAGON;
             labelMode.Text = strMode + "EquiPentagon";
+            OpenGL gl = openGLControl.OpenGL;
+            gl.RenderMode(OpenGL.GL_RENDER);
+            renderMode = true;
         }
 
         private void btn_EquiHexagon_Click(object sender, EventArgs e)
         {
             shape = SHAPE_EQUI_HEXAGON;
             labelMode.Text = strMode + "EquiHexagon";
+            OpenGL gl = openGLControl.OpenGL;
+            gl.RenderMode(OpenGL.GL_RENDER);
+            renderMode = true;
+        }
+
+        private void btn_Ellipse_Click(object sender, EventArgs e)
+        {
+            shape = SHAPE_ELLIPSE;
+            labelMode.Text = strMode + "Ellipse";
+            OpenGL gl = openGLControl.OpenGL;
+            gl.RenderMode(OpenGL.GL_RENDER);
+            renderMode = true;
+        }
+
+        private void btn_Select_Click(object sender, EventArgs e)
+        {
+            labelMode.Text = strMode + "Select";
+            changeToSelectMode();
+        }
+
+        private void openGLControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (renderMode == true)
+            {
+                return;
+            }
+            double minDist = double.MaxValue;
+            double esp = 10;
+            int index = -1;
+            for (int i = 0; i < listShapes.Count; i++)
+            {
+                for (int j = 0; j < listShapes[i].controlPoints.Count; j++)
+                {
+                    int x = listShapes[i].controlPoints[j].X;
+                    int y = listShapes[i].controlPoints[j].Y;
+                    double dist = Math.Sqrt((e.Location.X - x) * (e.Location.X - x)
+                    + (openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y - y) * (openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y - y));
+                    if (dist <= esp)
+                    {
+                        if (dist < minDist)
+                        {
+                            minDist = dist;
+                            index = i;
+                        }
+                    }
+                }
+            }
+
+            if (index != -1)
+            {
+                openGLControl.OpenGL.RenderMode(OpenGL.GL_RENDER);
+                ReDraw();
+                listShapes[index].DrawControlPoints(openGLControl.OpenGL);
+                changeToSelectMode();
+            }
         }
 
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)
