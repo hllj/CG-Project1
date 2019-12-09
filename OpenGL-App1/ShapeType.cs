@@ -33,42 +33,23 @@ namespace OpenGL_App1
 
     public class Line : ShapeType
     {
-        public override void Draw(OpenGL gl)
+        public override void Draw(OpenGL gl)        
+             
         {
-            if (controlPoints.Count < 2)
-            {
-                controlPoints.Add(p1);
-                controlPoints.Add(p2);
-            }
-            controlPoints[0] = new Point(p1.X, p1.Y);
-            controlPoints[1] = new Point(p2.X, p2.Y);
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
             gl.Begin(OpenGL.GL_LINES);
             gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
             gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
-
-            //gl.RenderContextProvider.Height -
             gl.End();
-
-            /*
-            gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
-            gl.PointSize(0);
-            gl.Begin(OpenGL.GL_POINTS);
-            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
-            gl.End();
-            gl.PointSize(0);
-            gl.Begin(OpenGL.GL_POINTS);
-            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
-            gl.End();
-            gl.PointSize(0);
-            */
             gl.Flush();
-
-            
         }
+
+
+    
 
         public override void Create(OpenGL gl)
         {
+            controlPoints = new List<Point>();
             controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
             controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
         }
@@ -90,8 +71,11 @@ namespace OpenGL_App1
         }
         public override ShapeType Clone()
         {
-            ShapeType t = new Line();
-            t.controlPoints = new List<Point>(controlPoints);
+            ShapeType t = new Line();            
+            for (int i =0;i<controlPoints.Count;i++)
+            {
+                t.controlPoints.Add(controlPoints[i]);
+            }
             t.color = color;
             t.p1 = new Point(p1.X, p1.Y);
             t.p2 = new Point(p2.X, p2.Y);
@@ -99,6 +83,10 @@ namespace OpenGL_App1
         }
         public override void Transform(Affine at)
         {
+            for (int i =0;i<controlPoints.Count;i++)
+            {
+                controlPoints[i] = at.Transform(controlPoints[i]);
+            }
             p1 = at.Transform(p1);
             p2 = at.Transform(p2);
         }
@@ -181,11 +169,24 @@ namespace OpenGL_App1
         }
         public override ShapeType Clone()
         {
-            throw new NotImplementedException();
+            ShapeType t = new Rectangle();
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                t.controlPoints.Add(controlPoints[i]);
+            }
+            t.color = color;
+            t.p1 = new Point(p1.X, p1.Y);
+            t.p2 = new Point(p2.X, p2.Y);
+            return t;
         }
         public override void Transform(Affine at)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                controlPoints[i] = at.Transform(controlPoints[i]);
+            }
+            p1 = at.Transform(p1);
+            p2 = at.Transform(p2);
         }
     }
 
@@ -274,12 +275,24 @@ namespace OpenGL_App1
         }
         public override ShapeType Clone()
         {
-            throw new NotImplementedException();
+            ShapeType t = new Ellipse();
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                t.controlPoints.Add(controlPoints[i]);
+            }
+            t.color = color;
+            t.p1 = new Point(p1.X, p1.Y);
+            t.p2 = new Point(p2.X, p2.Y);
+            return t;
         }
         public override void Transform(Affine at)
         {
-            throw new NotImplementedException();
-
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                controlPoints[i] = at.Transform(controlPoints[i]);
+            }
+            p1 = at.Transform(p1);
+            p2 = at.Transform(p2);
         }
 
         public override void DrawControlPoints(OpenGL gl)
@@ -453,18 +466,27 @@ namespace OpenGL_App1
 
         public override void Draw(OpenGL gl)
         {
-
+            gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
             for (int i = 0; i < controlPoints.Count - 1; i++)
             {
-                // Vẽ những cạnh trước đó 
-                gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+
+                
                 gl.Begin(OpenGL.GL_LINES);
-                gl.Vertex(controlPoints[i].X, gl.RenderContextProvider.Height - controlPoints[i].Y);
-                gl.Vertex(controlPoints[i + 1].X, gl.RenderContextProvider.Height - controlPoints[i + 1].Y);
+                gl.Vertex(controlPoints[i].X, controlPoints[i].Y);
+                gl.Vertex(controlPoints[i + 1].X, controlPoints[i + 1].Y);
                 gl.End();
                 gl.Flush();
             }
             // Mouse Move
+            if (Done)
+            {
+                gl.Begin(OpenGL.GL_LINES);
+                gl.Vertex(controlPoints[0].X, controlPoints[0].Y);
+                gl.Vertex(controlPoints.Last().X, controlPoints.Last().Y);
+                gl.End();
+                gl.Flush();
+                return;
+            }
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
             gl.Begin(OpenGL.GL_LINES);
             gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
@@ -474,20 +496,44 @@ namespace OpenGL_App1
         }
         public override void Create(OpenGL gl)
         {
-
+            
         }
         public override ShapeType Clone()
         {
-            throw new NotImplementedException();
+            ShapeType t = new Polygon();
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                t.controlPoints.Add(controlPoints[i]);
+            }
+            t.Done = true;
+            t.color = color;
+            t.p1 = new Point(p1.X, p1.Y);
+            t.p2 = new Point(p2.X, p2.Y);
+            return t;
         }
         public override void Transform(Affine at)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                controlPoints[i] = at.Transform(controlPoints[i]);
+            }
+            p1 = at.Transform(p1);
+            p2 = at.Transform(p2);
         }
         public override void DrawControlPoints(OpenGL gl)
 
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                gl.Color(color.R / 255.0, 0, 0);
+                gl.PointSize(5);
+                gl.Begin(OpenGL.GL_POINTS);
+                Point a = controlPoints[i];
+                gl.Vertex(a.X, a.Y);
+                gl.End();
+                gl.Flush();
+            }
+            gl.PointSize(1);
         }
 
     }

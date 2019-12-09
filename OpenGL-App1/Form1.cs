@@ -35,7 +35,7 @@ namespace OpenGL_App1
         Color userColor;
         short shape;
         Point pStart, pEnd;
-        ShapeType Selected_shape;
+        int Selected_shape;
         Point Selected_point;
         Boolean renderMode = false;
         Point pTmp;
@@ -126,23 +126,28 @@ namespace OpenGL_App1
 
             if ((int)openGLControl.Tag == OPENGL_IDLE || renderMode == false)
                 return;
+            reDraw();
             if (labelMode.Text == strMode + "Translate")
             {
                 /*for (int i = 0; i < listShapes.Count - 1; i++)
                 {
                     listShapes[i].Draw(gl);
                 }*/
-
-
-                newShape = listShapes.Last().Clone();
+                newShape = listShapes[Selected_shape].Clone();                             
                 newShape.Transform(affine);
                 newShape.Draw(gl);
-                //listShapes.RemoveAt(listShapes.Count - 1);
-                //listShapes.Add(newShape);
-                //Thread.Sleep(200);
-                return;
+                if ((int)openGLControl.Tag == OPENGL_DRAWN)
+                {
+                    //
+                    listShapes.Add(newShape);
+                    newShape.Create(gl);
+                    openGLControl.Tag = OPENGL_IDLE;
+                    listShapes.RemoveAt(Selected_shape);
+                    reDraw();
+                }
+                return;           
             }
-            reDraw();
+           
             // Clear the color and depth buffer.
 
             // Get the OpenGL object.
@@ -211,15 +216,17 @@ namespace OpenGL_App1
 
             newShape.color = userColor;
             newShape.p1 = new Point(pStart.X, pStart.Y);
-            newShape.p2 = new Point(pEnd.X, pEnd.Y);
-            newShape.Create(gl);
+            newShape.p2 = new Point(pEnd.X, pEnd.Y);            
             newShape.Draw(gl);
             if ((int)openGLControl.Tag == OPENGL_DRAWN)
             {
                 listShapes.Add(newShape);
+                newShape.Create(gl);
                 openGLControl.Tag = OPENGL_IDLE;
             }
         }
+
+      
 
         private void changeToSelectMode()
         {
@@ -261,33 +268,18 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (renderMode == false)
+            if (labelMode.Text == strMode + "Select")
             {
                 openGLControl.Tag = OPENGL_IDLE;
-
                 return;
             }
             if (labelMode.Text == strMode + "Polygon") // không xử lý event này trong mode polygon
                 return;
             if (labelMode.Text == strMode + "Translate")
             {
-                /*Selected_shape =  listShapes.Last().Clone();
-                double d = 0;
-                for(int i=0;i<Selected_shape.Control_points.Count;i++)
-                {
-                    Point j = new Point();
-                    j = Selected_shape.Control_points[i];
-                    double t = Math.Sqrt((double)(e.Location.X - j.X) * (e.Location.X - j.X) + (double)(e.Location.Y - j.Y) * (e.Location.Y - j.Y));
-                    if (d<t)
-                    {
-                        d = t;
-                        Selected_point = Selected_shape.Control_points[i];
-                    }
-                }*/
-
-                Selected_point = listShapes.Last().controlPoints[0];
+                Selected_point = e.Location;
                 openGLControl.Tag = OPENGL_DRAWING;
-
+                return;
             }
             openGLControl.Tag = OPENGL_DRAWING;
             pStart = e.Location;
@@ -296,21 +288,30 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (renderMode == false)
+            if (labelMode.Text == strMode + "Select")
             {
                 openGLControl.Tag = OPENGL_IDLE;
                 return;
             }
             if ((int)openGLControl.Tag == OPENGL_DRAWING)
             {
-                pEnd = e.Location;
+
 
                 if (labelMode.Text == strMode + "Polygon")
+                {
                     listShapes.Last().p2 = pEnd;
+                    pEnd = e.Location;
+                    return;
+                }
                 if (labelMode.Text == strMode + "Translate")
                 {
+                    
                     affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                    if (listShapes[Selected_shape].id == SHAPE_POLYGON)
+                        affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                    return;
                 }
+                pEnd = e.Location;
             }
         }
         private void openGLControl_MouseUp(object sender, MouseEventArgs e)
@@ -325,8 +326,9 @@ namespace OpenGL_App1
             if (labelMode.Text == strMode + "Translate")
             {
 
-                openGLControl.Tag = OPENGL_IDLE;
-                affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                openGLControl.Tag = OPENGL_DRAWN;
+                affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);                
+                return;
             }
 
             openGLControl.Tag = OPENGL_DRAWN;
@@ -373,7 +375,7 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseClick(object sender, MouseEventArgs e)
         {
-            if (renderMode == false)
+            if (renderMode == false) // mode select hanlde event
             {
                 double minDist = double.MaxValue;
                 double esp = 10;
@@ -402,6 +404,7 @@ namespace OpenGL_App1
                     openGLControl.OpenGL.RenderMode(OpenGL.GL_RENDER);
                     reDraw();
                     listShapes[index].DrawControlPoints(openGLControl.OpenGL);
+                    Selected_shape = index;
                     changeToSelectMode();
                 }
             }
@@ -421,6 +424,7 @@ namespace OpenGL_App1
                         tmp.Done = true;
                         tmp.p1 = tmp.controlPoints.Last();
                         tmp.p2 = tmp.controlPoints[0];
+                        tmp.Create(openGLControl.OpenGL);
                     }
                     openGLControl.Tag = OPENGL_DRAWN;
                 }
@@ -446,8 +450,8 @@ namespace OpenGL_App1
                         listShapes.Add(tmp);
                     }
 
-                    Point t = new Point(pStart.X, pStart.Y);
-                    t = pStart;
+                    Point t = new Point(e.Location.X, openGLControl.OpenGL.RenderContextProvider.Height -e.Location.Y);
+                    //t = e.Location;
                     listShapes.Last().controlPoints.Add(t);
                     listShapes.Last().p1 = pStart;
                     listShapes.Last().p2 = pEnd;
@@ -461,8 +465,7 @@ namespace OpenGL_App1
                     pEnd = pStart;
                 }
             }
-            if (labelMode.Text == strMode + "Translate")
-            {
+            if (labelMode.Text == strMode + "Translate"){
 
                 return;
             }
@@ -489,8 +492,13 @@ namespace OpenGL_App1
 
         private void btn_Translate_Click(object sender, EventArgs e)
         {
-
-            labelMode.Text = strMode + "Translate";
+            if (labelMode.Text == strMode + "Select")
+            {
+                labelMode.Text = strMode + "Translate";
+                OpenGL gl = openGLControl.OpenGL;
+                gl.RenderMode(OpenGL.GL_RENDER);
+                renderMode = true;
+            }
 
         }
 
