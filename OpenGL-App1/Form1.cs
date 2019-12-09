@@ -24,6 +24,7 @@ namespace OpenGL_App1
         const int SHAPE_EQUI_TRIANGLE = 4;
         const int SHAPE_EQUI_PENTAGON = 5;
         const int SHAPE_EQUI_HEXAGON = 6;
+        const int CL = 7;
 
         // Vẽ ellipse cần bao nhiêu điểm điều khiển?
         
@@ -34,8 +35,7 @@ namespace OpenGL_App1
         short shape;
         Point pStart, pEnd;
         
-        Point pTmp;
-        
+       
         string strMode;
 
         public Form1()
@@ -48,11 +48,6 @@ namespace OpenGL_App1
             openGLControl.Tag = OPENGL_IDLE;
             strMode = labelMode.Text;
             labelMode.Text = strMode + "Line";
-        }
-
-        private void openGLControl_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void openGLControl_OpenGLInitialized(object sender, EventArgs e)
@@ -151,12 +146,34 @@ namespace OpenGL_App1
                         id = SHAPE_EQUI_PENTAGON
                     };
                     break;
+                case CL:
+                    newShape = new Line();
+                    ColorFilling cl = new ColorFilling();
+                    RGBColor F, B;
+                    F.r = userColor.R;
+                    F.g = userColor.G;
+                    F.b = userColor.B;
+                    B.r = userColor.R;
+                    B.g = userColor.G;
+                    B.b = userColor.B;
+                    RGBColor X;
+                    X.r = 255;
+                    X.g = 72;
+                    X.b = 0;
+                    cl.init(openGLControl.OpenGL, openGLControl.Width, openGLControl.Height);
+                    RGBColor c = cl.GetPixel(pStart.X, pStart.Y);
+                    //cl.isSameColor()
+                    for(int i=0; i<100;i++)
+                        cl.PutPixel(pStart.X + i + 50, pStart.Y - i, X);
+                    cl.BoudaryFill(pStart.X, pStart.Y, X, B);
+                    break;
                 default:
                     newShape = new EquiHexagon()
                     {
                         id = SHAPE_EQUI_HEXAGON
                     };
                     break;
+                    
             }
 
             newShape.color = userColor;
@@ -229,6 +246,15 @@ namespace OpenGL_App1
         {
             shape = SHAPE_EQUI_HEXAGON;
             labelMode.Text = strMode + "EquiHexagon";
+        }
+
+        private void openGLControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                pStart = e.Location;
+                shape = CL;
+            }
         }
 
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)

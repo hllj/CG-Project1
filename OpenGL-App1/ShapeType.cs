@@ -48,23 +48,25 @@ namespace OpenGL_App1
         {
          
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
-            gl.Begin(OpenGL.GL_LINES);
+            // gl.Begin(OpenGL.GL_LINES);
+            //DÒng dưới này thêm vào để debug
+            gl.Begin(OpenGL.GL_POLYGON);
 
-            /*!!!!!! Chua sap xep cac dinh theo thu tu nguoc chieu kim dong ho*/
-            /* xác định các đỉnh của hình chữ nhật */
+            /* xác định các đỉnh của hình chữ nhật tho thứ tự ngược chiều kim đồng hồ*/
             //Canh 1
-            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
-            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p1.Y);
+
+            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y); // Đỉnh 1 (x1,y1)
+            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p2.Y); //Đỉnh 2 (x1,y2)
             //Canh 2
-            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p1.Y);
-            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
+            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p2.Y); //Đỉnh 2
+            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y); //Đỉnh 3 (x2,y2)
             //Canh 3
-            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
-            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p2.Y);
+            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y); //Đỉnh 3
+            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p1.Y); //Đỉnh 4 (x2,y1)
             //Canh 4
-            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p2.Y);
-            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
-            
+            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p1.Y); //Đỉnh 4
+            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y); //đỉnh 1
+
             gl.End();
             gl.Flush();
         }
