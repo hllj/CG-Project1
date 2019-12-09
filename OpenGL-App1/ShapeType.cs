@@ -22,6 +22,7 @@ namespace OpenGL_App1
         abstract public ShapeType Clone();
         abstract public void Transform(Affine at);
         abstract public void DrawControlPoints(OpenGL gl);
+        abstract public void Create(OpenGL gl);
         public ShapeType()
         {
             Done = false;
@@ -63,6 +64,11 @@ namespace OpenGL_App1
             */
             gl.Flush();
 
+            
+        }
+
+        public override void Create(OpenGL gl)
+        {
             controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
             controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
         }
@@ -104,7 +110,10 @@ namespace OpenGL_App1
         {
 
         }
+        public override void Create(OpenGL gl)
+        {
 
+        }
         public override ShapeType Clone()
         {
             throw new NotImplementedException();
@@ -143,7 +152,10 @@ namespace OpenGL_App1
             gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
 
             gl.End();
-            gl.Flush();
+            gl.Flush();           
+        }
+        public override void Create(OpenGL gl)
+        {
             controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
             controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p1.Y));
             controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
@@ -153,7 +165,6 @@ namespace OpenGL_App1
             controlPoints.Add(new Point((p1.X + p2.X) / 2, gl.RenderContextProvider.Height - p1.Y));
             controlPoints.Add(new Point((p1.X + p2.X) / 2, gl.RenderContextProvider.Height - p2.Y));
         }
-
         public override void DrawControlPoints(OpenGL gl)
         {
             for (int i = 0; i < controlPoints.Count; i++)
@@ -248,8 +259,10 @@ namespace OpenGL_App1
             }
 
             gl.End();
-            gl.Flush();
-            /* Thêm các điểm control point*/
+            gl.Flush();            
+        }
+        public override void Create(OpenGL gl)
+        {
             controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
             controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p1.Y));
             controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
@@ -317,6 +330,10 @@ namespace OpenGL_App1
             gl.End();
             gl.Flush();
         }
+        public override void Create(OpenGL gl)
+        {
+
+        }
         public override ShapeType Clone()
         {
             throw new NotImplementedException();
@@ -361,6 +378,10 @@ namespace OpenGL_App1
                 gl.Vertex(pt[i, 0], gl.RenderContextProvider.Height - pt[i, 1]);
             gl.End();
             gl.Flush();
+
+        }
+        public override void Create(OpenGL gl)
+        {
 
         }
         public override ShapeType Clone()
@@ -409,6 +430,10 @@ namespace OpenGL_App1
             gl.End();
             gl.Flush();
         }
+        public override void Create(OpenGL gl)
+        {
+
+        }
         public override ShapeType Clone()
         {
             throw new NotImplementedException();
@@ -446,6 +471,10 @@ namespace OpenGL_App1
             gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
             gl.End();
             gl.Flush();
+        }
+        public override void Create(OpenGL gl)
+        {
+
         }
         public override ShapeType Clone()
         {
