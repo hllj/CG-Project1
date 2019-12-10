@@ -29,6 +29,11 @@ namespace OpenGL_App1
             controlPoints = new List<Point>();
 
         }
+        public void Update(OpenGL gl)
+        {
+            controlPoints = new List<Point>();
+            Create(gl);
+        }
     }
 
     public class Line : ShapeType
@@ -43,9 +48,6 @@ namespace OpenGL_App1
             gl.End();
             gl.Flush();
         }
-
-
-    
 
         public override void Create(OpenGL gl)
         {

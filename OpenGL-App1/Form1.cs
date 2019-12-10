@@ -89,14 +89,15 @@ namespace OpenGL_App1
             gl.Ortho2D(0, openGLControl.Width, 0, openGLControl.Height);
         }
 
-        private void reDraw()
+        private void reDraw(int index)
         {
             OpenGL gl = openGLControl.OpenGL;
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             gl.ClearColor(1, 1, 1, 1);
             for (int i = 0; i < listShapes.Count; i++)
             {
-                listShapes[i].Draw(gl);
+                if (i != index)
+                    listShapes[i].Draw(gl);
             }
 
         }
@@ -105,20 +106,13 @@ namespace OpenGL_App1
         {
             // Get the OpenGL object.
             OpenGL gl = openGLControl.OpenGL;
-            ShapeType newShape;
-            /* **************************************/
-            if (startup) // đoạn code này để đổi backGround thành màu trắng
+            
+            // đoạn code này để đổi backGround thành màu trắng
+            if (startup) 
             {
                 gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
                 gl.ClearColor(1, 1, 1, 1);
-                Line tmp = new Line
-                {
-                    p1 = new Point(0, 0),
-                    p2 = new Point(0, 0)
-                };
-
-                tmp.Draw(gl);
-                listShapes.Add(tmp);
+                
                 startup = false;
                 return;
             }
@@ -126,34 +120,29 @@ namespace OpenGL_App1
 
             if ((int)openGLControl.Tag == OPENGL_IDLE || renderMode == false)
                 return;
-            reDraw();
+            reDraw(-1);
+            ShapeType newShape;
             if (labelMode.Text == strMode + "Translate")
             {
-                /*for (int i = 0; i < listShapes.Count - 1; i++)
-                {
-                    listShapes[i].Draw(gl);
-                }*/
-                newShape = listShapes[Selected_shape].Clone();                             
+                newShape = listShapes[Selected_shape].Clone();
                 newShape.Transform(affine);
+                
+                reDraw(Selected_shape);
                 newShape.Draw(gl);
+                //Đã kéo xong
                 if ((int)openGLControl.Tag == OPENGL_DRAWN)
                 {
-                    //
-                    listShapes.Add(newShape);
-                    newShape.Create(gl);
+                    listShapes[Selected_shape].p1 = newShape.p1;
+                    listShapes[Selected_shape].p2 = newShape.p2;
+                    listShapes[Selected_shape].Update(gl);
+                    reDraw(-1);
+                    affine = new Affine();
                     openGLControl.Tag = OPENGL_IDLE;
-                    listShapes.RemoveAt(Selected_shape);
-                    reDraw();
                 }
-                return;           
+                return;
             }
-           
-            // Clear the color and depth buffer.
-
-            // Get the OpenGL object.
 
             // Clear the color and depth buffer.
-
 
             gl.Color(userColor.R / 255.0, userColor.G / 255.0, userColor.B / 255.0);
 
@@ -216,7 +205,7 @@ namespace OpenGL_App1
 
             newShape.color = userColor;
             newShape.p1 = new Point(pStart.X, pStart.Y);
-            newShape.p2 = new Point(pEnd.X, pEnd.Y);            
+            newShape.p2 = new Point(pEnd.X, pEnd.Y);
             newShape.Draw(gl);
             if ((int)openGLControl.Tag == OPENGL_DRAWN)
             {
@@ -226,7 +215,7 @@ namespace OpenGL_App1
             }
         }
 
-      
+
 
         private void changeToSelectMode()
         {
@@ -305,7 +294,7 @@ namespace OpenGL_App1
                 }
                 if (labelMode.Text == strMode + "Translate")
                 {
-                    
+
                     affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
                     if (listShapes[Selected_shape].id == SHAPE_POLYGON)
                         affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
@@ -325,9 +314,8 @@ namespace OpenGL_App1
                 return;
             if (labelMode.Text == strMode + "Translate")
             {
-
                 openGLControl.Tag = OPENGL_DRAWN;
-                affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);                
+                affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
                 return;
             }
 
@@ -402,7 +390,7 @@ namespace OpenGL_App1
                 if (index != -1)
                 {
                     openGLControl.OpenGL.RenderMode(OpenGL.GL_RENDER);
-                    reDraw();
+                    reDraw(-1);
                     listShapes[index].DrawControlPoints(openGLControl.OpenGL);
                     Selected_shape = index;
                     changeToSelectMode();
@@ -450,14 +438,13 @@ namespace OpenGL_App1
                         listShapes.Add(tmp);
                     }
 
-                    Point t = new Point(e.Location.X, openGLControl.OpenGL.RenderContextProvider.Height -e.Location.Y);
+                    Point t = new Point(e.Location.X, openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y);
                     //t = e.Location;
                     listShapes.Last().controlPoints.Add(t);
                     listShapes.Last().p1 = pStart;
                     listShapes.Last().p2 = pEnd;
                     /* if (listShapes.Last().id == SHAPE_POLYGON && listShapes.Last().Done == false)
                      {
-
                          listShapes.Last().p1 = new Point(pStart.X, pStart.Y);
                          listShapes.Last().p2 = new Point(pEnd.X, pEnd.Y);
                      }*/
@@ -465,7 +452,8 @@ namespace OpenGL_App1
                     pEnd = pStart;
                 }
             }
-            if (labelMode.Text == strMode + "Translate"){
+            if (labelMode.Text == strMode + "Translate")
+            {
 
                 return;
             }
