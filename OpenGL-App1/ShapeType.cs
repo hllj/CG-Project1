@@ -25,12 +25,28 @@ namespace OpenGL_App1
     {
         public override void Draw(OpenGL gl)
         {
-            gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
-            gl.Begin(OpenGL.GL_LINES);
-            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
-            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
-            gl.End();
-            gl.Flush();
+            ColorFilling cl = new ColorFilling();
+            cl.init(gl, gl.RenderContextProvider.Width, gl.RenderContextProvider.Height);
+            ////gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            //gl.Color(255.0, 125.0, 0);
+            byte[] Ptr = { 255, 72, 0};
+            //short[] s = { (short)p1.X, (short)p1.Y };
+            //gl.Begin(OpenGL.GL_LINES);
+            //gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
+            //gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y+1);
+            //gl.End();
+            //gl.Flush();
+            gl.RasterPos(p1.X, gl.RenderContextProvider.Height - p1.Y);
+            gl.DrawPixels(1, 1, OpenGL.GL_RGB, Ptr);
+
+            RGBColor A = cl.GetPixel(p2.X, p2.Y - 1);
+            RGBColor D = cl.GetPixel(p2.X - 1, p2.Y - 1);
+            RGBColor B = cl.GetPixel(p2.X + 1, p2.Y);
+            RGBColor C = cl.GetPixel(p1.X, p1.Y);
+            RGBColor C1 = cl.GetPixel(p1.X + 1, p1.Y);
+            RGBColor C2 = cl.GetPixel(p1.X - 1, p1.Y);
+            RGBColor C3 = cl.GetPixel(p1.X, p1.Y + 1);
+            RGBColor C4 = cl.GetPixel(p1.X, p1.Y - 1);
         }
     }
 

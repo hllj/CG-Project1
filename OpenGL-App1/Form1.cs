@@ -161,11 +161,16 @@ namespace OpenGL_App1
                     X.g = 72;
                     X.b = 0;
                     cl.init(openGLControl.OpenGL, openGLControl.Width, openGLControl.Height);
-                    RGBColor c = cl.GetPixel(pStart.X, pStart.Y);
+                    RGBColor curColor = cl.GetPixel(pStart.X, pStart.Y);
                     //cl.isSameColor()
                     for(int i=0; i<100;i++)
                         cl.PutPixel(pStart.X + i + 50, pStart.Y - i, X);
-                    cl.BoudaryFill(pStart.X, pStart.Y, X, B);
+                    cl.isSameColor(X, F);
+                    cl.isSameColor(F, B);
+                    cl.isSameColor(curColor, B);
+                    cl.isSameColor(curColor, F);
+                    if ((!cl.isSameColor(curColor, F)) && (!cl.isSameColor(curColor, B))) ;
+                        cl.BoudaryFill(pStart.X, pStart.Y, X, B);
                     break;
                 default:
                     newShape = new EquiHexagon()
