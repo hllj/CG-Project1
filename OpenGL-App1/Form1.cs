@@ -295,9 +295,9 @@ namespace OpenGL_App1
                 if (labelMode.Text == strMode + "Translate")
                 {
 
-                    affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                    affine.Transform(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
                     if (listShapes[Selected_shape].id == SHAPE_POLYGON)
-                        affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                        affine.Transform(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
                     return;
                 }
                 pEnd = e.Location;
@@ -315,7 +315,7 @@ namespace OpenGL_App1
             if (labelMode.Text == strMode + "Translate")
             {
                 openGLControl.Tag = OPENGL_DRAWN;
-                affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                affine.Transform(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
                 return;
             }
 
