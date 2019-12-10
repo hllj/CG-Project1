@@ -134,7 +134,8 @@ namespace OpenGL_App1
                 {
                     listShapes[Selected_shape].p1 = newShape.p1;
                     listShapes[Selected_shape].p2 = newShape.p2;
-                    listShapes[Selected_shape].Update(gl);
+                    if (newShape.id != 7)
+                        listShapes[Selected_shape].Update(gl);
                     reDraw(-1);
                     affine = new Affine();
                     openGLControl.Tag = OPENGL_IDLE;
@@ -295,9 +296,9 @@ namespace OpenGL_App1
                 if (labelMode.Text == strMode + "Translate")
                 {
 
-                    affine.Transform(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                    affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
                     if (listShapes[Selected_shape].id == SHAPE_POLYGON)
-                        affine.Transform(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                        affine.Translate(e.Location.X - Selected_point.X, Selected_point.Y - e.Location.Y);
                     return;
                 }
                 pEnd = e.Location;
@@ -315,7 +316,9 @@ namespace OpenGL_App1
             if (labelMode.Text == strMode + "Translate")
             {
                 openGLControl.Tag = OPENGL_DRAWN;
-                affine.Transform(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+               // if (listShapes[Selected_shape].id == SHAPE_POLYGON)
+                 //   affine.Transform(e.Location.X - Selected_point.X,  Selected_point.Y - e.Location.Y);
                 return;
             }
 
@@ -395,6 +398,7 @@ namespace OpenGL_App1
                     Selected_shape = index;
                     changeToSelectMode();
                 }
+                return;
             }
             if (labelMode.Text == strMode + "Polygon")
             {
@@ -412,9 +416,10 @@ namespace OpenGL_App1
                         tmp.Done = true;
                         tmp.p1 = tmp.controlPoints.Last();
                         tmp.p2 = tmp.controlPoints[0];
-                        tmp.Create(openGLControl.OpenGL);
+                        
                     }
                     openGLControl.Tag = OPENGL_DRAWN;
+
                 }
                 if (e.Button == MouseButtons.Left)
                 {
@@ -451,6 +456,7 @@ namespace OpenGL_App1
 
                     pEnd = pStart;
                 }
+                return;
             }
             if (labelMode.Text == strMode + "Translate")
             {
@@ -488,6 +494,17 @@ namespace OpenGL_App1
                 renderMode = true;
             }
 
+        }
+
+        private void btn_Rotate_Click(object sender, EventArgs e)
+        {
+            if (labelMode.Text == strMode + "Select")
+            {
+                labelMode.Text = strMode + "Rotate";
+                OpenGL gl = openGLControl.OpenGL;
+                gl.RenderMode(OpenGL.GL_RENDER);
+                renderMode = true;
+            }
         }
 
         private void btn_Ellipse_Click(object sender, EventArgs e)

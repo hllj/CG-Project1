@@ -13,7 +13,7 @@ namespace OpenGL_App1
     {
         public int id { get; set; }
         public float[,] Matrix;
-        public void Transform(int dx,int dy) {
+        public void Translate(int dx,int dy) {
             Matrix = new float[3,3] 
             {
                 {1,0,dx},
@@ -21,7 +21,8 @@ namespace OpenGL_App1
                 {0,0,1}
             };
         }
-        public Point Translate(Point p)
+       
+        public Point Transform(Point p)
         {
            
             p.X =(int) Matrix[0, 0] * p.X + (int)Matrix[0, 1] * p.Y + (int)Matrix[0, 2];

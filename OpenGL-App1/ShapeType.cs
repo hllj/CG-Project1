@@ -87,10 +87,10 @@ namespace OpenGL_App1
         {
             for (int i =0;i<controlPoints.Count;i++)
             {
-                controlPoints[i] = at.Translate(controlPoints[i]);
+                controlPoints[i] = at.Transform(controlPoints[i]);
             }
-            p1 = at.Translate(p1);
-            p2 = at.Translate(p2);
+            p1 = at.Transform(p1);
+            p2 = at.Transform(p2);
         }
     }
 
@@ -185,10 +185,10 @@ namespace OpenGL_App1
         {
             for (int i = 0; i < controlPoints.Count; i++)
             {
-                controlPoints[i] = at.Translate(controlPoints[i]);
+                controlPoints[i] = at.Transform(controlPoints[i]);
             }
-            p1 = at.Translate(p1);
-            p2 = at.Translate(p2);
+            p1 = at.Transform(p1);
+            p2 = at.Transform(p2);
         }
     }
 
@@ -291,10 +291,10 @@ namespace OpenGL_App1
         {
             for (int i = 0; i < controlPoints.Count; i++)
             {
-                controlPoints[i] = at.Translate(controlPoints[i]);
+                controlPoints[i] = at.Transform(controlPoints[i]);
             }
-            p1 = at.Translate(p1);
-            p2 = at.Translate(p2);
+            p1 = at.Transform(p1);
+            p2 = at.Transform(p2);
         }
 
         public override void DrawControlPoints(OpenGL gl)
@@ -517,10 +517,10 @@ namespace OpenGL_App1
         {
             for (int i = 0; i < controlPoints.Count; i++)
             {
-                controlPoints[i] = at.Translate(controlPoints[i]);
+                controlPoints[i] = at.Transform(controlPoints[i]);
             }
-            p1 = at.Translate(p1);
-            p2 = at.Translate(p2);
+            p1 = at.Transform(p1);
+            p2 = at.Transform(p2);
         }
         public override void DrawControlPoints(OpenGL gl)
 
