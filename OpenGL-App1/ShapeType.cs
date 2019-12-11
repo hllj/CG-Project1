@@ -42,26 +42,7 @@ namespace OpenGL_App1
         }
         public void BoudaryFill(OpenGL gl)
         {
-            //gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
-            //gl.Begin(OpenGL.GL_LINES);
-
-            ///*!!!!!! Chua sap xep cac dinh theo thu tu nguoc chieu kim dong ho*/
-            ///* xác định các đỉnh của hình chữ nhật */
-            ////Canh 1
-            //gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
-            //gl.Vertex(p2.X, gl.RenderContextProvider.Height - p1.Y);
-            ////Canh 2
-            //gl.Vertex(p2.X, gl.RenderContextProvider.Height - p1.Y);
-            //gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
-            ////Canh 3
-            //gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
-            //gl.Vertex(p1.X, gl.RenderContextProvider.Height - p2.Y);
-            ////Canh 4
-            //gl.Vertex(p1.X, gl.RenderContextProvider.Height - p2.Y);
-            //gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
-
-            //gl.End();
-            //gl.Flush();
+           
             Draw(gl);
             ColorFilling cl = new ColorFilling();
             cl.init(gl);
