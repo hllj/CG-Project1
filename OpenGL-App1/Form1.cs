@@ -35,13 +35,13 @@ namespace OpenGL_App1
         const int SHAPE_EQUI_HEXAGON = 6;
 
         // Vẽ ellipse cần bao nhiêu điểm điều khiển?
-        
 
+        int shapeSelected = -1;
         List<ShapeType> listShapes;
 
         Color userColor;
         short shape;
-        Point pStart, pEnd;
+        Point pStart, pEnd, pointSelected;
         
         Point pTmp;
         Boolean renderMode = false;
@@ -67,6 +67,7 @@ namespace OpenGL_App1
             for (int i = 0; i < listShapes.Count; i++)
             {
                 listShapes[i].Draw(gl);
+                if (listShapes[i].filling) listShapes[i].ScanLine(gl);
             }
         }
 
@@ -180,12 +181,13 @@ namespace OpenGL_App1
             newShape.color = userColor;
             newShape.p1 = new Point(pStart.X, pStart.Y);
             newShape.p2 = new Point(pEnd.X, pEnd.Y);
-            newShape.Create(gl);
             newShape.Draw(gl);
             if ((int)openGLControl.Tag == OPENGL_DRAWN)
             {
+                newShape.Create(gl);
                 listShapes.Add(newShape);
                 openGLControl.Tag = OPENGL_IDLE;
+                
             }
             
         }
@@ -289,6 +291,7 @@ namespace OpenGL_App1
             {
                 return;
             }
+            pointSelected = e.Location;
             double minDist = double.MaxValue;
             double esp = 10;
             int index = -1;
@@ -313,11 +316,36 @@ namespace OpenGL_App1
 
             if (index != -1)
             {
+                shapeSelected = index;
                 openGLControl.OpenGL.RenderMode(OpenGL.GL_RENDER);
                 ReDraw();
                 listShapes[index].DrawControlPoints(openGLControl.OpenGL);
                 changeToSelectMode();
             }
+            else shapeSelected = index;
+        }
+
+        private void btn_ColorFilling_Click(object sender, EventArgs e)
+        {
+            if (renderMode == true || shapeSelected == -1) return;
+            labelMode.Text = strMode + "Color Filling";
+            /*
+            ColorFilling cl = new ColorFilling();
+            cl.init(openGLControl.OpenGL);
+            RGBColor F, B;
+            F.r = userColor.R;
+            F.g = userColor.G;
+            F.b = userColor.B;
+            B.r = userColor.R;
+            B.g = userColor.G;
+            B.b = userColor.B;
+            cl.BoudaryFill(pointSelected.X, pointSelected.Y, F, B);
+            */
+            openGLControl.OpenGL.RenderMode(OpenGL.GL_RENDER);
+            listShapes[shapeSelected].colorFilling = userColor;
+            listShapes[shapeSelected].filling = true;
+            listShapes[shapeSelected].ScanLine(openGLControl.OpenGL);
+            changeToSelectMode();
         }
 
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.vertexControl1 = new SharpGL.Controls.VertexControl();
             this.openGLControl = new SharpGL.OpenGLControl();
             this.btnLine = new System.Windows.Forms.Button();
@@ -41,6 +42,7 @@
             this.btn_EquiHexagon = new System.Windows.Forms.Button();
             this.btn_Ellipse = new System.Windows.Forms.Button();
             this.btn_Select = new System.Windows.Forms.Button();
+            this.btn_ColorFilling = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,11 +179,23 @@
             this.btn_Select.UseVisualStyleBackColor = true;
             this.btn_Select.Click += new System.EventHandler(this.btn_Select_Click);
             // 
+            // btn_ColorFilling
+            // 
+            this.btn_ColorFilling.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_ColorFilling.BackgroundImage")));
+            this.btn_ColorFilling.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_ColorFilling.Location = new System.Drawing.Point(84, 60);
+            this.btn_ColorFilling.Name = "btn_ColorFilling";
+            this.btn_ColorFilling.Size = new System.Drawing.Size(61, 48);
+            this.btn_ColorFilling.TabIndex = 11;
+            this.btn_ColorFilling.UseVisualStyleBackColor = true;
+            this.btn_ColorFilling.Click += new System.EventHandler(this.btn_ColorFilling_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 486);
+            this.Controls.Add(this.btn_ColorFilling);
             this.Controls.Add(this.btn_Select);
             this.Controls.Add(this.btn_Ellipse);
             this.Controls.Add(this.btn_EquiHexagon);
@@ -218,6 +232,7 @@
         private System.Windows.Forms.Button btn_EquiHexagon;
         private System.Windows.Forms.Button btn_Ellipse;
         private System.Windows.Forms.Button btn_Select;
+        private System.Windows.Forms.Button btn_ColorFilling;
     }
 }
 
