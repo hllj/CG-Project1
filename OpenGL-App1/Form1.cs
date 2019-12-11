@@ -136,6 +136,7 @@ namespace OpenGL_App1
                     listShapes[Selected_shape].p2 = newShape.p2;
                     if (newShape.id != 7)
                         listShapes[Selected_shape].Update(gl);
+                    else listShapes[Selected_shape] = newShape.Clone();
                     reDraw(-1);
                     affine = new Affine();
                     openGLControl.Tag = OPENGL_IDLE;
@@ -192,6 +193,7 @@ namespace OpenGL_App1
                     newShape = listShapes.Last();
                     if (newShape.id != SHAPE_POLYGON || newShape.Done == true)
                     {
+                        openGLControl.Tag = OPENGL_IDLE;
                         return;
                     }
                     newShape.color = userColor;
@@ -317,8 +319,8 @@ namespace OpenGL_App1
             {
                 openGLControl.Tag = OPENGL_DRAWN;
                 affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
-               // if (listShapes[Selected_shape].id == SHAPE_POLYGON)
-                 //   affine.Transform(e.Location.X - Selected_point.X,  Selected_point.Y - e.Location.Y);
+                if (listShapes[Selected_shape].id == SHAPE_POLYGON)
+                    affine.Translate(e.Location.X - Selected_point.X, Selected_point.Y - e.Location.Y);
                 return;
             }
 
@@ -410,15 +412,16 @@ namespace OpenGL_App1
                     // chuột phải thì kết thúc quá trình vẽ 
                     if ((int)openGLControl.Tag == OPENGL_DRAWING)
                     {
-                        pEnd = e.Location;
+                       
                         ShapeType tmp = new Polygon();
                         tmp = listShapes.Last();
                         tmp.Done = true;
                         tmp.p1 = tmp.controlPoints.Last();
                         tmp.p2 = tmp.controlPoints[0];
-                        
+                        pEnd = tmp.controlPoints.Last();
+
                     }
-                    openGLControl.Tag = OPENGL_DRAWN;
+                    
 
                 }
                 if (e.Button == MouseButtons.Left)
@@ -443,16 +446,10 @@ namespace OpenGL_App1
                         listShapes.Add(tmp);
                     }
 
-                    Point t = new Point(e.Location.X, openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y);
-                    //t = e.Location;
+                    Point t = new Point(e.Location.X, openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y);                    
                     listShapes.Last().controlPoints.Add(t);
                     listShapes.Last().p1 = pStart;
-                    listShapes.Last().p2 = pEnd;
-                    /* if (listShapes.Last().id == SHAPE_POLYGON && listShapes.Last().Done == false)
-                     {
-                         listShapes.Last().p1 = new Point(pStart.X, pStart.Y);
-                         listShapes.Last().p2 = new Point(pEnd.X, pEnd.Y);
-                     }*/
+                    listShapes.Last().p2 = pEnd;                   
 
                     pEnd = pStart;
                 }

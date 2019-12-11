@@ -507,6 +507,7 @@ namespace OpenGL_App1
             {
                 t.controlPoints.Add(controlPoints[i]);
             }
+            t.id = id;
             t.Done = true;
             t.color = color;
             t.p1 = new Point(p1.X, p1.Y);
