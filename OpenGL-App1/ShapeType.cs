@@ -40,7 +40,52 @@ namespace OpenGL_App1
             //controlPoints = new List<Point>();
             //Vertex = new List<Point>();
         }
+        public void BoudaryFill(OpenGL gl)
+        {
+            //gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            //gl.Begin(OpenGL.GL_LINES);
 
+            ///*!!!!!! Chua sap xep cac dinh theo thu tu nguoc chieu kim dong ho*/
+            ///* xác định các đỉnh của hình chữ nhật */
+            ////Canh 1
+            //gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
+            //gl.Vertex(p2.X, gl.RenderContextProvider.Height - p1.Y);
+            ////Canh 2
+            //gl.Vertex(p2.X, gl.RenderContextProvider.Height - p1.Y);
+            //gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
+            ////Canh 3
+            //gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
+            //gl.Vertex(p1.X, gl.RenderContextProvider.Height - p2.Y);
+            ////Canh 4
+            //gl.Vertex(p1.X, gl.RenderContextProvider.Height - p2.Y);
+            //gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
+
+            //gl.End();
+            //gl.Flush();
+            Draw(gl);
+            ColorFilling cl = new ColorFilling();
+            cl.init(gl);
+            RGBColor F, B;
+            F.r = color.R;
+            F.g = color.G;
+            F.b = color.B;
+            B.r = color.R;
+            B.g = color.G;
+            B.b = color.B;
+
+            int x = 0, y = 0;
+            for (int i = 0; i < Vertex.Count(); i++)
+            {
+                x = x + Vertex[i].X;
+                y = y + Vertex[i].Y;
+            }
+
+            x /= Vertex.Count();
+            y = gl.RenderContextProvider.Height - (y / Vertex.Count());
+
+        
+            cl.BoudaryFill(x , y, F, B);
+        }
         public void AddEdge(OpenGL gl)
         {
             /*Them cac canh*/
@@ -165,7 +210,7 @@ namespace OpenGL_App1
             }
         }
     }
-
+   
     public class Line : ShapeType
     {
         public override void Draw(OpenGL gl)
@@ -255,6 +300,7 @@ namespace OpenGL_App1
             Vertex.Add(new Point(p2.X, gl.RenderContextProvider.Height - p1.Y));
             Vertex.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
             Vertex.Add(new Point(p1.X, gl.RenderContextProvider.Height - p2.Y));
+            
             /*Thêm các cạnh*/
             AddEdge(gl);
         }

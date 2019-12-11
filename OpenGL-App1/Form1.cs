@@ -34,6 +34,7 @@ namespace OpenGL_App1
         const int SHAPE_EQUI_PENTAGON = 5;
         const int SHAPE_EQUI_HEXAGON = 6;
 
+
         // Vẽ ellipse cần bao nhiêu điểm điều khiển?
 
         int shapeSelected = -1;
@@ -42,8 +43,7 @@ namespace OpenGL_App1
         Color userColor;
         short shape;
         Point pStart, pEnd, pointSelected;
-        
-        Point pTmp;
+
         Boolean renderMode = false;
 
         string strMode;
@@ -170,6 +170,7 @@ namespace OpenGL_App1
                         id = SHAPE_EQUI_PENTAGON
                     };
                     break;
+               
                 default:
                     newShape = new EquiHexagon()
                     {
@@ -177,11 +178,11 @@ namespace OpenGL_App1
                     };
                     break;
             }
-
             newShape.color = userColor;
             newShape.p1 = new Point(pStart.X, pStart.Y);
             newShape.p2 = new Point(pEnd.X, pEnd.Y);
             newShape.Draw(gl);
+          
             if ((int)openGLControl.Tag == OPENGL_DRAWN)
             {
                 newShape.Create(gl);
@@ -231,7 +232,7 @@ namespace OpenGL_App1
         private void openGLControl_MouseUp(object sender, MouseEventArgs e)
         {
             openGLControl.Tag = OPENGL_DRAWN;
-            pEnd = e.Location;
+                  pEnd = e.Location;
         }
 
         private void btnRectangle_Click(object sender, EventArgs e)
@@ -329,22 +330,22 @@ namespace OpenGL_App1
         {
             if (renderMode == true || shapeSelected == -1) return;
             labelMode.Text = strMode + "Color Filling";
-            /*
-            ColorFilling cl = new ColorFilling();
-            cl.init(openGLControl.OpenGL);
-            RGBColor F, B;
-            F.r = userColor.R;
-            F.g = userColor.G;
-            F.b = userColor.B;
-            B.r = userColor.R;
-            B.g = userColor.G;
-            B.b = userColor.B;
-            cl.BoudaryFill(pointSelected.X, pointSelected.Y, F, B);
-            */
+            //ColorFilling cl = new ColorFilling();
+            //cl.init(openGLControl.OpenGL);
+            //RGBColor F, B;
+            //F.r = userColor.R;
+            //F.g = userColor.G;
+            //F.b = userColor.B;
+            //B.r = userColor.R;
+            //B.g = userColor.G;
+            //B.b = userColor.B;
+            //cl.BoudaryFill(pointSelected.X, pointSelected.Y, F, B);
+            
             openGLControl.OpenGL.RenderMode(OpenGL.GL_RENDER);
             listShapes[shapeSelected].colorFilling = userColor;
             listShapes[shapeSelected].filling = true;
-            listShapes[shapeSelected].ScanLine(openGLControl.OpenGL);
+           listShapes[shapeSelected].BoudaryFill(openGLControl.OpenGL);
+          //  listShapes[shapeSelected].ScanLine(openGLControl.OpenGL);
             changeToSelectMode();
         }
 

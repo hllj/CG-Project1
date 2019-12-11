@@ -71,11 +71,12 @@ namespace OpenGL_App1
             byte[] ptr = { color.r, color.g, color.b };
             gl.RasterPos(x, gl.RenderContextProvider.Height - y);
             gl.DrawPixels(1, 1, OpenGL.GL_RGB, ptr);
-
+            gl.Flush();
         }
-
+        
         public void BoudaryFill(int x, int y, RGBColor F_Color, RGBColor B_Color)
         {
+            
             /*
             BoudaryFill Algorithm: Fill all pixel that are not is F_color or B_color
             ---------------------
@@ -85,15 +86,15 @@ namespace OpenGL_App1
             B_Color: Border Color of Shape
 
             */
-
+            
             RGBColor curColor = GetPixel(x, y);
             if ((!isSameColor(curColor, F_Color)) && (!isSameColor(curColor, B_Color)))
             {
                 PutPixel(x, y, F_Color);
-                BoudaryFill(x + 1, y, F_Color, B_Color);
                 BoudaryFill(x - 1, y, F_Color, B_Color);
-                BoudaryFill(x, y - 1, F_Color, B_Color);
                 BoudaryFill(x, y + 1, F_Color, B_Color);
+                BoudaryFill(x + 1, y, F_Color, B_Color);
+                BoudaryFill(x, y - 1, F_Color, B_Color);
             }
 
         }
