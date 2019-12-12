@@ -309,19 +309,26 @@ namespace OpenGL_App1
                 if (labelMode.Text == strMode + "Scale")
                 {
                     affine = new Affine();
+                    int xmin = listShapes[Selected_shape].controlPoints[0].X,
+                        xmax = xmin,
+                        ymin = listShapes[Selected_shape].controlPoints[0].Y,
+                        ymax = ymin;
                     int x = 0, y = 0,n = listShapes[Selected_shape].controlPoints.Count;
                     for (int i=0;i<n;i++)
                     {
-                        x += listShapes[Selected_shape].controlPoints[i].X;
-                        y += listShapes[Selected_shape].controlPoints[i].Y;
+                        xmin = listShapes[Selected_shape].controlPoints[i].X < xmin ? listShapes[Selected_shape].controlPoints[i].X : xmin;
+                        xmax = listShapes[Selected_shape].controlPoints[i].X > xmax? listShapes[Selected_shape].controlPoints[i].X : xmax;
+                        ymin = listShapes[Selected_shape].controlPoints[i].Y < ymin ? listShapes[Selected_shape].controlPoints[i].Y : ymin;
+                        ymax = listShapes[Selected_shape].controlPoints[i].Y > ymax ? listShapes[Selected_shape].controlPoints[i].Y : ymax;
                     }
                     x /= n;
                     y /= n;
                     Point center = new Point(x, y);
                     float Sx = Math.Abs(e.Location.X - center.X) / Math.Abs(Selected_point.X - center.X),
                         Sy = Math.Abs(e.Location.Y - center.Y) / Math.Abs(Selected_point.Y - center.Y);
-                    affine.Translate(-x, y-openGLControl.OpenGL.RenderContextProvider.Height );
-                    affine.Scale(1,2);
+                    affine.Translate(-xmin, -ymin);
+                    //affine.Scale(1,2);
+                    //affine.Translate(xmin,  ymin);
                     //x = 0;y = 0;
                     //for (int i = 0; i < n; i++)
                     //{
@@ -330,7 +337,7 @@ namespace OpenGL_App1
                     //}
                     //x /= n;
                     //y /= n;
-                    affine.Translate(x,openGLControl.OpenGL.RenderContextProvider.Height-y);
+                    //affine.Translate(x,openGLControl.OpenGL.RenderContextProvider.Height-y);
                     return;
                 }
                 pEnd = e.Location;
