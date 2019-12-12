@@ -1,4 +1,5 @@
 ﻿using SharpGL;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -122,7 +123,7 @@ namespace OpenGL_App1
                 return;
             reDraw(-1);
             ShapeType newShape;
-            if (labelMode.Text == strMode + "Translate")
+            if (labelMode.Text == strMode + "Translate" || labelMode.Text == strMode + "Rotate" || labelMode.Text == strMode + "Scale")
             {
                 newShape = listShapes[Selected_shape].Clone();
                 newShape.Transform(affine);
@@ -267,7 +268,7 @@ namespace OpenGL_App1
             }
             if (labelMode.Text == strMode + "Polygon") // không xử lý event này trong mode polygon
                 return;
-            if (labelMode.Text == strMode + "Translate")
+            if (labelMode.Text == strMode + "Translate"|| labelMode.Text == strMode + "Rotate"|| labelMode.Text == strMode + "Scale")
             {
                 Selected_point = e.Location;
                 openGLControl.Tag = OPENGL_DRAWING;
@@ -297,10 +298,39 @@ namespace OpenGL_App1
                 }
                 if (labelMode.Text == strMode + "Translate")
                 {
-
-                    affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                    affine = new Affine();
+                    
                     if (listShapes[Selected_shape].id == SHAPE_POLYGON)
                         affine.Translate(e.Location.X - Selected_point.X, Selected_point.Y - e.Location.Y);
+                    else
+                        affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                    return;
+                }
+                if (labelMode.Text == strMode + "Scale")
+                {
+                    affine = new Affine();
+                    int x = 0, y = 0,n = listShapes[Selected_shape].controlPoints.Count;
+                    for (int i=0;i<n;i++)
+                    {
+                        x += listShapes[Selected_shape].controlPoints[i].X;
+                        y += listShapes[Selected_shape].controlPoints[i].Y;
+                    }
+                    x /= n;
+                    y /= n;
+                    Point center = new Point(x, y);
+                    float Sx = Math.Abs(e.Location.X - center.X) / Math.Abs(Selected_point.X - center.X),
+                        Sy = Math.Abs(e.Location.Y - center.Y) / Math.Abs(Selected_point.Y - center.Y);
+                    affine.Translate(-x, y-openGLControl.OpenGL.RenderContextProvider.Height );
+                    affine.Scale(1,2);
+                    //x = 0;y = 0;
+                    //for (int i = 0; i < n; i++)
+                    //{
+                    //    x += listShapes[Selected_shape].controlPoints[i].X;
+                    //    y += listShapes[Selected_shape].controlPoints[i].Y;
+                    //}
+                    //x /= n;
+                    //y /= n;
+                    affine.Translate(x,openGLControl.OpenGL.RenderContextProvider.Height-y);
                     return;
                 }
                 pEnd = e.Location;
@@ -318,12 +348,33 @@ namespace OpenGL_App1
             if (labelMode.Text == strMode + "Translate")
             {
                 openGLControl.Tag = OPENGL_DRAWN;
-                affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
+                affine = new Affine();
                 if (listShapes[Selected_shape].id == SHAPE_POLYGON)
                     affine.Translate(e.Location.X - Selected_point.X, Selected_point.Y - e.Location.Y);
+                else
+                    affine.Translate(e.Location.X - Selected_point.X, e.Location.Y - Selected_point.Y);
                 return;
             }
-
+            if (labelMode.Text == strMode + "Scale")
+            {
+                openGLControl.Tag = OPENGL_DRAWN;
+                return;
+                int x = 0, y = 0, n = listShapes[Selected_shape].controlPoints.Count;
+                for (int i = 0; i < n; i++)
+                {
+                    x += listShapes[Selected_shape].controlPoints[i].X;
+                    y += listShapes[Selected_shape].controlPoints[i].Y;
+                }
+                x /= n;
+                y /= n;
+                Point center = new Point(x, y);
+                int Sx = Math.Abs(e.Location.X - center.X) / Math.Abs(Selected_point.X - center.X),
+                    Sy = Math.Abs(e.Location.Y - center.Y) / Math.Abs(Selected_point.Y - center.Y);
+                affine.Translate(x, openGLControl.OpenGL.RenderContextProvider.Height-y);
+                //affine.Scale(Sx, Sy);
+                //affine.Translate(100, 100);
+                return;
+            }
             openGLControl.Tag = OPENGL_DRAWN;
             pEnd = e.Location;
 
@@ -455,7 +506,7 @@ namespace OpenGL_App1
                 }
                 return;
             }
-            if (labelMode.Text == strMode + "Translate")
+            if (labelMode.Text == strMode + "Translate" || labelMode.Text == strMode + "Rotate"|| labelMode.Text == strMode + "Scale")
             {
 
                 return;
@@ -498,6 +549,17 @@ namespace OpenGL_App1
             if (labelMode.Text == strMode + "Select")
             {
                 labelMode.Text = strMode + "Rotate";
+                OpenGL gl = openGLControl.OpenGL;
+                gl.RenderMode(OpenGL.GL_RENDER);
+                renderMode = true;
+            }
+        }
+
+        private void btn_Scale_Click(object sender, EventArgs e)
+        {
+            if (labelMode.Text == strMode + "Select")
+            {
+                labelMode.Text = strMode + "Scale";
                 OpenGL gl = openGLControl.OpenGL;
                 gl.RenderMode(OpenGL.GL_RENDER);
                 renderMode = true;

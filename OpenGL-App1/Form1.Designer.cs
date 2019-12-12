@@ -44,6 +44,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.btn_Ellipse = new System.Windows.Forms.Button();
             this.btn_Rotate = new System.Windows.Forms.Button();
+            this.btn_Scale = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -202,7 +203,7 @@
             // 
             // btn_Rotate
             // 
-            this.btn_Rotate.Location = new System.Drawing.Point(1, 186);
+            this.btn_Rotate.Location = new System.Drawing.Point(3, 186);
             this.btn_Rotate.Name = "btn_Rotate";
             this.btn_Rotate.Size = new System.Drawing.Size(75, 23);
             this.btn_Rotate.TabIndex = 12;
@@ -210,11 +211,22 @@
             this.btn_Rotate.UseVisualStyleBackColor = true;
             this.btn_Rotate.Click += new System.EventHandler(this.btn_Rotate_Click);
             // 
+            // btn_Scale
+            // 
+            this.btn_Scale.Location = new System.Drawing.Point(3, 215);
+            this.btn_Scale.Name = "btn_Scale";
+            this.btn_Scale.Size = new System.Drawing.Size(75, 23);
+            this.btn_Scale.TabIndex = 13;
+            this.btn_Scale.Text = "Scale";
+            this.btn_Scale.UseVisualStyleBackColor = true;
+            this.btn_Scale.Click += new System.EventHandler(this.btn_Scale_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 486);
+            this.Controls.Add(this.btn_Scale);
             this.Controls.Add(this.btn_Rotate);
             this.Controls.Add(this.btn_Translate);
             this.Controls.Add(this.btn_Select);
@@ -257,6 +269,7 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button btn_Ellipse;
         private System.Windows.Forms.Button btn_Rotate;
+        private System.Windows.Forms.Button btn_Scale;
     }
 }
 
