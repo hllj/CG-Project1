@@ -150,6 +150,12 @@ namespace OpenGL_App1
                     newShape = new Line();
                     ColorFilling cl = new ColorFilling();
                     RGBColor F, B;
+                    byte[] ptr = new byte[3];
+                    for (int i = 0; i < 400000; i++)
+                    {
+                        gl.ReadPixels(pStart.X, gl.RenderContextProvider.Height - pStart.Y, 1, 1, format: OpenGL.GL_RGB, type: OpenGL.GL_BYTE, ptr);
+                    }
+
                     F.r = userColor.R;
                     F.g = userColor.G;
                     F.b = userColor.B;
@@ -163,12 +169,7 @@ namespace OpenGL_App1
                     cl.init(openGLControl.OpenGL, openGLControl.Width, openGLControl.Height);
                     RGBColor curColor = cl.GetPixel(pStart.X, pStart.Y);
                     //cl.isSameColor()
-                    for(int i=0; i<100;i++)
-                        cl.PutPixel(pStart.X + i + 50, pStart.Y - i, X);
-                    cl.isSameColor(X, F);
-                    cl.isSameColor(F, B);
-                    cl.isSameColor(curColor, B);
-                    cl.isSameColor(curColor, F);
+                    
                     if ((!cl.isSameColor(curColor, F)) && (!cl.isSameColor(curColor, B))) ;
                         cl.BoudaryFill(pStart.X, pStart.Y, X, B);
                     break;

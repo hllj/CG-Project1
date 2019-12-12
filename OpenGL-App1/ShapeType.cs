@@ -64,9 +64,8 @@ namespace OpenGL_App1
         {
          
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
-            // gl.Begin(OpenGL.GL_LINES);
-            //DÒng dưới này thêm vào để debug
-            gl.Begin(OpenGL.GL_POLYGON);
+            gl.Begin(OpenGL.GL_LINES);
+            
 
             /* xác định các đỉnh của hình chữ nhật tho thứ tự ngược chiều kim đồng hồ*/
             //Canh 1

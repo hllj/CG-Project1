@@ -1,10 +1,10 @@
-﻿using System;
+﻿using SharpGL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using SharpGL;
 
 namespace OpenGL_App1
 {
@@ -39,7 +39,7 @@ namespace OpenGL_App1
             src.b = (byte)(src.b >> 1);
             return (des.r == src.r) && (des.g == src.g) && (des.b == src.b);
         }
-        
+
         public RGBColor GetPixel(int x, int y)
         {
 
@@ -49,8 +49,8 @@ namespace OpenGL_App1
             color.r = (byte)((ptr[0]) << 1);
             color.g = (byte)((ptr[1]) << 1);
             color.b = (byte)((ptr[2]) << 1);
+  
             return color;
-            
         }
 
         public void PutPixel(int x, int y, RGBColor color)
@@ -67,13 +67,14 @@ namespace OpenGL_App1
             if ((!isSameColor(curColor, F_Color)) && (!isSameColor(curColor, B_Color)))
             {
                 PutPixel(x, y, F_Color);
-                BoudaryFill(x + 1, y, F_Color, B_Color);
                 BoudaryFill(x - 1, y, F_Color, B_Color);
-                BoudaryFill(x, y - 1, F_Color, B_Color);
                 BoudaryFill(x, y + 1, F_Color, B_Color);
+                BoudaryFill(x + 1, y, F_Color, B_Color);
+                BoudaryFill(x, y - 1, F_Color, B_Color);
             }
 
         }
+
         public void BoudaryFillLeft(int x, int y, RGBColor F_Color, RGBColor B_Color)
         {
             RGBColor curColor = GetPixel(x, y);
@@ -90,7 +91,7 @@ namespace OpenGL_App1
         public void BoudaryFillRight(int x, int y, RGBColor F_Color, RGBColor B_Color)
         {
             RGBColor curColor = GetPixel(x, y);
-            if ((!isSameColor(curColor, F_Color)) && (!isSameColor(curColor, B_Color)))
+            if((!isSameColor(curColor, F_Color)) && (!isSameColor(curColor, B_Color)))
             {
                 PutPixel(x, y, F_Color);
                 //BoudaryFillLeft(x - 1, y, F_Color, B_Color);
