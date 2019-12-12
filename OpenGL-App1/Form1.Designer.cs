@@ -43,7 +43,13 @@
             this.btn_Ellipse = new System.Windows.Forms.Button();
             this.btn_Select = new System.Windows.Forms.Button();
             this.btn_ColorFilling = new System.Windows.Forms.Button();
+            this.btn_Translate = new System.Windows.Forms.Button();
+            this.btn_Rotate = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbtn_Bound = new System.Windows.Forms.RadioButton();
+            this.rbtn_ScanLine = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // vertexControl1
@@ -190,11 +196,66 @@
             this.btn_ColorFilling.UseVisualStyleBackColor = true;
             this.btn_ColorFilling.Click += new System.EventHandler(this.btn_ColorFilling_Click);
             // 
+            // btn_Translate
+            // 
+            this.btn_Translate.Location = new System.Drawing.Point(173, 71);
+            this.btn_Translate.Name = "btn_Translate";
+            this.btn_Translate.Size = new System.Drawing.Size(75, 23);
+            this.btn_Translate.TabIndex = 12;
+            this.btn_Translate.Text = "Translate";
+            this.btn_Translate.UseVisualStyleBackColor = true;
+            this.btn_Translate.Click += new System.EventHandler(this.btn_Translate_Click);
+            // 
+            // btn_Rotate
+            // 
+            this.btn_Rotate.Location = new System.Drawing.Point(272, 71);
+            this.btn_Rotate.Name = "btn_Rotate";
+            this.btn_Rotate.Size = new System.Drawing.Size(75, 23);
+            this.btn_Rotate.TabIndex = 13;
+            this.btn_Rotate.Text = "Rotate";
+            this.btn_Rotate.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbtn_Bound);
+            this.groupBox1.Controls.Add(this.rbtn_ScanLine);
+            this.groupBox1.Location = new System.Drawing.Point(661, 114);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(119, 68);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Color Filling";
+            // 
+            // rbtn_Bound
+            // 
+            this.rbtn_Bound.AutoSize = true;
+            this.rbtn_Bound.Location = new System.Drawing.Point(7, 44);
+            this.rbtn_Bound.Name = "rbtn_Bound";
+            this.rbtn_Bound.Size = new System.Drawing.Size(85, 17);
+            this.rbtn_Bound.TabIndex = 1;
+            this.rbtn_Bound.Text = "Boundary Fill";
+            this.rbtn_Bound.UseVisualStyleBackColor = true;
+            // 
+            // rbtn_ScanLine
+            // 
+            this.rbtn_ScanLine.AutoSize = true;
+            this.rbtn_ScanLine.Checked = true;
+            this.rbtn_ScanLine.Location = new System.Drawing.Point(7, 20);
+            this.rbtn_ScanLine.Name = "rbtn_ScanLine";
+            this.rbtn_ScanLine.Size = new System.Drawing.Size(73, 17);
+            this.rbtn_ScanLine.TabIndex = 0;
+            this.rbtn_ScanLine.TabStop = true;
+            this.rbtn_ScanLine.Text = "Scan Line";
+            this.rbtn_ScanLine.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 486);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btn_Rotate);
+            this.Controls.Add(this.btn_Translate);
             this.Controls.Add(this.btn_ColorFilling);
             this.Controls.Add(this.btn_Select);
             this.Controls.Add(this.btn_Ellipse);
@@ -212,6 +273,8 @@
             this.Name = "Form1";
             this.Text = "SimpleDraw";
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,6 +296,11 @@
         private System.Windows.Forms.Button btn_Ellipse;
         private System.Windows.Forms.Button btn_Select;
         private System.Windows.Forms.Button btn_ColorFilling;
+        private System.Windows.Forms.Button btn_Translate;
+        private System.Windows.Forms.Button btn_Rotate;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbtn_Bound;
+        private System.Windows.Forms.RadioButton rbtn_ScanLine;
     }
 }
 
