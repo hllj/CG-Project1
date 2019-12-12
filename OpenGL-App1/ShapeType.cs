@@ -392,7 +392,7 @@ namespace OpenGL_App1
         {
             gl.Color(colorFilling.R / 255.0, colorFilling.G / 255.0, colorFilling.B / 255.0);
             gl.Begin(OpenGL.GL_LINES);
-            gl.Vertex(p1.X, p2.Y);
+            gl.Vertex(p1.X, p1.Y);
             gl.Vertex(p2.X, p2.Y);
             gl.End();
             gl.Flush();
