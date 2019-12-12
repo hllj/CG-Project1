@@ -43,6 +43,9 @@
             this.btn_Ellipse = new System.Windows.Forms.Button();
             this.btn_Select = new System.Windows.Forms.Button();
             this.btn_ColorFilling = new System.Windows.Forms.Button();
+            this.btn_Translate = new System.Windows.Forms.Button();
+            this.btn_Rotate = new System.Windows.Forms.Button();
+            this.btn_Polygon = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -190,11 +193,44 @@
             this.btn_ColorFilling.UseVisualStyleBackColor = true;
             this.btn_ColorFilling.Click += new System.EventHandler(this.btn_ColorFilling_Click);
             // 
+            // btn_Translate
+            // 
+            this.btn_Translate.Location = new System.Drawing.Point(160, 60);
+            this.btn_Translate.Name = "btn_Translate";
+            this.btn_Translate.Size = new System.Drawing.Size(75, 23);
+            this.btn_Translate.TabIndex = 12;
+            this.btn_Translate.Text = "Translate";
+            this.btn_Translate.UseVisualStyleBackColor = true;
+            this.btn_Translate.Click += new System.EventHandler(this.btn_Translate_Click);
+            // 
+            // btn_Rotate
+            // 
+            this.btn_Rotate.Location = new System.Drawing.Point(276, 59);
+            this.btn_Rotate.Name = "btn_Rotate";
+            this.btn_Rotate.Size = new System.Drawing.Size(75, 23);
+            this.btn_Rotate.TabIndex = 13;
+            this.btn_Rotate.Text = "Rotate";
+            this.btn_Rotate.UseVisualStyleBackColor = true;
+            this.btn_Rotate.Click += new System.EventHandler(this.btn_Rotate_Click);
+            // 
+            // btn_Polygon
+            // 
+            this.btn_Polygon.Location = new System.Drawing.Point(378, 59);
+            this.btn_Polygon.Name = "btn_Polygon";
+            this.btn_Polygon.Size = new System.Drawing.Size(75, 23);
+            this.btn_Polygon.TabIndex = 14;
+            this.btn_Polygon.Text = "Polygon";
+            this.btn_Polygon.UseVisualStyleBackColor = true;
+            this.btn_Polygon.Click += new System.EventHandler(this.btn_Polygon_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(790, 486);
+            this.Controls.Add(this.btn_Polygon);
+            this.Controls.Add(this.btn_Rotate);
+            this.Controls.Add(this.btn_Translate);
             this.Controls.Add(this.btn_ColorFilling);
             this.Controls.Add(this.btn_Select);
             this.Controls.Add(this.btn_Ellipse);
@@ -233,6 +269,9 @@
         private System.Windows.Forms.Button btn_Ellipse;
         private System.Windows.Forms.Button btn_Select;
         private System.Windows.Forms.Button btn_ColorFilling;
+        private System.Windows.Forms.Button btn_Translate;
+        private System.Windows.Forms.Button btn_Rotate;
+        private System.Windows.Forms.Button btn_Polygon;
     }
 }
 

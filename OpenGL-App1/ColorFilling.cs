@@ -49,7 +49,7 @@ namespace OpenGL_App1
             Return values:
             RGB color of pixel
             */
-
+           //Console.WriteLine(x + " " + y);
             byte[] ptr = new byte[3];
             RGBColor color;
             gl.ReadPixels(x, gl.RenderContextProvider.Height - y, 1, 1, format: OpenGL.GL_RGB, type: OpenGL.GL_BYTE, ptr);

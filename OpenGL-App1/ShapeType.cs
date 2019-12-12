@@ -22,6 +22,7 @@ namespace OpenGL_App1
     abstract public class ShapeType
     {
         public int id { get; set; }
+        public bool Done;
         public int ymin, ymax;
         public Boolean filling = false, scanLine = false;
         public Color colorFilling;
@@ -32,13 +33,34 @@ namespace OpenGL_App1
         public List<List<AEL>> ET;
         public List<AEL> BegList, Edge;
         public List<Point> Vertex;
+        public Point tam;
+        
         abstract public void Draw(OpenGL gl);
         abstract public void Create(OpenGL gl);
 
         public ShapeType()
         {
-            //controlPoints = new List<Point>();
+            Done = false;
+            controlPoints = new List<Point>();
             //Vertex = new List<Point>();
+        }
+        //cap nhat lai au khi tranform
+        //khong can nua, Clone thoi
+        public void Update(OpenGL gl)
+        {
+            controlPoints = new List<Point>();
+            //them dinh? nua
+            //
+            Create(gl);
+        }
+        public void Transform(Affine at)
+        {
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                controlPoints[i] = at.Transform(controlPoints[i]);
+            }
+            p1 = at.Transform(p1);
+            p2 = at.Transform(p2);
         }
 
         public void AddEdge(OpenGL gl)
@@ -62,14 +84,45 @@ namespace OpenGL_App1
                 {
                     t.slope = (Vertex[i].X - Vertex[i + 1].X) * 1.0 / (Vertex[i].Y - Vertex[i + 1].Y) * 1.0;
                 }
+                
+                // Tinh chỉnh lại dữ liệu
+                //TH1: Giảm:
+                //TH2: Tăng
+                Console.Write(t.y_upper + " ");
+                if (i == 0)
+                {
+                    if (Vertex[i + 1].Y < Vertex[i].Y && Vertex[i].Y < Vertex[Vertex.Count - 1].Y)
+                    {
+                        t.y_upper--;
+                    }
+                    else
+                    if (Vertex[i].Y > Vertex[Vertex.Count - 1].Y && Vertex[i + 1].Y > Vertex[i].Y)
+                    {
+                        t.y_upper--;
+                    }
+                } else
+                {
+                    Console.Write(Vertex[i - 1].Y + " " + Vertex[i].Y + " " + Vertex[i + 1].Y + " ");
+                    if (Vertex[i + 1].Y < Vertex[i].Y && Vertex[i].Y < Vertex[i - 1].Y)
+                    {
+                        t.y_upper--;
+                    } else
+                    if (Vertex[i].Y > Vertex[i - 1].Y && Vertex[i + 1].Y > Vertex[i].Y)
+                    {
+                        t.y_upper--;
+                    }
+                }
                 Edge.Add(t);
                 ymin = Math.Min(ymin, Vertex[i + 1].Y);
                 ymax = Math.Max(ymax, Vertex[i + 1].Y);
+                Console.WriteLine(t.y_upper + " " + t.y_lower + " " + t.x);
             }
+
             t = new AEL();
             t.y_upper = Math.Max(Vertex[Vertex.Count - 1].Y, Vertex[0].Y);
             t.y_lower = Math.Min(Vertex[Vertex.Count - 1].Y, Vertex[0].Y);
             t.x = Vertex[Vertex.Count - 1].Y > Vertex[0].Y ? Vertex[0].X : Vertex[Vertex.Count - 1].X;
+            Console.Write(t.y_upper + " ");
             if (t.y_lower == t.y_upper)
             {
                 t.slope = 0;
@@ -78,10 +131,47 @@ namespace OpenGL_App1
             {
                 t.slope = (Vertex[Vertex.Count - 1].X - Vertex[0].X) * 1.0 / (Vertex[Vertex.Count - 1].Y - Vertex[0].Y) * 1.0;
             }
-            Edge.Add(t);
-        }
 
-        public void DrawControlPoints(OpenGL gl)
+            if (Vertex[0].Y < Vertex[Vertex.Count - 1].Y && Vertex[Vertex.Count - 1].Y < Vertex[Vertex.Count - 2].Y)
+            {
+                t.y_upper--;
+            }
+            else
+            if (Vertex[Vertex.Count - 1].Y > Vertex[Vertex.Count - 2].Y && Vertex[0].Y > Vertex[Vertex.Count - 1].Y)
+            {
+                t.y_upper--;
+            }
+            Edge.Add(t);
+            Console.WriteLine(t.y_upper + " " + t.y_lower + " " + t.x);
+        }
+        virtual public ShapeType Clone(OpenGL gl)
+        {
+            ShapeType t = new Rectangle();
+
+            for (int i = 0; i < controlPoints.Count; i++)
+            {
+                t.controlPoints.Add(controlPoints[i]);
+            }
+            t.Vertex = new List<Point>();
+            for (int i = 0; i < Vertex.Count; i++)
+            {
+                t.Vertex.Add(Vertex[i]);
+            }
+            t.AddEdge(gl);
+            t.color = color;
+            t.colorFilling = colorFilling;
+            t.filling = filling;
+            t.Done = Done;
+            t.ymax = ymax;
+            t.ymin = ymin;
+            t.scanLine = scanLine;
+            t.id = id;
+            t.p1 = new Point(p1.X, p1.Y);
+            t.p2 = new Point(p2.X, p2.Y);
+
+            return t;
+        }
+        virtual public void DrawControlPoints(OpenGL gl)
         {
             for (int i = 0; i < controlPoints.Count; i++)
             {
@@ -96,6 +186,16 @@ namespace OpenGL_App1
             gl.PointSize(1);
         }
 
+        public void BoundaryFill(OpenGL gl)
+        {
+            Draw(gl);
+            ColorFilling cl = new ColorFilling();
+            cl.init(gl);
+            RGBColor F, B;
+            F.r = color.R; F.g = color.G; F.b = color.B;
+            B.r = color.R; B.g = color.G; B.b = color.B;
+            cl.BoudaryFill(tam.X, tam.Y, F, B);
+        }
         virtual public void ScanLine(OpenGL gl)
         {
             ET = new List<List<AEL>>();
@@ -196,6 +296,7 @@ namespace OpenGL_App1
             gl.End();
             gl.Flush();
         }
+    
     }
 
     public class Circle : ShapeType
@@ -208,6 +309,8 @@ namespace OpenGL_App1
         {
 
         }
+        
+        
     }
 
     public class Rectangle : ShapeType
@@ -249,7 +352,8 @@ namespace OpenGL_App1
             controlPoints.Add(new Point(p2.X, (gl.RenderContextProvider.Height - p1.Y + gl.RenderContextProvider.Height - p2.Y) / 2));
             controlPoints.Add(new Point((p1.X + p2.X) / 2, gl.RenderContextProvider.Height - p1.Y));
             controlPoints.Add(new Point((p1.X + p2.X) / 2, gl.RenderContextProvider.Height - p2.Y));
-
+            tam.X =  (p1.X + p2.X) / 2;
+            tam.Y = (gl.RenderContextProvider.Height - p1.Y + gl.RenderContextProvider.Height - p2.Y) / 2;
             /*Thêm các đỉnh*/
             Vertex.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
             Vertex.Add(new Point(p2.X, gl.RenderContextProvider.Height - p1.Y));
@@ -258,7 +362,6 @@ namespace OpenGL_App1
             /*Thêm các cạnh*/
             AddEdge(gl);
         }
-        
     }
 
     public class Ellipse : ShapeType
@@ -415,7 +518,7 @@ namespace OpenGL_App1
     
     public class EquiTriangle : ShapeType
     {
-        private Point p3;
+        public Point p3;
         public override void Draw(OpenGL gl)
         {
             double a = Math.Sqrt((p1.X - p2.X) ^ 2 + (p1.Y - p2.Y) ^ 2);
@@ -514,6 +617,7 @@ namespace OpenGL_App1
             }
             AddEdge(gl);
         }
+        
     }
 
     public class EquiHexagon : ShapeType
@@ -559,6 +663,44 @@ namespace OpenGL_App1
             }
             AddEdge(gl);
         }
+       
+        
     }
-  
+
+    public class Polygon : ShapeType
+    {
+
+        public override void Draw(OpenGL gl)
+        {
+            gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            for (int i = 0; i < controlPoints.Count - 1; i++)
+            {
+                gl.Begin(OpenGL.GL_LINES);
+                gl.Vertex(controlPoints[i].X, controlPoints[i].Y);
+                gl.Vertex(controlPoints[i + 1].X, controlPoints[i + 1].Y);
+                gl.End();
+                gl.Flush();
+            }
+            // Mouse Move
+            if (Done)
+            {
+                gl.Begin(OpenGL.GL_LINES);
+                gl.Vertex(controlPoints[0].X, controlPoints[0].Y);
+                gl.Vertex(controlPoints.Last().X, controlPoints.Last().Y);
+                gl.End();
+                gl.Flush();
+                return;
+            }
+            gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            gl.Begin(OpenGL.GL_LINES);
+            gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
+            gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
+            gl.End();
+            gl.Flush();
+        }
+        public override void Create(OpenGL gl)
+        {
+
+        }
+    }
 }

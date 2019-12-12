@@ -33,17 +33,20 @@ namespace OpenGL_App1
         const int SHAPE_EQUI_TRIANGLE = 4;
         const int SHAPE_EQUI_PENTAGON = 5;
         const int SHAPE_EQUI_HEXAGON = 6;
+        const int SHAPE_POLYGON = 7;
 
         // Vẽ ellipse cần bao nhiêu điểm điều khiển?
 
-        int shapeSelected = -1;
+        int selectedShape = -1;
         List<ShapeType> listShapes;
+        private bool startup; // biến kiểm tra chương trình được khởi động lần đầu
+        Affine affine;
 
         Color userColor;
         short shape;
         Point pStart, pEnd, pointSelected;
         
-        Point pTmp;
+        Point selectedPoint;
         Boolean renderMode = false;
 
         string strMode;
@@ -57,18 +60,24 @@ namespace OpenGL_App1
             gl.SelectBuffer(512, selectO);
             gl.RenderMode(OpenGL.GL_SELECT);
             renderMode = false;
+            
         }
 
-        private void ReDraw()
+        private void reDraw(int index)
         {
             OpenGL gl = openGLControl.OpenGL;
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-
+            gl.ClearColor(1, 1, 1, 1);
             for (int i = 0; i < listShapes.Count; i++)
             {
-                listShapes[i].Draw(gl);
-                if (listShapes[i].filling) listShapes[i].ScanLine(gl);
+                if (i != index)
+                {
+                    listShapes[i].Draw(gl);
+                    if (listShapes[i].filling) listShapes[i].ScanLine(gl);
+                }
+                    
             }
+
         }
 
         public Form1()
@@ -76,10 +85,13 @@ namespace OpenGL_App1
             InitializeComponent();
             listShapes = new List<ShapeType>();
             List<Point> pointsOfShape = new List<Point>();
-            userColor = Color.White;
+            userColor = Color.Black;
             shape = SHAPE_LINE;
             openGLControl.Tag = OPENGL_IDLE;
             strMode = labelMode.Text;
+            startup = true;  //
+            selectedPoint = new Point();
+            affine = new Affine();
             labelMode.Text = strMode + "Select";
             renderMode = false;
         }
@@ -94,7 +106,7 @@ namespace OpenGL_App1
             // Get the OpenGL object.
             OpenGL gl = openGLControl.OpenGL;
             // Set the clear color.
-            gl.ClearColor(0, 0, 0, 0);
+            gl.ClearColor(1, 1, 1, 1);
             // Set the projection matrix.
             gl.MatrixMode(OpenGL.GL_PROJECTION);
             // Load the identity.
@@ -116,19 +128,52 @@ namespace OpenGL_App1
 
         private void openGLControl_OpenGLDraw(object sender, RenderEventArgs e)
         {
-            if ((int)openGLControl.Tag == OPENGL_IDLE || renderMode == false)
-                return;
+            
+            // đoạn code này để đổi backGround thành màu trắng
             // Get the OpenGL object.
             OpenGL gl = openGLControl.OpenGL;
+            if (startup)
+            {
+                gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+                gl.ClearColor(1, 1, 1, 1);
+
+                startup = false;
+                return;
+            }
+
+            if ((int)openGLControl.Tag == OPENGL_IDLE || renderMode == false)
+                return;
             // Clear the color and depth buffer.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
-            ReDraw();
+            reDraw(-1);
 
             gl.Color(userColor.R / 255.0, userColor.G / 255.0, userColor.B / 255.0);
 
-
             ShapeType newShape;
+
+            if (labelMode.Text == strMode + "Translate")
+            {
+                newShape = listShapes[selectedShape].Clone(gl);
+                newShape.Transform(affine);
+
+                reDraw(selectedShape);
+                newShape.Draw(gl);
+                //Đã kéo xong
+                if ((int)openGLControl.Tag == OPENGL_DRAWN)
+                {
+                    listShapes[selectedShape].p1 = newShape.p1;
+                    listShapes[selectedShape].p2 = newShape.p2;
+                    if (newShape.id != 7)
+                        listShapes[selectedShape].Update(gl);
+                    else listShapes[selectedShape] = newShape.Clone(gl);
+                    reDraw(-1);
+                    affine = new Affine();
+                    openGLControl.Tag = OPENGL_IDLE;
+                }
+                return;
+            }
+
 
             // Vẽ vời chỗ này. Ví dụ:
             switch (shape)
@@ -170,6 +215,17 @@ namespace OpenGL_App1
                         id = SHAPE_EQUI_PENTAGON
                     };
                     break;
+                case SHAPE_POLYGON:
+                    newShape = new Polygon();
+                    newShape = listShapes.Last();
+                    if (newShape.id != SHAPE_POLYGON || newShape.Done == true)
+                    {
+                        openGLControl.Tag = OPENGL_IDLE;
+                        return;
+                    }
+                    newShape.color = userColor;
+                    return;
+
                 default:
                     newShape = new EquiHexagon()
                     {
@@ -223,6 +279,19 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseDown(object sender, MouseEventArgs e)
         {
+            if (labelMode.Text == strMode + "Select")
+            {
+                openGLControl.Tag = OPENGL_IDLE;
+                return;
+            }
+            if (labelMode.Text == strMode + "Polygon") // không xử lý event này trong mode polygon
+                return;
+            if (labelMode.Text == strMode + "Translate")
+            {
+                selectedPoint = e.Location;
+                openGLControl.Tag = OPENGL_DRAWING;
+                return;
+            }
             openGLControl.Tag = OPENGL_DRAWING;
             pStart = e.Location;
             pEnd = pStart;
@@ -230,6 +299,22 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseUp(object sender, MouseEventArgs e)
         {
+            if (renderMode == false)
+            {
+                openGLControl.Tag = OPENGL_IDLE;
+                return;
+            }
+            if (labelMode.Text == strMode + "Polygon") // không xử lý event này trong mode polygon
+                return;
+            if (labelMode.Text == strMode + "Translate")
+            {
+                openGLControl.Tag = OPENGL_DRAWN;
+                affine.Translate(e.Location.X - selectedPoint.X, e.Location.Y - selectedPoint.Y);
+                if (listShapes[selectedShape].id == SHAPE_POLYGON)
+                    affine.Translate(e.Location.X - selectedPoint.X, selectedPoint.Y - e.Location.Y);
+                return;
+            }
+
             openGLControl.Tag = OPENGL_DRAWN;
             pEnd = e.Location;
         }
@@ -287,47 +372,136 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseClick(object sender, MouseEventArgs e)
         {
-            if (renderMode == true)
+            if (renderMode == false) // mode select hanlde event
             {
-                return;
-            }
-            pointSelected = e.Location;
-            double minDist = double.MaxValue;
-            double esp = 10;
-            int index = -1;
-            for (int i = 0; i < listShapes.Count; i++)
-            {
-                for (int j = 0; j < listShapes[i].controlPoints.Count; j++)
+                double minDist = double.MaxValue;
+                double esp = 10;
+                int index = -1;
+                for (int i = 0; i < listShapes.Count; i++)
                 {
-                    int x = listShapes[i].controlPoints[j].X;
-                    int y = listShapes[i].controlPoints[j].Y;
-                    double dist = Math.Sqrt((e.Location.X - x) * (e.Location.X - x)
-                    + (openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y - y) * (openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y - y));
-                    if (dist <= esp)
+                    for (int j = 0; j < listShapes[i].controlPoints.Count; j++)
                     {
-                        if (dist < minDist)
+                        int x = listShapes[i].controlPoints[j].X;
+                        int y = listShapes[i].controlPoints[j].Y;
+                        double dist = Math.Sqrt((e.Location.X - x) * (e.Location.X - x)
+                        + (openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y - y) * (openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y - y));
+                        if (dist <= esp)
                         {
-                            minDist = dist;
-                            index = i;
+                            if (dist < minDist)
+                            {
+                                minDist = dist;
+                                index = i;
+                            }
                         }
                     }
                 }
-            }
 
-            if (index != -1)
-            {
-                shapeSelected = index;
-                openGLControl.OpenGL.RenderMode(OpenGL.GL_RENDER);
-                ReDraw();
-                listShapes[index].DrawControlPoints(openGLControl.OpenGL);
-                changeToSelectMode();
+                if (index != -1)
+                {
+                    openGLControl.OpenGL.RenderMode(OpenGL.GL_RENDER);
+                    reDraw(-1);
+                    listShapes[index].DrawControlPoints(openGLControl.OpenGL);
+                    selectedShape = index;
+                    changeToSelectMode();
+                }
+                return;
             }
-            else shapeSelected = index;
+            if (labelMode.Text == strMode + "Polygon")
+            {
+                // xử lý event mouse click trong chế độ polygon 
+
+                if (e.Button == MouseButtons.Right)
+                {
+
+                    // chuột phải thì kết thúc quá trình vẽ 
+                    if ((int)openGLControl.Tag == OPENGL_DRAWING)
+                    {
+
+                        ShapeType tmp = new Polygon();
+                        tmp = listShapes.Last();
+                        tmp.Done = true;
+                        tmp.p1 = tmp.controlPoints.Last();
+                        tmp.p2 = tmp.controlPoints[0];
+                        pEnd = tmp.controlPoints.Last();
+
+                    }
+
+
+                }
+                if (e.Button == MouseButtons.Left)
+                {
+                    // xử lý click chuột trái
+
+                    pStart = e.Location;
+                    openGLControl.Tag = OPENGL_DRAWING;
+                    ShapeType tmp;
+                    if (listShapes.Count == 0 || listShapes.Last().id != SHAPE_POLYGON || listShapes.Last().Done)
+                    {
+                        // nếu trong danh sách các hình đã vẽ, nếu hình cuối vẽ chưa xong, hoạc chưa có hình nào
+                        //* hoặc ko phải là 1 polygon thì tạo 1 polygon mới thêm vào listshape
+                        tmp = new Polygon()
+                        {
+                            id = SHAPE_POLYGON,
+                            Done = false,
+                            p1 = new Point(pStart.X, pStart.Y),
+                            p2 = new Point(pStart.X, pStart.Y)
+
+                        };
+                        listShapes.Add(tmp);
+
+
+                       pEnd = e.Location;
+                    }
+
+                    Point t = new Point(e.Location.X, openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y);
+                    listShapes.Last().controlPoints.Add(t);
+                    listShapes.Last().p1 = pStart;
+                    listShapes.Last().p2 = pEnd;
+
+                    pEnd = pStart;
+                }
+                return;
+            }
+            if (labelMode.Text == strMode + "Translate")
+            {
+
+                return;
+            }
+        }
+
+        private void btn_Translate_Click(object sender, EventArgs e)
+        {
+            if (labelMode.Text == strMode + "Select")
+            {
+                labelMode.Text = strMode + "Translate";
+                OpenGL gl = openGLControl.OpenGL;
+                gl.RenderMode(OpenGL.GL_RENDER);
+                renderMode = true;
+            }
+        }
+
+        private void btn_Rotate_Click(object sender, EventArgs e)
+        {
+            if (labelMode.Text == strMode + "Select")
+            {
+                labelMode.Text = strMode + "Rotate";
+                OpenGL gl = openGLControl.OpenGL;
+                gl.RenderMode(OpenGL.GL_RENDER);
+                renderMode = true;
+            }
+        }
+
+        private void btn_Polygon_Click(object sender, EventArgs e)
+        {
+            labelMode.Text = strMode + "Polygon";
+            OpenGL gl = openGLControl.OpenGL;
+            gl.RenderMode(OpenGL.GL_RENDER);
+            renderMode = true;
         }
 
         private void btn_ColorFilling_Click(object sender, EventArgs e)
         {
-            if (renderMode == true || shapeSelected == -1) return;
+            if (renderMode == true || selectedShape == -1) return;
             labelMode.Text = strMode + "Color Filling";
             /*
             ColorFilling cl = new ColorFilling();
@@ -342,9 +516,10 @@ namespace OpenGL_App1
             cl.BoudaryFill(pointSelected.X, pointSelected.Y, F, B);
             */
             openGLControl.OpenGL.RenderMode(OpenGL.GL_RENDER);
-            listShapes[shapeSelected].colorFilling = userColor;
-            listShapes[shapeSelected].filling = true;
-            listShapes[shapeSelected].ScanLine(openGLControl.OpenGL);
+            listShapes[selectedShape].colorFilling = userColor;
+            listShapes[selectedShape].filling = true;
+            listShapes[selectedShape].ScanLine(openGLControl.OpenGL);
+            //listShapes[selectedShape].BoundaryFill(openGLControl.OpenGL);
             changeToSelectMode();
         }
 
@@ -352,6 +527,21 @@ namespace OpenGL_App1
         {
             if ((int)openGLControl.Tag == OPENGL_DRAWING)
             {
+               
+                if (labelMode.Text == strMode + "Polygon")
+                {
+                    listShapes.Last().p2 = pEnd;
+                    pEnd = e.Location;
+                    return;
+                }
+                if (labelMode.Text == strMode + "Translate")
+                {
+                   
+                    affine.Translate(e.Location.X - selectedPoint.X, e.Location.Y - selectedPoint.Y);
+                    if (listShapes[selectedShape].id == SHAPE_POLYGON)
+                        affine.Translate(e.Location.X - selectedPoint.X, selectedPoint.Y - e.Location.Y);
+                    return;
+                }
                 pEnd = e.Location;
             }
         }
