@@ -214,7 +214,7 @@ namespace OpenGL_App1
                     {
                         id = SHAPE_EQUI_PENTAGON
                     };
-                    break;
+                    break;               
                 case SHAPE_POLYGON:
                     newShape = new Polygon();
                     newShape = listShapes.Last();
@@ -225,7 +225,6 @@ namespace OpenGL_App1
                     }
                     newShape.color = userColor;
                     return;
-
                 default:
                     newShape = new EquiHexagon()
                     {
@@ -416,10 +415,11 @@ namespace OpenGL_App1
                     // chuột phải thì kết thúc quá trình vẽ 
                     if ((int)openGLControl.Tag == OPENGL_DRAWING)
                     {
-
+                        OpenGL gl = openGLControl.OpenGL;
                         ShapeType tmp = new Polygon();
                         tmp = listShapes.Last();
                         tmp.Done = true;
+                        tmp.AddEdge(gl);
                         tmp.p1 = tmp.controlPoints.Last();
                         tmp.p2 = tmp.controlPoints[0];
                         pEnd = tmp.controlPoints.Last();
@@ -431,8 +431,8 @@ namespace OpenGL_App1
                 if (e.Button == MouseButtons.Left)
                 {
                     // xử lý click chuột trái
-
                     pStart = e.Location;
+
                     openGLControl.Tag = OPENGL_DRAWING;
                     ShapeType tmp;
                     if (listShapes.Count == 0 || listShapes.Last().id != SHAPE_POLYGON || listShapes.Last().Done)
@@ -444,17 +444,17 @@ namespace OpenGL_App1
                             id = SHAPE_POLYGON,
                             Done = false,
                             p1 = new Point(pStart.X, pStart.Y),
-                            p2 = new Point(pStart.X, pStart.Y)
+                            p2 = new Point(pStart.X, pStart.Y),
+                            Vertex = new List<Point>()
+
 
                         };
                         listShapes.Add(tmp);
-
-
-                       pEnd = e.Location;
                     }
 
                     Point t = new Point(e.Location.X, openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y);
-                    listShapes.Last().controlPoints.Add(t);
+                    listShapes.Last().controlPoints.Add(t);                    
+                    listShapes.Last().Vertex.Add(t);
                     listShapes.Last().p1 = pStart;
                     listShapes.Last().p2 = pEnd;
 
@@ -493,6 +493,7 @@ namespace OpenGL_App1
 
         private void btn_Polygon_Click(object sender, EventArgs e)
         {
+            shape = SHAPE_POLYGON;
             labelMode.Text = strMode + "Polygon";
             OpenGL gl = openGLControl.OpenGL;
             gl.RenderMode(OpenGL.GL_RENDER);
@@ -527,7 +528,7 @@ namespace OpenGL_App1
         {
             if ((int)openGLControl.Tag == OPENGL_DRAWING)
             {
-               
+
                 if (labelMode.Text == strMode + "Polygon")
                 {
                     listShapes.Last().p2 = pEnd;
@@ -536,10 +537,12 @@ namespace OpenGL_App1
                 }
                 if (labelMode.Text == strMode + "Translate")
                 {
-                   
-                    affine.Translate(e.Location.X - selectedPoint.X, e.Location.Y - selectedPoint.Y);
+                    affine = new Affine();
+
                     if (listShapes[selectedShape].id == SHAPE_POLYGON)
                         affine.Translate(e.Location.X - selectedPoint.X, selectedPoint.Y - e.Location.Y);
+                    else
+                        affine.Translate(e.Location.X - selectedPoint.X, e.Location.Y - selectedPoint.Y);
                     return;
                 }
                 pEnd = e.Location;

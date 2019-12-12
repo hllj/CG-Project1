@@ -155,7 +155,8 @@ namespace OpenGL_App1
             t.Vertex = new List<Point>();
             for (int i = 0; i < Vertex.Count; i++)
             {
-                t.Vertex.Add(Vertex[i]);
+                Point p = new Point(Vertex[i].X,Vertex[i].Y);
+                t.Vertex.Add(p);
             }
             t.AddEdge(gl);
             t.color = color;
@@ -675,6 +676,8 @@ namespace OpenGL_App1
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
             for (int i = 0; i < controlPoints.Count - 1; i++)
             {
+
+
                 gl.Begin(OpenGL.GL_LINES);
                 gl.Vertex(controlPoints[i].X, controlPoints[i].Y);
                 gl.Vertex(controlPoints[i + 1].X, controlPoints[i + 1].Y);
