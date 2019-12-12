@@ -125,9 +125,21 @@ namespace OpenGL_App1
             ShapeType newShape;
             if (labelMode.Text == strMode + "Translate" || labelMode.Text == strMode + "Rotate" || labelMode.Text == strMode + "Scale")
             {
-                newShape = listShapes[Selected_shape].Clone();
-                newShape.Transform(affine);
                 
+                newShape = listShapes[Selected_shape].Clone();
+
+                for (int i =0;i< newShape.controlPoints.Count;i++)
+                {
+                    Console.WriteLine("trc {0} {1} {2} ", i, newShape.controlPoints[i].X, newShape.controlPoints[i].Y);
+                }
+
+                newShape.Transform(affine);
+
+                for (int i = 0; i < newShape.controlPoints.Count; i++)
+                {
+                    Console.WriteLine("sau {0} {1} {2} ", i, newShape.controlPoints[i].X, newShape.controlPoints[i].Y);
+                }
+
                 reDraw(Selected_shape);
                 newShape.Draw(gl);
                 //Đã kéo xong
@@ -135,6 +147,7 @@ namespace OpenGL_App1
                 {
                     listShapes[Selected_shape].p1 = newShape.p1;
                     listShapes[Selected_shape].p2 = newShape.p2;
+                    
                     if (newShape.id != 7)
                         listShapes[Selected_shape].Update(gl);
                     else listShapes[Selected_shape] = newShape.Clone();
@@ -326,9 +339,13 @@ namespace OpenGL_App1
                     Point center = new Point(x, y);
                     float Sx = Math.Abs(e.Location.X - center.X) / Math.Abs(Selected_point.X - center.X),
                         Sy = Math.Abs(e.Location.Y - center.Y) / Math.Abs(Selected_point.Y - center.Y);
+                    affine.Translate(0, openGLControl.OpenGL.RenderContextProvider.Height);
+                    affine.Scale(1, -1);
+                    affine.Translate(xmax, ymin);
+                    affine.Scale(2,2);
                     affine.Translate(-xmin, -ymin);
-                    //affine.Scale(1,2);
-                    //affine.Translate(xmin,  ymin);
+                    affine.Scale(1, -1);
+                    affine.Translate(0,-openGLControl.OpenGL.RenderContextProvider.Height);
                     //x = 0;y = 0;
                     //for (int i = 0; i < n; i++)
                     //{
