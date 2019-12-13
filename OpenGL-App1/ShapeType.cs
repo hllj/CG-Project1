@@ -404,11 +404,87 @@ namespace OpenGL_App1
     {
         public override void Draw(OpenGL gl)
         {
-
+            if (done)
+            {
+                gl.Begin(OpenGL.GL_POINTS);                                         // Draws pentagon.
+                for (int i = 0; i < Vertex.Count; i++)
+                {
+                    gl.Vertex(Vertex[i].X, Vertex[i].Y);
+                }
+                gl.End();
+                gl.Flush();
+                return;
+            }
+            done = true;
+            Vertex = new List<Point>();
+            gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            gl.Begin(OpenGL.GL_POINTS);
+            /* Xác định các đại lượng cơ bản của đường tròn */
+            /* Bán kính r */
+            int r = Math.Abs(p1.X - p2.X);
+            /* Tâm hình tròn */
+            int xc = p1.X, yc = p1.Y;
+            int x = 0, y = r;
+            int twoX = 2 * x;
+            int twoY = 2 * y;
+            int p = (int)Math.Round(5.0/4.0 - (double)r);
+            /* Vẽ đối xứng qua tâm */
+            gl.Vertex(xc + x, gl.RenderContextProvider.Height - (yc + y));
+            gl.Vertex(xc - x, gl.RenderContextProvider.Height - (yc - y));
+            gl.Vertex(xc - r, gl.RenderContextProvider.Height - (yc - 0));
+            gl.Vertex(xc + r, gl.RenderContextProvider.Height - (yc + 0));
+            /* Thêm vào list Vertex */
+            Vertex.Add(new Point(xc + x, gl.RenderContextProvider.Height - (yc + y)));
+            Vertex.Add(new Point(xc - x, gl.RenderContextProvider.Height - (yc - y)));
+            Vertex.Add(new Point(xc - r, gl.RenderContextProvider.Height - (yc - 0)));
+            Vertex.Add(new Point(xc + r, gl.RenderContextProvider.Height - (yc + 0)));
+            /* Tiến hành vẽ các điểm trên đường tròn */
+            while (x < y)
+            {
+                x++;
+                twoX = 2 * x;
+                if (p < 0)
+                {
+                    p = p + twoX + 1;
+                }
+                else
+                {
+                    y--;
+                    twoY = 2 * y;
+                    p = p + twoX - twoY + 1;
+                }
+                /* Vẽ đối xứng qua tâm*/
+                gl.Vertex(xc + x, gl.RenderContextProvider.Height - (yc + y));
+                gl.Vertex(xc - x, gl.RenderContextProvider.Height - (yc + y));
+                gl.Vertex(xc + x, gl.RenderContextProvider.Height - (yc - y));
+                gl.Vertex(xc - x, gl.RenderContextProvider.Height - (yc - y));
+                /* điểm đối xứng với (x,y) qua đường thẳng y = x */
+                int xSym = (x + y) - x;
+                int ySym = (x + y) - y;
+                gl.Vertex(xc + xSym, gl.RenderContextProvider.Height - (yc + ySym));
+                gl.Vertex(xc - xSym, gl.RenderContextProvider.Height - (yc + ySym));
+                gl.Vertex(xc + xSym, gl.RenderContextProvider.Height - (yc - ySym));
+                gl.Vertex(xc - xSym, gl.RenderContextProvider.Height - (yc - ySym));
+                Vertex.Add(new Point(xc + x, gl.RenderContextProvider.Height - (yc + y)));
+                Vertex.Add(new Point(xc - x, gl.RenderContextProvider.Height - (yc + y)));
+                Vertex.Add(new Point(xc + x, gl.RenderContextProvider.Height - (yc - y)));
+                Vertex.Add(new Point(xc - x, gl.RenderContextProvider.Height - (yc - y)));
+                Vertex.Add(new Point(xc + xSym, gl.RenderContextProvider.Height - (yc + ySym)));
+                Vertex.Add(new Point(xc - xSym, gl.RenderContextProvider.Height - (yc + ySym)));
+                Vertex.Add(new Point(xc + xSym, gl.RenderContextProvider.Height - (yc - ySym)));
+                Vertex.Add(new Point(xc - xSym, gl.RenderContextProvider.Height - (yc - ySym)));
+            }
+            gl.End();
+            gl.Flush();
         }
         public override void Create(OpenGL gl)
         {
-
+            //Vertex = new List<Point>();
+            //Vertex.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
+            //Vertex.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
+            controlPoints = new List<Point>();
+            controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
+            controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
         }
 
 
@@ -561,7 +637,7 @@ namespace OpenGL_App1
             Vertex.Add(new Point(xc - x, gl.RenderContextProvider.Height - (yc + y)));
             Vertex.Add(new Point(xc + x, gl.RenderContextProvider.Height - (yc - y)));
             Vertex.Add(new Point(xc - x, gl.RenderContextProvider.Height - (yc - y)));
-            /* Vùng 1: dx/dy <= 1*/
+            /* Vùng 1: dy/dx <= 1*/
             int p = (int)(Math.Round(ry2 - rx2 * ry + 0.25 * rx2));
             while (px < py)
             {

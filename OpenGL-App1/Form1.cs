@@ -68,10 +68,12 @@ namespace OpenGL_App1
             OpenGL gl = openGLControl.OpenGL;
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             gl.ClearColor(1, 1, 1, 1);
+
             for (int i = 0; i < listShapes.Count; i++)
             {
                 if (i != index)
                 {
+                    gl.Color(listShapes[i].color.R / 255.0, listShapes[i].color.G / 255.0, listShapes[i].color.B / 255.0);
                     listShapes[i].Draw(gl);
                     if (listShapes[i].filling)
                     {
@@ -153,8 +155,7 @@ namespace OpenGL_App1
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
             reDraw(-1);
-
-            gl.Color(userColor.R / 255.0, userColor.G / 255.0, userColor.B / 255.0);
+            
 
             ShapeType newShape;
 
