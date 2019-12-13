@@ -255,6 +255,7 @@ namespace OpenGL_App1
         {
             scanLine = false;
             boundaryFill = true;
+           
             Draw(gl);
             ColorFilling cl = new ColorFilling();
             cl.init(gl);
@@ -276,8 +277,7 @@ namespace OpenGL_App1
             x /= Vertex.Count();
             y = gl.RenderContextProvider.Height - (y / Vertex.Count());
 
-            cl.BoudaryFill(x, y, F, B);
-
+            cl.BoundaryFill(x, y, F, B);
         }
         virtual public void ScanLine(OpenGL gl)
         {
@@ -357,6 +357,8 @@ namespace OpenGL_App1
         {
             if (done)
             {
+                gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+
                 gl.Begin(OpenGL.GL_LINES);                                         // Draws pentagon.
                 for (int i = 0; i < Vertex.Count; i++)
                 {
@@ -496,6 +498,7 @@ namespace OpenGL_App1
         {
             if (done)
             {
+                gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
                 gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
                 for (int i = 0; i < Vertex.Count; i++)
                 {
@@ -602,6 +605,7 @@ namespace OpenGL_App1
         {
             if (done)
             {
+                gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
                 gl.Begin(OpenGL.GL_POINTS);                                         // Draws pentagon.
                 for (int i = 0; i < Vertex.Count; i++)
                 {
@@ -725,6 +729,7 @@ namespace OpenGL_App1
         {
             if (done)
             {
+                gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
                 gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
                 for (int i = 0; i < Vertex.Count; i++)
                 {
@@ -794,6 +799,7 @@ namespace OpenGL_App1
         {
             if (done)
             {
+                gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
                 gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
                 for (int i = 0; i < 5; i++)
                 {
@@ -867,6 +873,7 @@ namespace OpenGL_App1
         {
             if (done)
             {
+                gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
                 gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
                 for (int i = 0; i < 6; i++)
                 {
@@ -938,6 +945,7 @@ namespace OpenGL_App1
             // Mouse Move
             if (Done)
             {
+                gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
                 gl.Begin(OpenGL.GL_LINES);
                 gl.Vertex(controlPoints[0].X, controlPoints[0].Y);
                 gl.Vertex(controlPoints.Last().X, controlPoints.Last().Y);

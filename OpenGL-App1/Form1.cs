@@ -528,6 +528,7 @@ namespace OpenGL_App1
             else if (listShapes[selectedShape].boundaryFill)
                 listShapes[selectedShape].BoundaryFill(openGLControl.OpenGL);
             changeToSelectMode();
+            
         }
 
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)
