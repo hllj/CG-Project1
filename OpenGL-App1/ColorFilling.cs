@@ -4,8 +4,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using SharpGL;
-
+using System.Drawing;
 namespace OpenGL_App1
 {
     struct RGBColor
@@ -73,30 +74,90 @@ namespace OpenGL_App1
             gl.DrawPixels(1, 1, OpenGL.GL_RGB, ptr);
             gl.Flush();
         }
-        
-        public void BoudaryFill(int x, int y, RGBColor F_Color, RGBColor B_Color)
-        {
-            
+        /*BoundaryFill with Recursion*/
+        //public void BoundaryFill(int x, int y, RGBColor F_Color, RGBColor B_Color)
+        //{
+
+        //    /*
+        //    BoundaryFill Algorithm: Fill all pixel that are not is F_color or B_color
+        //    ---------------------
+        //    Parameters:
+        //    x,y: Coordinate
+        //    F_Color: Color to fill
+        //    B_Color: Border Color of Shape
+
+        //    */
+
+        //    RGBColor curColor = GetPixel(x, y);
+        //    if ((!isSameColor(curColor, F_Color)) && (!isSameColor(curColor, B_Color)))
+        //    {
+        //        PutPixel(x, y, F_Color);
+        //        BoundaryFill(x - 1, y, F_Color, B_Color);
+        //        BoundaryFill(x, y + 1, F_Color, B_Color);
+        //        BoundaryFill(x + 1, y, F_Color, B_Color);
+        //        BoundaryFill(x, y - 1, F_Color, B_Color);
+        //    }
+
+        //}
+        /*BoundaryFill with BFS algorithm*/
+        public void BoundaryFill(int X, int Y, RGBColor F_Color, RGBColor B_Color)
+         {
             /*
-            BoudaryFill Algorithm: Fill all pixel that are not is F_color or B_color
-            ---------------------
+            BoundaryFill Algorithm: Fill all pixel that are not is F_color or B_color
+            -------------------- -
             Parameters:
-            x,y: Coordinate
-            F_Color: Color to fill
-            B_Color: Border Color of Shape
+                    x,y: Coordinate
+                    F_Color: Color to fill
+                    B_Color: Border Color of Shape
 
             */
-            
-            RGBColor curColor = GetPixel(x, y);
-            if ((!isSameColor(curColor, F_Color)) && (!isSameColor(curColor, B_Color)))
+            //  Khai bao queue chua piXel chua duoc to mau
+            Queue<Point> Q = new Queue<Point>();
+            Point m = new Point();
+            Point Tg = new Point();
+            RGBColor curColor;
+            curColor = GetPixel(X, Y);
+            PutPixel(X, Y, F_Color);
+            m.X = X;
+            m.Y = Y;
+            PutPixel(m.X, m.Y, F_Color);
+            Q.Enqueue(m);  //  Them 1 diem vao queue, queue size tang 1
+            while (Q.Count() != 0)   //Xet 4 diem Xung quanh voi moi diem luu trong queue (neu queue con phan tu)
             {
-                PutPixel(x, y, F_Color);
-                BoudaryFill(x - 1, y, F_Color, B_Color);
-                BoudaryFill(x, y + 1, F_Color, B_Color);
-                BoudaryFill(x + 1, y, F_Color, B_Color);
-                BoudaryFill(x, y - 1, F_Color, B_Color);
-            }
+                m = Q.Dequeue();//  Xoa 1 diem phia dau queue, queue size giam 1
+                                
+                //Xet cac diem lan can cua 1 diem
+                if (!(isSameColor(GetPixel(m.X + 1, m.Y), B_Color)) && !(isSameColor(GetPixel(m.X + 1, m.Y), F_Color)))
+                {
+                    PutPixel(m.X + 1, m.Y, F_Color);
+                    Tg.X = m.X + 1;
+                    Tg.Y = m.Y;
+                    Q.Enqueue(Tg);// Them 1 diem vao cuoi queue
+                }
 
+                if (!(isSameColor(GetPixel(m.X - 1, m.Y), B_Color)) && !(isSameColor(GetPixel(m.X - 1, m.Y), F_Color)))
+                {
+                    PutPixel(m.X - 1, m.Y, F_Color);
+                    Tg.X = m.X - 1;
+                    Tg.Y = m.Y;
+                    Q.Enqueue(Tg);// Them 1 diem vao cuoi queue
+                }
+                if (!(isSameColor(GetPixel(m.X, m.Y + 1), B_Color)) && !(isSameColor(GetPixel(m.X, m.Y + 1), F_Color)))
+                {
+                    PutPixel(m.X, m.Y + 1, F_Color);
+                    Tg.X = m.X;
+                    Tg.Y = m.Y + 1;
+                    Q.Enqueue(Tg);// Them 1 diem vao cuoi queue
+                }
+                if (!(isSameColor(GetPixel(m.X, m.Y - 1), B_Color)) && !(isSameColor(GetPixel(m.X, m.Y - 1), F_Color)))
+                {
+                    PutPixel(m.X, m.Y - 1, F_Color);
+                    Tg.X = m.X;
+                    Tg.Y = m.Y - 1;
+                    Q.Enqueue(Tg);// Them 1 diem vao cuoi queue
+                }
+
+            }
         }
     }
 }
