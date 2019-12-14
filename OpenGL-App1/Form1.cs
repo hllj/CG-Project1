@@ -42,7 +42,7 @@ namespace OpenGL_App1
         Point pTmp;
         Affine affine;
         string strMode;
-
+        float change;
         public Form1()
         {
             InitializeComponent();
@@ -57,7 +57,7 @@ namespace OpenGL_App1
             affine = new Affine();
             labelMode.Text = strMode + "Select";
             renderMode = false;
-
+            change = 1.1f;
         }
 
         private void openGLControl_Load(object sender, EventArgs e)
@@ -338,14 +338,35 @@ namespace OpenGL_App1
                     y /= n;
                     Point center = new Point(x, y);
                     float Sx = Math.Abs(e.Location.X - center.X) / Math.Abs(Selected_point.X - center.X),
-                        Sy = Math.Abs(e.Location.Y - center.Y) / Math.Abs(Selected_point.Y - center.Y);
-                    affine.Translate(0, openGLControl.OpenGL.RenderContextProvider.Height);
+                        Sy =(float) (openGLControl.OpenGL.RenderContextProvider.Height-e.Location.Y-ymin) /(float)(ymax-ymin);
+
+
+                    if (listShapes[Selected_shape].id != SHAPE_POLYGON)
+
+                        affine.Translate(0, openGLControl.OpenGL.RenderContextProvider.Height);
+                    else
+                        affine.Translate(0,-openGLControl.OpenGL.RenderContextProvider.Height);
+
+
                     affine.Scale(1, -1);
-                    affine.Translate(xmax, ymin);
-                    affine.Scale(2,2);
-                    affine.Translate(-xmin, -ymin);
+
+                    if (listShapes[Selected_shape].id != SHAPE_POLYGON)
+                        affine.Translate(xmin, ymin);
+                    else
+                        affine.Translate(xmin, -ymin);
+
+                    affine.Scale(1,Sy);
+                    if (listShapes[Selected_shape].id != SHAPE_POLYGON)
+                        affine.Translate(-xmin, -ymin);
+                    else
+                        affine.Translate(xmin, ymin);
+
                     affine.Scale(1, -1);
-                    affine.Translate(0,-openGLControl.OpenGL.RenderContextProvider.Height);
+                    if (listShapes[Selected_shape].id != SHAPE_POLYGON)
+                        affine.Translate(0,-openGLControl.OpenGL.RenderContextProvider.Height);
+                    else
+                        affine.Translate(0, openGLControl.OpenGL.RenderContextProvider.Height);
+
                     //x = 0;y = 0;
                     //for (int i = 0; i < n; i++)
                     //{
