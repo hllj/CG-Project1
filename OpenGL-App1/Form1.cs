@@ -499,17 +499,6 @@ namespace OpenGL_App1
             }
         }
 
-        private void btn_Rotate_Click(object sender, EventArgs e)
-        {
-            if (labelMode.Text == strMode + "Select")
-            {
-                labelMode.Text = strMode + "Rotate";
-                OpenGL gl = openGLControl.OpenGL;
-                gl.RenderMode(OpenGL.GL_RENDER);
-                renderMode = true;
-            }
-        }
-
         private void btn_Polygon_Click(object sender, EventArgs e)
         {
             shape = SHAPE_POLYGON;
@@ -530,6 +519,17 @@ namespace OpenGL_App1
             }
         }
 
+        private void btn_Rotate_Click(object sender, EventArgs e)
+        {
+            if (labelMode.Text == strMode + "Select")
+            {
+                labelMode.Text = strMode + "Rotate";
+                OpenGL gl = openGLControl.OpenGL;
+                gl.RenderMode(OpenGL.GL_RENDER);
+                renderMode = true;
+            }
+        }
+
         private void btn_ColorFilling_Click(object sender, EventArgs e)
         {
             if (renderMode == true || selectedShape == -1) return;
@@ -542,7 +542,11 @@ namespace OpenGL_App1
             if (listShapes[selectedShape].scanLine)
                 listShapes[selectedShape].ScanLine(openGLControl.OpenGL);
             else if (listShapes[selectedShape].boundaryFill)
+            {
+                listShapes[selectedShape].Draw(openGLControl.OpenGL);
                 listShapes[selectedShape].BoundaryFill(openGLControl.OpenGL);
+            }
+                
             changeToSelectMode();
 
         }
@@ -622,12 +626,42 @@ namespace OpenGL_App1
                         Sy = (float)(ymax - openGLControl.OpenGL.RenderContextProvider.Height + e.Location.Y ) / (float)(ymax - ymin);
                     }
 
-                    
                     affine.Translate(dx, dy);
                     
                     affine.Scale(Sx, Sy);
                     affine.Translate(-dx, -dy);                
 
+                    return;
+                }
+                if (labelMode.Text == strMode + "Rotate")
+                {
+                    affine = new Affine();
+
+                    int xmin = listShapes[selectedShape].controlPoints[0].X,
+                        xmax = xmin,
+                        ymin = listShapes[selectedShape].controlPoints[0].Y,
+                        ymax = ymin;
+                    int x = 0, y = 0, n = listShapes[selectedShape].controlPoints.Count;
+                    for (int i = 0; i < n; i++)
+                    {
+                        x += listShapes[selectedShape].controlPoints[i].X;
+                        y += listShapes[selectedShape].controlPoints[i].Y;
+                        xmin = listShapes[selectedShape].controlPoints[i].X < xmin ? listShapes[selectedShape].controlPoints[i].X : xmin;
+                        xmax = listShapes[selectedShape].controlPoints[i].X > xmax ? listShapes[selectedShape].controlPoints[i].X : xmax;
+                        ymin = listShapes[selectedShape].controlPoints[i].Y < ymin ? listShapes[selectedShape].controlPoints[i].Y : ymin;
+                        ymax = listShapes[selectedShape].controlPoints[i].Y > ymax ? listShapes[selectedShape].controlPoints[i].Y : ymax;
+                    }
+                    x /= n;
+                    y /= n;
+
+                    affine.Translate(x, y);
+                    //Console.WriteLine(e.Location.X + " " + x);
+                    double alpha = 0;
+                    if (e.Location.Y != y) alpha = Math.Atan(Math.Abs(e.Location.X - x) / Math.Abs(e.Location.Y - y));
+                    //affine.Scale(x, y);
+                    Console.WriteLine(Math.Cos(alpha) + " " + Math.Abs(e.Location.X - x) + " " + Math.Abs(e.Location.Y - y));
+                    affine.Rotate(alpha);
+                    affine.Translate(-x, -y);
                     return;
                 }
                 pEnd = e.Location;

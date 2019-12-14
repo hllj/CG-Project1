@@ -82,10 +82,7 @@ namespace OpenGL_App1
             p1 = at.Transform(p1);
             p2 = at.Transform(p2);
 
-            for (int i = 0; i < Vertex.Count; i++)
-            {
-                Console.WriteLine(Vertex[i].Y);
-            }
+            
             AddEdge(gl);
         }
 
@@ -260,7 +257,7 @@ namespace OpenGL_App1
             scanLine = false;
             boundaryFill = true;
            
-            Draw(gl);
+            //Draw(gl);
             ColorFilling cl = new ColorFilling();
             cl.init(gl);
             RGBColor F, B;
@@ -844,20 +841,7 @@ namespace OpenGL_App1
             }
             gl.End();
             gl.Flush();
-            Console.WriteLine("1:");
-            for (int i = 0; i < Vertex.Count; i++)
-            {
-                Console.Write(Vertex[i].X + " " + Vertex[i].Y + ", ");
-            }
-            Console.WriteLine();
-            if (controlPoints.Count != 0)
-            {
-                for (int i = 0; i < controlPoints.Count; i++)
-                {
-                    Console.Write(controlPoints[i].X + " " + controlPoints[i].Y + ", ");
-                }
-            }
-            Console.WriteLine();
+            
         }
         public override void Create(OpenGL gl)
         {

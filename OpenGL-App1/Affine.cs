@@ -12,10 +12,10 @@ namespace OpenGL_App1
     public class Affine
     {
         public int id { get; set; }
-        public float[,] Matrix;
+        public double[,] Matrix;
         public void Translate(int dx, int dy)
         {
-            float[,] mat = new float[3, 3]
+            double[,] mat = new double[3, 3]
             {
                 {1,0,dx},
                 {0,1,dy},
@@ -23,13 +23,23 @@ namespace OpenGL_App1
             };
             Multiply(mat);
         }
-        public void Scale(float Sx, float Sy)
+        public void Scale(double Sx, double Sy)
         {
-            float[,] mat = new float[3, 3]
+            double[,] mat = new double[3, 3]
             {
                 {Sx,0,0},
                 {0,Sy,0},
                 {0,0,1}
+            };
+            Multiply(mat);
+        }
+        public void Rotate(double alpha)
+        {
+            double[,] mat = new double[3, 3]
+            {
+                {Math.Cos(alpha), -Math.Sin(alpha), 0},
+                {Math.Sin(alpha), Math.Cos(alpha), 0},
+                {0, 0, 1}
             };
             Multiply(mat);
         }
@@ -41,13 +51,13 @@ namespace OpenGL_App1
             return new Point(p.X, p.Y);
         }
 
-        private void Multiply(float[,] mat)
+        private void Multiply(double[,] mat)
         {
-            float[,] result = new float[3, 3];
+            double[,] result = new double[3, 3];
             for (int row = 0; row < 3; row++)
                 for (int col = 0; col < 3; col++)
                 {
-                    float sum = 0;
+                    double sum = 0;
                     for (int i = 0; i < 3; i++)
                         sum += Matrix[row, i] * mat[i, col];
                     result[row, col] = sum;
@@ -57,7 +67,7 @@ namespace OpenGL_App1
 
         public Affine()
         {
-            Matrix = new float[3, 3]
+            Matrix = new double[3, 3]
             {
                 {1,0,0 },
                 {0,1,0 },

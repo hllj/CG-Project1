@@ -217,6 +217,7 @@
             this.btn_Rotate.TabIndex = 13;
             this.btn_Rotate.Text = "Rotate";
             this.btn_Rotate.UseVisualStyleBackColor = true;
+            this.btn_Rotate.Click += new System.EventHandler(this.btn_Rotate_Click);
             // 
             // groupBox1
             // 
