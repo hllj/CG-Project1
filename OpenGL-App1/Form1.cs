@@ -657,7 +657,7 @@ namespace OpenGL_App1
                     affine.Translate(x, y);
                     //Console.WriteLine(e.Location.X + " " + x);
                     double alpha = 0;
-                    if (e.Location.Y != y) alpha = Math.Atan(Math.Abs(e.Location.X - x) / Math.Abs(e.Location.Y - y));
+                    if (e.Location.Y != y) alpha = Math.Atan((double)Math.Abs(e.Location.X - x) / (double)Math.Abs(e.Location.Y - y));
                     //affine.Scale(x, y);
                     Console.WriteLine(Math.Cos(alpha) + " " + Math.Abs(e.Location.X - x) + " " + Math.Abs(e.Location.Y - y));
                     affine.Rotate(alpha);
