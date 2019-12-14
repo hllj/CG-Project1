@@ -543,8 +543,10 @@ namespace OpenGL_App1
                 listShapes[selectedShape].ScanLine(openGLControl.OpenGL);
             else if (listShapes[selectedShape].boundaryFill)
             {
-                listShapes[selectedShape].Draw(openGLControl.OpenGL);
+                openGLControl.OpenGL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
                 listShapes[selectedShape].BoundaryFill(openGLControl.OpenGL);
+                reDraw(-1);
+
             }
                 
             changeToSelectMode();

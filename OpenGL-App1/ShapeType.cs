@@ -257,7 +257,7 @@ namespace OpenGL_App1
             scanLine = false;
             boundaryFill = true;
            
-            //Draw(gl);
+            Draw(gl);
             ColorFilling cl = new ColorFilling();
             cl.init(gl);
             RGBColor F, B;
