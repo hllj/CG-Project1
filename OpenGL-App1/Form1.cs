@@ -324,6 +324,7 @@ namespace OpenGL_App1
             {
                 openGLControl.Tag = OPENGL_DRAWN;
                 //Sua o day
+                affine = new Affine();
                 affine.Translate(e.Location.X - selectedPoint.X, -e.Location.Y + selectedPoint.Y);
                 if (listShapes[selectedShape].id == SHAPE_POLYGON)
                     affine.Translate(e.Location.X - selectedPoint.X, selectedPoint.Y - e.Location.Y);
@@ -549,6 +550,7 @@ namespace OpenGL_App1
                 if (labelMode.Text == strMode + "Translate")
                 {
                     //sua o day
+                    affine = new Affine();
                     affine.Translate(e.Location.X - selectedPoint.X, -e.Location.Y + selectedPoint.Y);
                     if (listShapes[selectedShape].id == SHAPE_POLYGON)
                         affine.Translate(e.Location.X - selectedPoint.X, selectedPoint.Y - e.Location.Y);
