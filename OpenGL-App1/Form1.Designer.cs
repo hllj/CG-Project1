@@ -49,6 +49,7 @@
             this.rbtn_Bound = new System.Windows.Forms.RadioButton();
             this.rbtn_ScanLine = new System.Windows.Forms.RadioButton();
             this.btn_Polygon = new System.Windows.Forms.Button();
+            this.btn_Scale = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +57,7 @@
             // vertexControl1
             // 
             this.vertexControl1.Location = new System.Drawing.Point(405, 0);
-            this.vertexControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.vertexControl1.Margin = new System.Windows.Forms.Padding(2);
             this.vertexControl1.Name = "vertexControl1";
             this.vertexControl1.Size = new System.Drawing.Size(6, 6);
             this.vertexControl1.TabIndex = 0;
@@ -66,7 +67,7 @@
             this.openGLControl.DrawFPS = false;
             this.openGLControl.ForeColor = System.Drawing.SystemColors.Window;
             this.openGLControl.Location = new System.Drawing.Point(10, 114);
-            this.openGLControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openGLControl.Margin = new System.Windows.Forms.Padding(4);
             this.openGLControl.Name = "openGLControl";
             this.openGLControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
             this.openGLControl.RenderContextType = SharpGL.RenderContextType.DIBSection;
@@ -85,7 +86,7 @@
             // btnLine
             // 
             this.btnLine.Location = new System.Drawing.Point(10, 10);
-            this.btnLine.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLine.Margin = new System.Windows.Forms.Padding(2);
             this.btnLine.Name = "btnLine";
             this.btnLine.Size = new System.Drawing.Size(59, 44);
             this.btnLine.TabIndex = 2;
@@ -96,7 +97,7 @@
             // btnCircle
             // 
             this.btnCircle.Location = new System.Drawing.Point(74, 10);
-            this.btnCircle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCircle.Margin = new System.Windows.Forms.Padding(2);
             this.btnCircle.Name = "btnCircle";
             this.btnCircle.Size = new System.Drawing.Size(49, 44);
             this.btnCircle.TabIndex = 3;
@@ -107,7 +108,7 @@
             // colorPalette
             // 
             this.colorPalette.Location = new System.Drawing.Point(757, 11);
-            this.colorPalette.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.colorPalette.Margin = new System.Windows.Forms.Padding(2);
             this.colorPalette.Name = "colorPalette";
             this.colorPalette.Size = new System.Drawing.Size(68, 43);
             this.colorPalette.TabIndex = 4;
@@ -128,7 +129,7 @@
             // btn_rectangle
             // 
             this.btn_rectangle.Location = new System.Drawing.Point(200, 10);
-            this.btn_rectangle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_rectangle.Margin = new System.Windows.Forms.Padding(2);
             this.btn_rectangle.Name = "btn_rectangle";
             this.btn_rectangle.Size = new System.Drawing.Size(67, 44);
             this.btn_rectangle.TabIndex = 3;
@@ -139,7 +140,7 @@
             // btn_Triangles
             // 
             this.btn_Triangles.Location = new System.Drawing.Point(128, 10);
-            this.btn_Triangles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Triangles.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Triangles.Name = "btn_Triangles";
             this.btn_Triangles.Size = new System.Drawing.Size(67, 44);
             this.btn_Triangles.TabIndex = 3;
@@ -260,11 +261,23 @@
             this.btn_Polygon.UseVisualStyleBackColor = true;
             this.btn_Polygon.Click += new System.EventHandler(this.btn_Polygon_Click);
             // 
+            // btn_Scale
+            // 
+            this.btn_Scale.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_Scale.Location = new System.Drawing.Point(274, 58);
+            this.btn_Scale.Name = "btn_Scale";
+            this.btn_Scale.Size = new System.Drawing.Size(65, 44);
+            this.btn_Scale.TabIndex = 16;
+            this.btn_Scale.Text = "Scale";
+            this.btn_Scale.UseVisualStyleBackColor = true;
+            this.btn_Scale.Click += new System.EventHandler(this.btn_Scale_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 571);
+            this.Controls.Add(this.btn_Scale);
             this.Controls.Add(this.btn_Polygon);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_Rotate);
@@ -282,7 +295,7 @@
             this.Controls.Add(this.btnLine);
             this.Controls.Add(this.openGLControl);
             this.Controls.Add(this.vertexControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "SimpleDraw";
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).EndInit();
@@ -315,6 +328,7 @@
         private System.Windows.Forms.RadioButton rbtn_Bound;
         private System.Windows.Forms.RadioButton rbtn_ScanLine;
         private System.Windows.Forms.Button btn_Polygon;
+        private System.Windows.Forms.Button btn_Scale;
     }
 }
 

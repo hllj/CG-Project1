@@ -82,6 +82,10 @@ namespace OpenGL_App1
             p1 = at.Transform(p1);
             p2 = at.Transform(p2);
 
+            for (int i = 0; i < Vertex.Count; i++)
+            {
+                Console.WriteLine(Vertex[i].Y);
+            }
             AddEdge(gl);
         }
 

@@ -155,11 +155,11 @@ namespace OpenGL_App1
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
             reDraw(-1);
-            
+
 
             ShapeType newShape;
 
-            if (labelMode.Text == strMode + "Translate")
+            if (labelMode.Text == strMode + "Translate" || labelMode.Text == strMode + "Rotate" || labelMode.Text == strMode + "Scale")
             {
                 newShape = listShapes[selectedShape].Clone(gl);
                 newShape.Transform(affine, gl);
@@ -300,7 +300,7 @@ namespace OpenGL_App1
             }
             if (labelMode.Text == strMode + "Polygon") // không xử lý event này trong mode polygon
                 return;
-            if (labelMode.Text == strMode + "Translate")
+            if (labelMode.Text == strMode + "Translate" || labelMode.Text == strMode + "Rotate" || labelMode.Text == strMode + "Scale")
             {
                 selectedPoint = e.Location;
                 openGLControl.Tag = OPENGL_DRAWING;
@@ -326,8 +326,6 @@ namespace OpenGL_App1
                 //Sua o day
                 affine = new Affine();
                 affine.Translate(e.Location.X - selectedPoint.X, -e.Location.Y + selectedPoint.Y);
-                if (listShapes[selectedShape].id == SHAPE_POLYGON)
-                    affine.Translate(e.Location.X - selectedPoint.X, selectedPoint.Y - e.Location.Y);
                 return;
             }
 
@@ -462,7 +460,7 @@ namespace OpenGL_App1
                             p1 = new Point(pStart.X, pStart.Y),
                             p2 = new Point(pStart.X, pStart.Y),
                             Vertex = new List<Point>()
-                       
+
 
                         };
                         listShapes.Add(tmp);
@@ -519,6 +517,17 @@ namespace OpenGL_App1
             renderMode = true;
         }
 
+        private void btn_Scale_Click(object sender, EventArgs e)
+        {
+            if (labelMode.Text == strMode + "Select")
+            {
+                labelMode.Text = strMode + "Scale";
+                OpenGL gl = openGLControl.OpenGL;
+                gl.RenderMode(OpenGL.GL_RENDER);
+                renderMode = true;
+            }
+        }
+
         private void btn_ColorFilling_Click(object sender, EventArgs e)
         {
             if (renderMode == true || selectedShape == -1) return;
@@ -533,7 +542,7 @@ namespace OpenGL_App1
             else if (listShapes[selectedShape].boundaryFill)
                 listShapes[selectedShape].BoundaryFill(openGLControl.OpenGL);
             changeToSelectMode();
-            
+
         }
 
         private void openGLControl_MouseMove(object sender, MouseEventArgs e)
@@ -552,12 +561,77 @@ namespace OpenGL_App1
                     //sua o day
                     affine = new Affine();
                     affine.Translate(e.Location.X - selectedPoint.X, -e.Location.Y + selectedPoint.Y);
-                    if (listShapes[selectedShape].id == SHAPE_POLYGON)
-                        affine.Translate(e.Location.X - selectedPoint.X, selectedPoint.Y - e.Location.Y);
+
+                    return;
+                }
+                if (labelMode.Text == strMode + "Scale")
+                {
+                    affine = new Affine();
+                    int xmin = listShapes[selectedShape].controlPoints[0].X,
+                        xmax = xmin,
+                        ymin = listShapes[selectedShape].controlPoints[0].Y,
+                        ymax = ymin;
+                    int x = 0, y = 0, n = listShapes[selectedShape].controlPoints.Count;
+                    for (int i = 0; i < n; i++)
+                    {
+                        xmin = listShapes[selectedShape].controlPoints[i].X < xmin ? listShapes[selectedShape].controlPoints[i].X : xmin;
+                        xmax = listShapes[selectedShape].controlPoints[i].X > xmax ? listShapes[selectedShape].controlPoints[i].X : xmax;
+                        ymin = listShapes[selectedShape].controlPoints[i].Y < ymin ? listShapes[selectedShape].controlPoints[i].Y : ymin;
+                        ymax = listShapes[selectedShape].controlPoints[i].Y > ymax ? listShapes[selectedShape].controlPoints[i].Y : ymax;
+                    }
+                    x /= n;
+                    y /= n;
+                    Point center = new Point(x, y);
+
+                    float Sx=1,
+                        Sy=1;
+                    int dx=xmin, dy=ymin;
+                    
+                    if (selectedPoint.X > xmin && openGLControl.OpenGL.RenderContextProvider.Height-selectedPoint.Y > ymin)
+                    {   
+                        // GOC PHAN TU THU 1
+                        dx = xmin;
+                        dy = ymin;
+                        Sx = (float)(e.Location.X - dx) / (float)(xmax - xmin);
+                        Sy = (float)(openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y - ymin) / (float)(ymax - ymin);
+                    }
+                    if(selectedPoint.X > xmin && openGLControl.OpenGL.RenderContextProvider.Height - selectedPoint.Y < ymin)
+                    {
+                        // GOC Phan tu thu 4
+                        dx = xmin;
+                        dy = ymax;
+                        Sx = (float)(e.Location.X - xmin)/ (float)(xmax - xmin);
+                        Sy = (float)(ymax - openGLControl.OpenGL.RenderContextProvider.Height + e.Location.Y ) / (float)(ymax - ymin);
+                    }
+                    if (selectedPoint.X < xmin && openGLControl.OpenGL.RenderContextProvider.Height - selectedPoint.Y > ymin)
+                    {
+                        // goc phan tu thu 2
+                        dx = xmax;
+                        dy = ymin;
+                        Sx = (float)(xmax - e.Location.X ) / (float)(xmax - xmin);
+                        Sy = (float)(openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y - ymin) / (float)(ymax - ymin);
+                    }
+                    if (selectedPoint.X < xmin && openGLControl.OpenGL.RenderContextProvider.Height - selectedPoint.Y < ymin)
+                    {
+                        // goc phan tu thu 3
+                        dx = xmax;
+                        dy = ymax;
+                        Sx = (float)(xmax -e.Location.X) / (float)(xmax - xmin);
+                        Sy = (float)(ymax - openGLControl.OpenGL.RenderContextProvider.Height + e.Location.Y ) / (float)(ymax - ymin);
+                    }
+
+                    
+                    affine.Translate(dx, dy);
+                    
+                    affine.Scale(Sx, Sy);
+                    affine.Translate(-dx, -dy);                
+
                     return;
                 }
                 pEnd = e.Location;
             }
+            pEnd = e.Location;
+         
         }
 
     }
