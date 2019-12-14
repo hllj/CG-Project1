@@ -437,6 +437,8 @@ namespace OpenGL_App1
                         tmp.p1 = tmp.controlPoints.Last();
                         tmp.p2 = tmp.controlPoints[0];
                         pEnd = tmp.controlPoints.Last();
+                        tmp.AddEdge(openGLControl.OpenGL);
+
 
                     }
 
