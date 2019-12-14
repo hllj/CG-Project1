@@ -459,7 +459,9 @@ namespace OpenGL_App1
                             id = SHAPE_POLYGON,
                             Done = false,
                             p1 = new Point(pStart.X, pStart.Y),
-                            p2 = new Point(pStart.X, pStart.Y)
+                            p2 = new Point(pStart.X, pStart.Y),
+                            Vertex = new List<Point>()
+                       
 
                         };
                         listShapes.Add(tmp);
@@ -470,6 +472,7 @@ namespace OpenGL_App1
 
                     Point t = new Point(e.Location.X, openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y);
                     listShapes.Last().controlPoints.Add(t);
+                    listShapes.Last().Vertex.Add(t);
                     listShapes.Last().p1 = pStart;
                     listShapes.Last().p2 = pEnd;
 
@@ -508,6 +511,7 @@ namespace OpenGL_App1
 
         private void btn_Polygon_Click(object sender, EventArgs e)
         {
+            shape = SHAPE_POLYGON;
             labelMode.Text = strMode + "Polygon";
             OpenGL gl = openGLControl.OpenGL;
             gl.RenderMode(OpenGL.GL_RENDER);
