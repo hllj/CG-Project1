@@ -24,18 +24,18 @@ namespace OpenGL_App1
 {
     abstract public class ShapeType
     {
-        const int OPENGL_IDLE = 0;
-        const int OPENGL_DRAWING = 1;
-        const int OPENGL_DRAWN = 2;
+        //const int OPENGL_IDLE = 0;
+        //const int OPENGL_DRAWING = 1;
+        //const int OPENGL_DRAWN = 2;
 
-        const int SHAPE_LINE = 0;
-        const int SHAPE_CIRCLE = 1;
-        const int SHAPE_RECTANGLE = 2;
-        const int SHAPE_ELLIPSE = 3;
-        const int SHAPE_EQUI_TRIANGLE = 4;
-        const int SHAPE_EQUI_PENTAGON = 5;
-        const int SHAPE_EQUI_HEXAGON = 6;
-        const int SHAPE_POLYGON = 7;
+        //const int SHAPE_LINE = 0;
+        //const int SHAPE_CIRCLE = 1;
+        //const int SHAPE_RECTANGLE = 2;
+        //const int SHAPE_ELLIPSE = 3;
+        //const int SHAPE_EQUI_TRIANGLE = 4;
+        //const int SHAPE_EQUI_PENTAGON = 5;
+        //const int SHAPE_EQUI_HEXAGON = 6;
+        //const int SHAPE_POLYGON = 7;
 
         public int id { get; set; }
         public bool Done;
@@ -50,6 +50,7 @@ namespace OpenGL_App1
         public List<AEL> BegList, Edge;
         public List<Point> Vertex;
         public Point tam;
+        public float thickness;
 
         abstract public void Draw(OpenGL gl);
         abstract public void Create(OpenGL gl);
@@ -60,7 +61,7 @@ namespace OpenGL_App1
             controlPoints = new List<Point>();
             //Vertex = new List<Point>();
         }
-        //cap nhat lai au khi tranform
+        //cap nhat lai sau khi tranform
         //khong can nua, Clone thoi
         public void Update(OpenGL gl)
         {
@@ -185,25 +186,25 @@ namespace OpenGL_App1
             ShapeType t;
             switch (id)
             {
-                case SHAPE_LINE:
+                case Form1.SHAPE_LINE:
                     t = new Line();
                     break;
-                case SHAPE_CIRCLE:
+                case Form1.SHAPE_CIRCLE:
                     t = new Circle();
                     break;
-                case SHAPE_RECTANGLE:
+                case Form1.SHAPE_RECTANGLE:
                     t = new Rectangle();
                     break;
-                case SHAPE_ELLIPSE:
+                case Form1.SHAPE_ELLIPSE:
                     t = new Ellipse();
                     break;
-                case SHAPE_EQUI_TRIANGLE:
+                case Form1.SHAPE_EQUI_TRIANGLE:
                     t = new EquiTriangle();
                     break;
-                case SHAPE_EQUI_PENTAGON:
+                case Form1.SHAPE_EQUI_PENTAGON:
                     t = new EquiPentagon();
                     break;
-                case SHAPE_POLYGON:
+                case Form1.SHAPE_POLYGON:
                     t = new Polygon();
                     break;
                 default:
@@ -359,19 +360,21 @@ namespace OpenGL_App1
             if (done)
             {
                 gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
-
+                gl.LineWidth(thickness);
                 gl.Begin(OpenGL.GL_LINES);                                         // Draws pentagon.
                 for (int i = 0; i < Vertex.Count; i++)
                 {
                     gl.Vertex(Vertex[i].X, Vertex[i].Y);
 
                 }
+                
                 gl.End();
                 gl.Flush();
                 return;
             }
             done = true;
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            gl.LineWidth(thickness);
             gl.Begin(OpenGL.GL_LINES);
             gl.Vertex(p1.X, gl.RenderContextProvider.Height - p1.Y);
             gl.Vertex(p2.X, gl.RenderContextProvider.Height - p2.Y);
@@ -454,6 +457,7 @@ namespace OpenGL_App1
         {
             if (done)
             {
+                gl.PointSize(thickness);
                 gl.Begin(OpenGL.GL_POINTS);                                         // Draws pentagon.
                 for (int i = 0; i < Vertex.Count; i++)
                 {
@@ -466,6 +470,7 @@ namespace OpenGL_App1
             done = true;
             Vertex = new List<Point>();
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            gl.PointSize(thickness);
             gl.Begin(OpenGL.GL_POINTS);
             /* Xác định các đại lượng cơ bản của đường tròn */
             /* Bán kính r */
@@ -558,6 +563,7 @@ namespace OpenGL_App1
             if (done)
             {
                 gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+                gl.LineWidth(thickness);
                 gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
                 for (int i = 0; i < Vertex.Count; i++)
                 {
@@ -570,6 +576,7 @@ namespace OpenGL_App1
             }
             done = true;
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            gl.LineWidth(thickness);            
             gl.Begin(OpenGL.GL_LINES);
 
             /*!!!!!! Chua sap xep cac dinh theo thu tu nguoc chieu kim dong ho*/
@@ -670,6 +677,7 @@ namespace OpenGL_App1
             {
                 Console.WriteLine("OK");
                 gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+                gl.PointSize(thickness);
                 gl.Begin(OpenGL.GL_POINTS);                                         // Draws pentagon.
                 for (int i = 0; i < Vertex.Count; i++)
                 {
@@ -683,6 +691,7 @@ namespace OpenGL_App1
             done = true;
             Vertex = new List<Point>();
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            gl.PointSize(thickness);
             gl.Begin(OpenGL.GL_POINTS);
             /* Xác định các đại lượng cơ bản của hình ellipse */
             /* Bán kính rx, ry*/
@@ -794,7 +803,8 @@ namespace OpenGL_App1
             if (done)
             {
                 gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
-                gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
+                gl.LineWidth(thickness);
+                gl.Begin(OpenGL.GL_LINE_LOOP); // Draws pentagon.
                 for (int i = 0; i < Vertex.Count; i++)
                 {
                     gl.Vertex(Vertex[i].X, Vertex[i].Y);
@@ -811,6 +821,7 @@ namespace OpenGL_App1
             int xx = p1.X - p2.X;
 
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            gl.LineWidth(thickness);
             /* xác định các đỉnh của tam giác đều */
             p3.X = p1.X + p2.X;
             p3.X /= 2;
@@ -864,6 +875,7 @@ namespace OpenGL_App1
             if (done)
             {
                 gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+                gl.LineWidth(thickness);
                 gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
                 for (int i = 0; i < 5; i++)
                 {
@@ -895,7 +907,7 @@ namespace OpenGL_App1
             }
 
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
-
+            gl.LineWidth(thickness);
             gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
             for (int i = 0; i < 5; i++)
             {
@@ -925,6 +937,7 @@ namespace OpenGL_App1
             if (done)
             {
                 gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+                gl.LineWidth(thickness);
                 gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
                 for (int i = 0; i < 6; i++)
                 {
@@ -956,7 +969,7 @@ namespace OpenGL_App1
             }
 
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
-
+            gl.LineWidth(thickness);
             gl.Begin(OpenGL.GL_LINE_LOOP);                                         // Draws pentagon.
             for (int i = 0; i < 6; i++)
             {
@@ -985,6 +998,7 @@ namespace OpenGL_App1
         public override void Draw(OpenGL gl)
         {
             gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
+            gl.LineWidth(thickness);
             for (int i = 0; i < controlPoints.Count - 1; i++)
             {
                 gl.Begin(OpenGL.GL_LINES);
