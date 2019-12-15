@@ -26,14 +26,14 @@ namespace OpenGL_App1
         const int OPENGL_DRAWING = 1;
         const int OPENGL_DRAWN = 2;
 
-        const int SHAPE_LINE = 0;
-        const int SHAPE_CIRCLE = 1;
-        const int SHAPE_RECTANGLE = 2;
-        const int SHAPE_ELLIPSE = 3;
-        const int SHAPE_EQUI_TRIANGLE = 4;
-        const int SHAPE_EQUI_PENTAGON = 5;
-        const int SHAPE_EQUI_HEXAGON = 6;
-        const int SHAPE_POLYGON = 7;
+        public const int SHAPE_LINE = 0;
+        public const int SHAPE_CIRCLE = 1;
+        public const int SHAPE_RECTANGLE = 2;
+        public const int SHAPE_ELLIPSE = 3;
+        public const int SHAPE_EQUI_TRIANGLE = 4;
+        public const int SHAPE_EQUI_PENTAGON = 5;
+        public const int SHAPE_EQUI_HEXAGON = 6;
+        public const int SHAPE_POLYGON = 7;
 
         // Đồng hồ đếm thời gian
         Timer drawingTime;
@@ -262,6 +262,7 @@ namespace OpenGL_App1
             }
 
             newShape.color = userColor;
+            newShape.thickness = (float)numericUpDown1.Value;
             newShape.p1 = new Point(pStart.X, pStart.Y);
             newShape.p2 = new Point(pEnd.X, pEnd.Y);
 
@@ -562,6 +563,7 @@ namespace OpenGL_App1
             int milsec = time_elapsed % 1000 / 100;
             labelTimer.Text = $"{minute.ToString().PadLeft(2,'0')}:{second.ToString().PadLeft(2,'0')}.{milsec.ToString()}";
         }
+
 
         private void btn_ColorFilling_Click(object sender, EventArgs e)
         {

@@ -52,8 +52,11 @@
             this.btn_Scale = new System.Windows.Forms.Button();
             this.labelTimer = new System.Windows.Forms.Label();
             this.listBoxTimeSpans = new System.Windows.Forms.ListBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // vertexControl1
@@ -307,11 +310,45 @@
             this.listBoxTimeSpans.Size = new System.Drawing.Size(175, 356);
             this.listBoxTimeSpans.TabIndex = 18;
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(887, 43);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(105, 22);
+            this.numericUpDown1.TabIndex = 19;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(887, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 20);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Thickness";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1112, 703);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.listBoxTimeSpans);
             this.Controls.Add(this.labelTimer);
             this.Controls.Add(this.btn_Scale);
@@ -338,6 +375,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,6 +406,8 @@
         private System.Windows.Forms.Button btn_Scale;
         private System.Windows.Forms.Label labelTimer;
         private System.Windows.Forms.ListBox listBoxTimeSpans;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
