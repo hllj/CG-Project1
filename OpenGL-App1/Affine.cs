@@ -46,9 +46,9 @@ namespace OpenGL_App1
         public Point Transform(Point p)
         {
 
-            p.X = (int)(Matrix[0, 0] * p.X + Matrix[0, 1] * p.Y + Matrix[0, 2]);
-            p.Y = (int)(Matrix[1, 0] * p.X + Matrix[1, 1] * p.Y + Matrix[1, 2]);
-            return new Point(p.X, p.Y);
+            int X = (int)(Matrix[0, 0] * p.X + Matrix[0, 1] * p.Y + Matrix[0, 2]);
+            int Y = (int)(Matrix[1, 0] * p.X + Matrix[1, 1] * p.Y + Matrix[1, 2]);
+            return new Point(X, Y);
         }
 
         private void Multiply(double[,] mat)

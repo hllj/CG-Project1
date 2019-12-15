@@ -545,15 +545,18 @@ namespace OpenGL_App1
             {
                 openGLControl.OpenGL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
                 listShapes[selectedShape].BoundaryFill(openGLControl.OpenGL);
+                /*Gán filling của Shape selected  = false để vẽ lại viền*/
+                listShapes[selectedShape].filling = false;
                 reDraw(-1);
+                listShapes[selectedShape].filling = true;
 
             }
                 
             changeToSelectMode();
 
         }
-
-        private void openGLControl_MouseMove(object sender, MouseEventArgs e)
+        
+            private void openGLControl_MouseMove(object sender, MouseEventArgs e)
         {
             if ((int)openGLControl.Tag == OPENGL_DRAWING)
             {
@@ -657,12 +660,22 @@ namespace OpenGL_App1
                     y /= n;
 
                     affine.Translate(x, y);
-                    //Console.WriteLine(e.Location.X + " " + x);
+                    Point u = new Point(selectedPoint.X - x, openGLControl.OpenGL.RenderContextProvider.Height-selectedPoint.Y - y);
+                    Point v = new Point(e.Location.X - x, openGLControl.OpenGL.RenderContextProvider.Height - e.Location.Y - y);
+                    double a = (double)(openGLControl.OpenGL.RenderContextProvider.Height - selectedPoint.Y - y) / (double)(selectedPoint.X - x);
+                    double b = y - a * x;
+
+                    double tu = u.X * v.X+u.Y*v.Y;
+                    double mau = Math.Sqrt(u.X * u.X + u.Y * u.Y) * Math.Sqrt(v.X * v.X + v.Y * v.Y);
+                   
                     double alpha = 0;
-                    if (e.Location.Y != y) alpha = Math.Atan((double)Math.Abs(e.Location.X - x) / (double)Math.Abs(e.Location.Y - y));
-                    //affine.Scale(x, y);
-                    Console.WriteLine(Math.Cos(alpha) + " " + Math.Abs(e.Location.X - x) + " " + Math.Abs(e.Location.Y - y));
-                    affine.Rotate(alpha);
+                    alpha = Math.Acos(tu / mau);
+                    if (selectedPoint.X > x) alpha = -alpha;
+                    
+                    if (a * e.Location.X + b - openGLControl.OpenGL.RenderContextProvider.Height + e.Location.Y > 0)
+                        affine.Rotate(alpha);
+                    else
+                        affine.Rotate(-alpha);
                     affine.Translate(-x, -y);
                     return;
                 }
