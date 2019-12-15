@@ -35,8 +35,11 @@ namespace OpenGL_App1
         const int SHAPE_EQUI_HEXAGON = 6;
         const int SHAPE_POLYGON = 7;
 
-        // Vẽ ellipse cần bao nhiêu điểm điều khiển?
-
+        // Đồng hồ đếm thời gian
+        Timer drawingTime;
+        int time_elapsed = 0; // millisecond
+        BindingList<string> listTimeSpans;
+        
         int selectedShape = -1;
         List<ShapeType> listShapes;
         private bool startup; // biến kiểm tra chương trình được khởi động lần đầu
@@ -50,6 +53,14 @@ namespace OpenGL_App1
         Boolean renderMode = false;
 
         string strMode;
+
+        Timer initializeNewTimer()
+        {
+            Timer res = new Timer();
+            res.Interval = 100;
+            res.Tick += timer1_Tick;
+            return res;
+        }
 
         private void changeToSelectMode()
         {
@@ -102,6 +113,9 @@ namespace OpenGL_App1
             affine = new Affine();
             labelMode.Text = strMode + "Select";
             renderMode = false;
+            drawingTime = initializeNewTimer();
+            listTimeSpans = new BindingList<string>();
+            listBoxTimeSpans.DataSource = listTimeSpans;
         }
 
         private void openGLControl_Load(object sender, EventArgs e)
@@ -293,6 +307,9 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseDown(object sender, MouseEventArgs e)
         {
+            time_elapsed = 0;
+            //drawingTime = initializeNewTimer();
+            drawingTime.Start();
             if (labelMode.Text == strMode + "Select")
             {
                 openGLControl.Tag = OPENGL_IDLE;
@@ -313,6 +330,10 @@ namespace OpenGL_App1
 
         private void openGLControl_MouseUp(object sender, MouseEventArgs e)
         {
+            drawingTime.Stop();
+            string newTimeSpan = labelTimer.Text;
+            listTimeSpans.Add(newTimeSpan);
+            listBoxTimeSpans.SelectedIndex = listTimeSpans.Count - 1;
             if (renderMode == false)
             {
                 openGLControl.Tag = OPENGL_IDLE;
@@ -528,6 +549,18 @@ namespace OpenGL_App1
                 gl.RenderMode(OpenGL.GL_RENDER);
                 renderMode = true;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            time_elapsed += 100;
+            //int minute = time_elapsed / 1000 / 60;
+            //int second = time_elapsed / 1000 % 60;
+            //int milsec = time_elapsed % 1000;
+            int minute = time_elapsed / 1000 / 60;
+            int second = time_elapsed / 1000 % 60;
+            int milsec = time_elapsed % 1000 / 100;
+            labelTimer.Text = $"{minute.ToString().PadLeft(2,'0')}:{second.ToString().PadLeft(2,'0')}.{milsec.ToString()}";
         }
 
         private void btn_ColorFilling_Click(object sender, EventArgs e)
