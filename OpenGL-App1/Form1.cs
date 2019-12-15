@@ -243,7 +243,7 @@ namespace OpenGL_App1
                     };
                     break;
                 case SHAPE_POLYGON:
-                    newShape = new Polygon();
+                    //newShape = new Polygon();
                     newShape = listShapes.Last();
                     if (newShape.id != SHAPE_POLYGON || newShape.Done == true)
                     {
