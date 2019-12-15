@@ -82,7 +82,7 @@ namespace OpenGL_App1
             p1 = at.Transform(p1);
             p2 = at.Transform(p2);
 
-            
+
             AddEdge(gl);
         }
 
@@ -256,7 +256,7 @@ namespace OpenGL_App1
         {
             scanLine = false;
             boundaryFill = true;
-           
+
             Draw(gl);
             ColorFilling cl = new ColorFilling();
             cl.init(gl);
@@ -405,6 +405,51 @@ namespace OpenGL_App1
 
     public class Circle : ShapeType
     {
+        public override void ScanLine(OpenGL gl)
+        {
+            ET = new List<List<AEL>>();
+            /*Tạo Edge Table*/
+            for (int y = ymin; y <= ymax; y++)
+            {
+                List<AEL> subList = new List<AEL>();
+                ET.Add(subList);
+            }
+
+            for (int i = 0; i < Vertex.Count; i++)
+            {
+                int y = Vertex[i].Y;
+                int x = Vertex[i].X;
+
+                if (ET[y - ymin].Count == 0)
+                {
+                    AEL t = new AEL();
+                    t.x = x;
+                    ET[y - ymin].Add(t);
+                    ET[y - ymin].Add(t);
+                }
+                else
+                {
+                    AEL t = new AEL();
+                    t.x = Math.Min(ET[y - ymin][0].x, x);
+                    ET[y - ymin][0] = t;
+                    t.x = Math.Max(ET[y - ymin][1].x, x);
+                    ET[y - ymin][1] = t;
+                }
+
+            }
+            gl.Color(colorFilling.R / 255.0, colorFilling.G / 255.0, colorFilling.B / 255.0);
+            gl.Begin(OpenGL.GL_LINES);
+            for (int y = ymin; y <= ymax; y++)
+            {
+                if (ET[y - ymin].Count != 0)
+                {
+                    gl.Vertex(ET[y - ymin][0].x, y);
+                    gl.Vertex(ET[y - ymin][1].x, y);
+                }
+            }
+            gl.End();
+            gl.Flush();
+        }
         public override void Draw(OpenGL gl)
         {
             if (done)
@@ -430,7 +475,7 @@ namespace OpenGL_App1
             int x = 0, y = r;
             int twoX = 2 * x;
             int twoY = 2 * y;
-            int p = (int)Math.Round(5.0/4.0 - (double)r);
+            int p = (int)Math.Round(5.0 / 4.0 - (double)r);
             /* Vẽ đối xứng qua tâm */
             gl.Vertex(xc + x, gl.RenderContextProvider.Height - (yc + y));
             gl.Vertex(xc - x, gl.RenderContextProvider.Height - (yc - y));
@@ -482,12 +527,25 @@ namespace OpenGL_App1
         }
         public override void Create(OpenGL gl)
         {
-            //Vertex = new List<Point>();
-            //Vertex.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
-            //Vertex.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
+            ymin = Vertex[0].Y;
+            ymax = ymin;
+            int xmax = Vertex[0].X, xmin = xmax;
+            for (int i = 0; i < Vertex.Count; i++)
+            {
+                ymin = Math.Min(ymin, Vertex[i].Y);
+                ymax = Math.Max(ymax, Vertex[i].Y);
+                xmin = Math.Min(xmin, Vertex[i].X);
+                xmax = Math.Max(xmax, Vertex[i].X);
+            }
             controlPoints = new List<Point>();
-            controlPoints.Add(new Point(p1.X, gl.RenderContextProvider.Height - p1.Y));
-            controlPoints.Add(new Point(p2.X, gl.RenderContextProvider.Height - p2.Y));
+            controlPoints.Add(new Point(xmin, ymin));
+            controlPoints.Add(new Point(xmax, ymin));
+            controlPoints.Add(new Point(xmin, ymax));
+            controlPoints.Add(new Point(xmax, ymax));
+            controlPoints.Add(new Point((xmin + xmax) / 2, ymin));
+            controlPoints.Add(new Point((xmin + xmax) / 2, ymax));
+            controlPoints.Add(new Point(xmin, (ymin + ymax) / 2));
+            controlPoints.Add(new Point(xmax, (ymin + ymax) / 2));
         }
 
 
@@ -595,8 +653,12 @@ namespace OpenGL_App1
             gl.Begin(OpenGL.GL_LINES);
             for (int y = ymin; y <= ymax; y++)
             {
-                gl.Vertex(ET[y - ymin][0].x, y);
-                gl.Vertex(ET[y - ymin][1].x, y);
+                if (ET[y - ymin].Count != 0)
+                {
+                    gl.Vertex(ET[y - ymin][0].x, y);
+                    gl.Vertex(ET[y - ymin][1].x, y);
+                }
+
             }
             gl.End();
             gl.Flush();
@@ -606,6 +668,7 @@ namespace OpenGL_App1
         {
             if (done)
             {
+                Console.WriteLine("OK");
                 gl.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0);
                 gl.Begin(OpenGL.GL_POINTS);                                         // Draws pentagon.
                 for (int i = 0; i < Vertex.Count; i++)
@@ -841,7 +904,7 @@ namespace OpenGL_App1
             }
             gl.End();
             gl.Flush();
-            
+
         }
         public override void Create(OpenGL gl)
         {

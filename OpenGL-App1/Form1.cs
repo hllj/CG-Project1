@@ -576,20 +576,14 @@ namespace OpenGL_App1
                 listShapes[selectedShape].ScanLine(openGLControl.OpenGL);
             else if (listShapes[selectedShape].boundaryFill)
             {
-                openGLControl.OpenGL.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-                listShapes[selectedShape].BoundaryFill(openGLControl.OpenGL);
-                /*Gán filling của Shape selected  = false để vẽ lại viền*/
-                listShapes[selectedShape].filling = false;
-                reDraw(-1);
-                listShapes[selectedShape].filling = true;
-
+                listShapes[selectedShape].BoundaryFill(openGLControl.OpenGL);  
             }
                 
             changeToSelectMode();
 
         }
         
-            private void openGLControl_MouseMove(object sender, MouseEventArgs e)
+        private void openGLControl_MouseMove(object sender, MouseEventArgs e)
         {
             if ((int)openGLControl.Tag == OPENGL_DRAWING)
             {
