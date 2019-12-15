@@ -251,6 +251,7 @@ namespace OpenGL_App1
                         return;
                     }
                     newShape.color = userColor;
+                    newShape.thickness = (float)numericUpDown1.Value;
                     return;
 
                 default:
